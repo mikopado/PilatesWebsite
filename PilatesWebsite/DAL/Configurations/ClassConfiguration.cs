@@ -12,7 +12,7 @@ namespace PilatesWebsite.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Class> builder)
         {
-            builder.HasOne<Teacher>()
+            builder.HasOne<TeacherConfiguration>()
                 .WithMany()
                 .HasForeignKey(x => x.TeacherId)
                 .IsRequired();

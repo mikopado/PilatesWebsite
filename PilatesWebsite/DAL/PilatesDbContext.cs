@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PilatesWebsite.DAL.Configurations;
 using PilatesWebsite.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,11 @@ namespace PilatesWebsite.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Class>().Property(x => x.)
+            modelBuilder.ApplyConfiguration(new ClassConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerMembershipConfiguration());
+            modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new MembershipConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
 
         public DbSet<Class> Classes { get; set; }
