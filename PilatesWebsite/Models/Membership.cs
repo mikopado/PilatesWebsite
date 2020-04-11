@@ -10,7 +10,6 @@ namespace PilatesWebsite.Models
         public Guid Id { get; set; }
         public MembershipType Type { get; set; }
         public ClassType ClassType { get; set; }
-        public int MyProperty { get; set; }
         public DateTime StartingDate { get; set; }
     }
 }

@@ -9,8 +9,8 @@ namespace PilatesWebsite.Models
     {
         public Guid Id { get; set; }
         public ClassType Type { get; set; }
-        public Level Level{ get; set; }
-        public Teacher Teacher{ get; set; }
+        public Guid LevelId{ get; set; }
+        public Guid TeacherId{ get; set; }
         public DateTime Date { get; set; }
     }
 }

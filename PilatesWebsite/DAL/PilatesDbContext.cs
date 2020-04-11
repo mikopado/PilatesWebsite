@@ -15,6 +15,11 @@ namespace PilatesWebsite.DAL
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Class>().Property(x => x.)
+        }
+
         public DbSet<Class> Classes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Membership> Memberships { get; set; }
