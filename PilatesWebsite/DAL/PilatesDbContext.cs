@@ -16,6 +16,10 @@ namespace PilatesWebsite.DAL
 
         }
 
+        public PilatesDbContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClassConfiguration());
