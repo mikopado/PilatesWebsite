@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PilatesWebsite.Models
 {
-    public class Level
+    public enum Level
     {
-        public Guid Id { get; set; }
-        public string Type { get; set; }
+       Beginner,
+       Intermediate,
+       Advanced
     }
 }

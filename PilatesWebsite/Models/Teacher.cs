@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PilatesWebsite.Models
 {
@@ -7,5 +9,7 @@ namespace PilatesWebsite.Models
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public ICollection<Class> Classes { get; set; }
     }
 }

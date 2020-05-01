@@ -16,7 +16,7 @@ namespace PilatesWebsite.DAL.Configurations
                 .IsRequired();
 
             builder.Property(x => x.LastName)
-               .IsRequired();
+               .IsRequired();           
         }
     }
 }

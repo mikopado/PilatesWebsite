@@ -18,7 +18,7 @@ namespace PilatesWebsite.DAL.Configurations
 
             builder.Property(x => x.ClassType)
                 .HasConversion<string>()
-                .IsRequired();
+                .IsRequired();           
         }
     }
 }

@@ -22,8 +22,7 @@ namespace PilatesWebsite.DAL.Configurations
                .IsRequired();
 
             builder.Property(x => x.City)
-              .IsRequired();
-
+              .IsRequired();           
         }
     }
 }

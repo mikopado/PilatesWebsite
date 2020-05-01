@@ -7,7 +7,7 @@ namespace PilatesWebsite.DAL.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {
-        IClassRepository Classes { get; }
+        IRepository<T> Repository<T>() where T : class;
         Task<int> SaveAsync();
     }
 }

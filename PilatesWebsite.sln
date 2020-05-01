@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PilatesWebsite", "PilatesWebsite\PilatesWebsite.csproj", "{F1E3EE0F-24A0-4C4A-991B-D783CDD097BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PilatesWebsite", "PilatesWebsite\PilatesWebsite.csproj", "{F1E3EE0F-24A0-4C4A-991B-D783CDD097BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pilates.Service.Tests", "Pilates.Service.Tests\Pilates.Service.Tests.csproj", "{089A9005-661F-4D67-A00D-30B0D7086E8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F1E3EE0F-24A0-4C4A-991B-D783CDD097BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1E3EE0F-24A0-4C4A-991B-D783CDD097BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1E3EE0F-24A0-4C4A-991B-D783CDD097BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{089A9005-661F-4D67-A00D-30B0D7086E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{089A9005-661F-4D67-A00D-30B0D7086E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{089A9005-661F-4D67-A00D-30B0D7086E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{089A9005-661F-4D67-A00D-30B0D7086E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

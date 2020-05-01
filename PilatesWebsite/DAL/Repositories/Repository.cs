@@ -9,7 +9,7 @@ namespace PilatesWebsite.DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private DbSet<T> _entities;
+        private readonly DbSet<T> _entities;
 
         public Repository(DbContext context)
         {
@@ -26,6 +26,7 @@ namespace PilatesWebsite.DAL.Repositories
             await _entities.AddAsync(entity);
         }
 
+        // Should be changed. No delete entity from Db but only disable entity
         public void Delete(T entity)
         {
             _entities.Remove(entity);

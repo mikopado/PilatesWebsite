@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -27,8 +28,8 @@ namespace PilatesWebsite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();  
-            services.AddDbContext<PilatesDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("SQLite")));
+            services.AddControllers();
+            services.AddDbContext<PilatesDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PilatesDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

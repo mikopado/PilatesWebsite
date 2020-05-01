@@ -12,22 +12,17 @@ namespace PilatesWebsite.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Class> builder)
         {
-            builder.HasOne<TeacherConfiguration>()
-                .WithMany()
-                .HasForeignKey(x => x.TeacherId)
-                .IsRequired();
-
-            builder.HasOne<Level>()
-                .WithMany()
-                .HasForeignKey(x => x.LevelId)
-                .IsRequired();
-
+            builder.HasOne(cl => cl.Teacher)
+                .WithMany(t => t.Classes)
+                .IsRequired();    
+            
             builder.Property(x => x.Type)
                 .HasConversion<string>()
                 .IsRequired();
 
-            builder.Property(x => x.Date)
-                .IsRequired();
+            builder.Property(x => x.Level)
+               .HasConversion<string>()
+               .IsRequired();           
         }
     }
 }

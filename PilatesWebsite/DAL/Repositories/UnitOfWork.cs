@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,22 +9,32 @@ namespace PilatesWebsite.DAL.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private PilatesDbContext _context;
+        private Dictionary<Type, object> _repositories;
 
         public UnitOfWork(PilatesDbContext dbContext)
         {
             _context = dbContext;
-            Classes = new ClassRepository(_context);
+            _repositories = new Dictionary<Type, object>();
         }
-        public IClassRepository Classes { get; }
 
-        public void Dispose()
+        public IRepository<T> Repository<T>() where T : class
         {
-            _context.Dispose();
+            if (_repositories.ContainsKey(typeof(T)))
+            {
+                _repositories.Add(typeof(T), new Repository<T>(_context));
+            }
+
+            return _repositories[typeof(T)] as IRepository<T>;
         }
 
         public Task<int> SaveAsync()
         {
             return _context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 }
