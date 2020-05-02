@@ -26,21 +26,9 @@ namespace PilatesWebsite.DAL
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            var entries = ChangeTracker
-                        .Entries()
-                        .Where(e => e.Entity is DatedEntity && (
-                        e.State == EntityState.Added
-                        || e.State == EntityState.Modified));
-
-            foreach (var entityEntry in entries)
-            {
-                ((DatedEntity)entityEntry.Entity).UpdatedAt = DateTime.Now;
-
-                if (entityEntry.State == EntityState.Added)
-                {
-                    ((DatedEntity)entityEntry.Entity).CreatedAt = DateTime.Now;
-                }
-            }
+            DeleteEntries();
+            UpdateEntries();
+            
             return base.SaveChangesAsync(cancellationToken);
 
         }
@@ -50,5 +38,49 @@ namespace PilatesWebsite.DAL
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+
+        private void DeleteEntries()
+        {
+            var deletables = ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted);
+
+            foreach (var item in deletables)
+            {
+                if (item.Entity is IDeletable entity)
+                {
+                    // Set the entity to unchanged (if we mark the whole entity as Modified, every field gets sent to Db as an update)
+                    item.State = EntityState.Unchanged;
+                    // Only update the IsDeleted flag - only this will get sent to the Db
+                    entity.IsDeleted = true;
+                }
+            }
+        }
+
+        private void UpdateEntries()
+        {
+            var entries = ChangeTracker
+                        .Entries()
+                        .Where(e => e.State == EntityState.Added
+                        || e.State == EntityState.Modified);
+
+            foreach (var entityEntry in entries)
+            {
+                if (entityEntry.Entity is DatedEntity entity)
+                {
+                    if (entityEntry.State == EntityState.Modified)
+                    {
+                        entity.UpdatedAt = DateTime.Now;
+                    }
+                    if (entityEntry.State == EntityState.Added)
+                    {
+                        entity.CreatedAt = DateTime.Now;
+                    }
+                }
+                if(entityEntry.State == EntityState.Added && entityEntry.Entity is IDeletable deletable)
+                {
+                    deletable.IsDeleted = false;
+                }
+
+            }
+        }
     }
 }
