@@ -19,7 +19,7 @@ namespace PilatesWebsite.DAL.Repositories
 
         public IRepository<T> Repository<T>() where T : class
         {
-            if (_repositories.ContainsKey(typeof(T)))
+            if (!_repositories.ContainsKey(typeof(T)))
             {
                 _repositories.Add(typeof(T), new Repository<T>(_context));
             }

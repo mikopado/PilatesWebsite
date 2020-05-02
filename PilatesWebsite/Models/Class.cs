@@ -11,6 +11,8 @@ namespace PilatesWebsite.Models
         public ClassType Type { get; set; }
         public Level Level{ get; set; }
         public Teacher Teacher{ get; set; }
+        public DateTime TimeSlot { get; set; }
+        public string Room { get; set; }
         public bool IsDeleted { get ; set ; }
     }
 }
