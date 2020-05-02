@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PilatesWebsite.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace PilatesWebsite.DAL.Repositories
@@ -30,13 +32,7 @@ namespace PilatesWebsite.DAL.Repositories
         public void Delete(T entity)
         {
             _entities.Remove(entity);
-        }
-
-        public void Delete(Guid id)
-        {
-            var entity = _entities.Find(id);
-            _entities.Remove(entity);
-        }
+        }        
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {

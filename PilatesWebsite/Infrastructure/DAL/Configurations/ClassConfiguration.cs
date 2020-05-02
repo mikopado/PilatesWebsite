@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 
 namespace PilatesWebsite.DAL.Configurations
 {
-    public class MembershipConfiguration : IEntityTypeConfiguration<Membership>
+    public class ClassConfiguration : IEntityTypeConfiguration<Class>
     {
-        public void Configure(EntityTypeBuilder<Membership> builder)
+        public void Configure(EntityTypeBuilder<Class> builder)
         {
+            builder.HasOne(cl => cl.Teacher)
+                .WithMany(t => t.Classes)
+                .IsRequired();    
+            
             builder.Property(x => x.Type)
                 .HasConversion<string>()
                 .IsRequired();
 
-            builder.Property(x => x.ClassType)
-                .HasConversion<string>()
-                .IsRequired();           
+            builder.Property(x => x.Level)
+               .HasConversion<string>()
+               .IsRequired();
         }
     }
 }

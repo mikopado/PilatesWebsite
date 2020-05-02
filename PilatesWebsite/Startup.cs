@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PilatesWebsite.DAL;
+using PilatesWebsite.DAL.Repositories;
+using PilatesWebsite.Services;
 
 namespace PilatesWebsite
 {
@@ -30,6 +32,8 @@ namespace PilatesWebsite
         {
             services.AddControllers();
             services.AddDbContext<PilatesDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PilatesDb")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IClassService, ClassService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,21 +8,15 @@ using System.Threading.Tasks;
 
 namespace PilatesWebsite.DAL.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Teacher> builder)
         {
             builder.Property(x => x.FirstName)
                 .IsRequired();
 
             builder.Property(x => x.LastName)
-                .IsRequired();
-
-            builder.Property(x => x.Address)
                .IsRequired();
-
-            builder.Property(x => x.City)
-              .IsRequired();           
         }
     }
 }
