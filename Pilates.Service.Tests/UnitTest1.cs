@@ -35,7 +35,7 @@ namespace Pilates.Service.Tests
             var db = new PilatesDbContext(options.Options);
             var uow = new UnitOfWork(db);
 
-            var classes = uow.Repository<Class>().GetEntities();
+            var classes = await uow.Repository<Class>().GetEntities();
             var cls = classes.ToArray()[0];
 
             uow.Repository<Class>().Delete(cls);

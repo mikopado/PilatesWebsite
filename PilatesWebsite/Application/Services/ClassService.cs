@@ -26,9 +26,9 @@ namespace PilatesWebsite.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Class>> GetAllClassesAsync()
+        public async Task<IEnumerable<Class>> GetAllClassesAsync()
         {
-            throw new NotImplementedException();
+            return await _uow.Repository<Class>().GetEntities();
         }
 
         public Task<Class> GetClassAsync(Guid id)

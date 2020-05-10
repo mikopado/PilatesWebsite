@@ -39,14 +39,14 @@ namespace PilatesWebsite.DAL.Repositories
             return _entities.Where(predicate);
         }
 
-        public T Get(Guid id)
+        public async Task<T> Get(Guid id)
         {
-            return _entities.Find(id);
+            return await _entities.FindAsync(id);
         }
 
-        public IEnumerable<T> GetEntities()
+        public async Task<IEnumerable<T>> GetEntities()
         {
-            return _entities.ToList();
+            return await _entities.ToListAsync();
         }
 
         public void Update(T entity)

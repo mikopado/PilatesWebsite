@@ -7,5 +7,7 @@ namespace PilatesWebsite.Application.DTO
 {
     public class AddClassRequest
     {
+        public string Level { get; set; }
+        public Guid TeacherId { get; set; }
     }
 }
