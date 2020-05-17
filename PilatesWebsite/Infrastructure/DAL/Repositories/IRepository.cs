@@ -10,10 +10,10 @@ namespace PilatesWebsite.DAL.Repositories
     {
         void Add(T entity);
         Task AddAsync(T entity);
-        void Delete(T entity);
+        Task DeleteAsync(T entity);
         void Update(T entity);
-        Task<T> Get(Guid id);
-        Task<IEnumerable<T>> GetEntities();
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
+        Task<T> GetAsync(Guid id);
+        Task<IEnumerable<T>> GetEntitiesAsync();
+        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
     }
 }

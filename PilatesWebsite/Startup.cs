@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,6 +39,7 @@ namespace PilatesWebsite
             services.AddDbContext<PilatesDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PilatesDb")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IClassService, ClassService>();
+            services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
             {

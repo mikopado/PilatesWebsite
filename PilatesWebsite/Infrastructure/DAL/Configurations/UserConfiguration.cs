@@ -23,6 +23,9 @@ namespace PilatesWebsite.DAL.Configurations
 
             builder.Property(x => x.City)
               .IsRequired();
+
+            // Filter all removed entries when query database
+            builder.HasQueryFilter(p => !p.IsDeleted);
         }
     }
 }

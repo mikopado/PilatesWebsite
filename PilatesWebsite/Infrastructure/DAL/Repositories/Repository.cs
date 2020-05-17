@@ -28,23 +28,23 @@ namespace PilatesWebsite.DAL.Repositories
             await _entities.AddAsync(entity);
         }
 
-        // Should be changed. No delete entity from Db but only disable entity
-        public void Delete(T entity)
+        // Just disable entities not removing from Db
+        public async Task DeleteAsync(T entity)
         {
-            _entities.Remove(entity);
+            (await _entities.ToListAsync()).Remove(entity);
         }        
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return _entities.Where(predicate);
+            return (await _entities.ToListAsync()).AsQueryable().Where(predicate);
         }
 
-        public async Task<T> Get(Guid id)
+        public async Task<T> GetAsync(Guid id)
         {
             return await _entities.FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetEntities()
+        public async Task<IEnumerable<T>> GetEntitiesAsync()
         {
             return await _entities.ToListAsync();
         }
