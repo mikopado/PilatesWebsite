@@ -16,7 +16,8 @@ namespace PilatesWebsite.DAL
         public PilatesDbContext(DbContextOptions<PilatesDbContext> options)
             : base(options)
         {
-
+            // No tracking entities when it's only readonly
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

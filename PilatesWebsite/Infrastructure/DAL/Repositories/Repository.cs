@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace PilatesWebsite.DAL.Repositories
@@ -36,7 +35,7 @@ namespace PilatesWebsite.DAL.Repositories
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return (await _entities.ToListAsync()).AsQueryable().Where(predicate);
+            return await _entities.Where(predicate).ToListAsync();
         }
 
         public async Task<T> GetAsync(Guid id)
@@ -53,5 +52,15 @@ namespace PilatesWebsite.DAL.Repositories
         {
             _entities.Update(entity);
         }
+
+        public IQueryable<T> With(params Expression<Func<T, object>>[] properties)
+        {
+            if (properties == null) throw new ArgumentNullException(nameof(properties));
+
+            var query = _entities as IQueryable<T>;
+
+            return properties.Aggregate(query, (current, property) => current.Include(property));
+        }
+       
     }
 }

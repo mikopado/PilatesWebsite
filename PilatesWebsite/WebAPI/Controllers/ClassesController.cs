@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PilatesWebsite.Application.DTO;
+using PilatesWebsite.Application.DTO.Requests;
 using PilatesWebsite.Application.ResponseObjects;
 using PilatesWebsite.Models;
 using PilatesWebsite.Services;
@@ -60,11 +61,10 @@ namespace PilatesWebsite.Controllers
 
         }
 
-        // TODO Check PUT request how to consume it (i.e. id also in body?)
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClass(Guid id, [FromBody] UpdateClassRequest classRequest)
         {
-            _classService.UpdateClass(id, classRequest);
+            await _classService.UpdateClassAsync(id, classRequest);
             return Ok(new ApiResponse(HttpStatusCode.OK));
 
         }
@@ -72,7 +72,7 @@ namespace PilatesWebsite.Controllers
         [HttpGet("timetable/{start}/{end}")]
         public async Task<IActionResult> GetTimetable(DateTime start, DateTime end)
         {
-            var timetable = await _classService.GetTimetable(start, end);
+            var timetable = await _classService.GetTimetableAsync(start, end);
             return Ok(new ApiResponse(HttpStatusCode.OK, timetable));
 
         }
@@ -83,6 +83,20 @@ namespace PilatesWebsite.Controllers
             var classes = await _classService.GetClassesAsync(x => x.Type.ToString() == type);
             return Ok(new ApiResponse(HttpStatusCode.OK, classes));
 
+        }
+
+        [HttpGet("teacher")]
+        public async Task<IActionResult> GetClassesWithTeacher()
+        {
+            var classes = await _classService.GetClassesWithTeacherAsync();
+            return Ok(new ApiResponse(HttpStatusCode.OK, classes));
+        }
+
+        [HttpGet("{id}/teacher")]
+        public async Task<IActionResult> GetClassWithTeacher(Guid id)
+        {
+            var clsWithTeacher = await _classService.GetClassWithTeacherAsync(id);
+            return Ok(new ApiResponse(HttpStatusCode.OK, clsWithTeacher));
         }
     }
 }

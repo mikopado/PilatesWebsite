@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PilatesWebsite.Application.DTO;
+using PilatesWebsite.Application.DTO.Requests;
+using PilatesWebsite.Application.DTO.Responses;
+using PilatesWebsite.Application.Exceptions;
 using PilatesWebsite.DAL.Repositories;
 using PilatesWebsite.Models;
 using System;
@@ -25,44 +29,72 @@ namespace PilatesWebsite.Services
 
         public async Task AddClassAsync(AddClassRequest request)
         {
-            await _repository.AddAsync(_mapper.Map<Class>(request));
+            var classToAdd = _mapper.Map<Class>(request);
+            await _repository.AddAsync(classToAdd);
+            await _uow.SaveAsync();
         }
 
         public async Task DeleteClassAsync(Guid id)
         {
-            var repo = _uow.Repository<Class>();
-            var cls = await repo.GetAsync(id);
-            if (cls is null) throw new Exception($"An error has occurred while retrieving the resource with id: {id}.");
-            await _repository.DeleteAsync(cls);
+            var classToDelete = await FindClassAsync(id);
+            await _repository.DeleteAsync(classToDelete);
+            await _uow.SaveAsync();
         }
 
-        public async Task<IEnumerable<Class>> GetAllClassesAsync()
+        public async Task<IEnumerable<ClassResponse>> GetAllClassesAsync()
         {
-            return await _repository.GetEntitiesAsync();
+            var classes = await _repository.GetEntitiesAsync();
+            return _mapper.Map<IEnumerable<ClassResponse>>(classes);
         }
 
-        public async Task<Class> GetClassAsync(Guid id)
+        public async Task<ClassResponse> GetClassAsync(Guid id)
         {
-            return await _repository.GetAsync(id);
+            var cls = await FindClassAsync(id);
+            return _mapper.Map<ClassResponse>(cls);
         }
 
-        public void UpdateClass(Guid id, UpdateClassRequest request)
+        public async Task UpdateClassAsync(Guid id, UpdateClassRequest request)
         {
-            var cls = _mapper.Map<Class>(request);
-            cls.Id = id;
-            _repository.Update(cls);
+            var originalClass = await FindClassAsync(id);
+            var updatedClass = _mapper.Map(request, originalClass);
+            _repository.Update(updatedClass);
+            await _uow.SaveAsync();
         }
-        public async Task<IEnumerable<Class>> GetClassesAsync(Expression<Func<Class, bool>> predicate)
+        public async Task<IEnumerable<ClassResponse>> GetClassesAsync(Expression<Func<Class, bool>> predicate)
         {
-            return await _repository.FindAsync(predicate);
+            var classes = await _repository.FindAsync(predicate);
+            if (classes is null) throw new NotFoundException("Resource cannot be found");
+            return _mapper.Map<IEnumerable<ClassResponse>>(classes);
         }
 
-        public async Task<IEnumerable<Class>> GetTimetable(DateTime start, DateTime end, Func<Class, bool> predicate = null)
+        public async Task<IEnumerable<ClassResponse>> GetTimetableAsync(DateTime start, DateTime end, Func<Class, bool> predicate = null)
         {
             var timetable = await _repository.FindAsync(x => x.StartingTime >= start && x.EndingTime <= end);
-            if (predicate is null) return timetable;
-            return timetable.Where(predicate);
+            if (timetable is null) throw new Exception("An error occured while retrieving resources.");
+            if (predicate is null) return _mapper.Map<IEnumerable<ClassResponse>>(timetable);
+            var filteredTimetable = timetable.Where(predicate);
+            return _mapper.Map<IEnumerable<ClassResponse>>(filteredTimetable);
+        }
 
+        public async Task<ClassResponseWithTeacher> GetClassWithTeacherAsync(Guid id)
+        {
+            var classWithTeacher = await _repository.With(x => x.Teacher).FirstOrDefaultAsync(x => x.Id == id);
+            if (classWithTeacher is null) throw new NotFoundException($"Resource with id: {id} cannot be found.");
+            return _mapper.Map<ClassResponseWithTeacher>(classWithTeacher);
+        }
+
+        public async Task<IEnumerable<ClassResponseWithTeacher>> GetClassesWithTeacherAsync()
+        {
+            var classesWithTeacher = await _repository.With(x => x.Teacher).ToListAsync();
+            if (classesWithTeacher is null) throw new Exception("An error occured while retrieving resources.");
+            return _mapper.Map<IEnumerable<ClassResponseWithTeacher>>(classesWithTeacher);
+        }
+
+        private async Task<Class> FindClassAsync(Guid id)
+        {
+            var cls = await _repository.GetAsync(id);
+            if (cls is null) throw new NotFoundException($"The resource with id: {id} cannot been found.");
+            return cls;
         }
 
     }

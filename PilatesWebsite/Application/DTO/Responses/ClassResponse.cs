@@ -1,15 +1,18 @@
 ﻿using PilatesWebsite.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace PilatesWebsite.Services
+namespace PilatesWebsite.Application.DTO.Responses
 {
-    public class UpdateClassRequest
+    public class ClassResponse
     {
+        public Guid Id { get; set; }
         public ClassType Type { get; set; }
-        public Guid TeacherId { get; set; }
         public Level Level { get; set; }
-        public string Room { get; set; }
         public DateTime StartingTime { get; set; }
         public DateTime EndingTime { get; set; }
+        public string Room { get; set; }
     }
 }

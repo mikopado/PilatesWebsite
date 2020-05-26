@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PilatesWebsite.Application.Services;
 using PilatesWebsite.DAL;
 using PilatesWebsite.DAL.Repositories;
 using PilatesWebsite.Services;
@@ -36,9 +37,11 @@ namespace PilatesWebsite
             {
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
+            // TODO Sorting out services by purpose. Check repository of Architecture best practice??
             services.AddDbContext<PilatesDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PilatesDb")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IClassService, ClassService>();
+            services.AddScoped<IMembershipService, MembershipService>();
             services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>

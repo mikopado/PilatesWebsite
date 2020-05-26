@@ -15,5 +15,6 @@ namespace PilatesWebsite.DAL.Repositories
         Task<T> GetAsync(Guid id);
         Task<IEnumerable<T>> GetEntitiesAsync();
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        IQueryable<T> With(params Expression<Func<T, object>>[] properties);
     }
 }

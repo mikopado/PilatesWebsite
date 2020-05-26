@@ -13,7 +13,7 @@ namespace PilatesWebsite.DAL.Repositories
 
         public UnitOfWork(PilatesDbContext dbContext)
         {
-            _context = dbContext;
+            _context = dbContext;           
             _repositories = new Dictionary<Type, object>();
         }
 

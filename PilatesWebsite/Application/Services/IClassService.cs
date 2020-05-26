@@ -1,4 +1,6 @@
 ﻿using PilatesWebsite.Application.DTO;
+using PilatesWebsite.Application.DTO.Requests;
+using PilatesWebsite.Application.DTO.Responses;
 using PilatesWebsite.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,14 @@ namespace PilatesWebsite.Services
 {
     public interface IClassService
     {
-        Task<IEnumerable<Class>> GetAllClassesAsync();
-        Task<Class> GetClassAsync(Guid id);
+        Task<IEnumerable<ClassResponse>> GetAllClassesAsync();
+        Task<ClassResponse> GetClassAsync(Guid id);
         Task AddClassAsync(AddClassRequest request);
         Task DeleteClassAsync(Guid id);
-        void UpdateClass(Guid id, UpdateClassRequest request);
-        Task<IEnumerable<Class>> GetClassesAsync(Expression<Func<Class, bool>> predicate);
-        Task<IEnumerable<Class>> GetTimetable(DateTime start, DateTime end, Func<Class, bool> predicate = null);
+        Task UpdateClassAsync(Guid id, UpdateClassRequest request);
+        Task<IEnumerable<ClassResponse>> GetClassesAsync(Expression<Func<Class, bool>> predicate);
+        Task<IEnumerable<ClassResponse>> GetTimetableAsync(DateTime start, DateTime end, Func<Class, bool> predicate = null);
+        Task<ClassResponseWithTeacher> GetClassWithTeacherAsync(Guid id);
+        Task<IEnumerable<ClassResponseWithTeacher>> GetClassesWithTeacherAsync();
     }
 }
