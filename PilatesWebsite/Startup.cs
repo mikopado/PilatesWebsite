@@ -15,9 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PilatesWebsite.Application.Services;
-using PilatesWebsite.DAL;
-using PilatesWebsite.DAL.Repositories;
-using PilatesWebsite.Services;
+using PilatesWebsite.Infrastructure.DAL;
+using PilatesWebsite.Infrastructure.DAL.Repositories;
 
 namespace PilatesWebsite
 {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace PilatesWebsite.Models
+namespace PilatesWebsite.Domain.Models
 {
     public class Teacher : IDeletable
     {

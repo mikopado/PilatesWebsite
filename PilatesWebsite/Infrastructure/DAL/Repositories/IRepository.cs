@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace PilatesWebsite.DAL.Repositories
+namespace PilatesWebsite.Infrastructure.DAL.Repositories
 {
     public interface IRepository<T>
     {

@@ -1,4 +1,4 @@
-﻿using PilatesWebsite.Models;
+﻿using PilatesWebsite.Domain.Models;
 using System;
 
 namespace PilatesWebsite.Application.DTO.Requests

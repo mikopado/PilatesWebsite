@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PilatesWebsite.Models;
+using PilatesWebsite.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace PilatesWebsite.DAL.Repositories
+namespace PilatesWebsite.Infrastructure.DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {

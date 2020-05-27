@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PilatesWebsite.Models
+namespace PilatesWebsite.Domain.Models
 {
     public enum ClassType
     {

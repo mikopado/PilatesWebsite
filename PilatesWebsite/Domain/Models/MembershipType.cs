@@ -1,4 +1,4 @@
-﻿namespace PilatesWebsite.Models
+﻿namespace PilatesWebsite.Domain.Models
 {
     public enum MembershipType
     {

@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using PilatesWebsite.Application.DTO;
 using PilatesWebsite.Application.DTO.Requests;
 using PilatesWebsite.Application.ResponseObjects;
-using PilatesWebsite.Models;
-using PilatesWebsite.Services;
-using PilatesWebsite.WebAPI.Controllers.BaseController;
+using PilatesWebsite.Domain.Models;
+using PilatesWebsite.Application.Services;
+using PilatesWebsite.WebAPI.Controllers.Base;
 
-namespace PilatesWebsite.Controllers
+namespace PilatesWebsite.WebAPI.Controllers.Controllers
 {
     // TODO: define url path naming
     [Route("api/[controller]")]

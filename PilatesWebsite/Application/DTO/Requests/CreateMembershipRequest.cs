@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PilatesWebsite.Domain.Models
+namespace PilatesWebsite.Application.DTO.Requests
 {
-    public interface IDeletable
+    public class CreateMembershipRequest
     {
-        public bool IsDeleted { get; set; }
     }
 }

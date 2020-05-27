@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using PilatesWebsite.DAL.Configurations;
-using PilatesWebsite.Models;
+using PilatesWebsite.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +7,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PilatesWebsite.DAL
+namespace PilatesWebsite.Infrastructure.DAL
 {
     public class PilatesDbContext : DbContext
     {

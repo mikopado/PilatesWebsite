@@ -5,15 +5,15 @@ using PilatesWebsite.Application.DTO;
 using PilatesWebsite.Application.DTO.Requests;
 using PilatesWebsite.Application.DTO.Responses;
 using PilatesWebsite.Application.Exceptions;
-using PilatesWebsite.DAL.Repositories;
-using PilatesWebsite.Models;
+using PilatesWebsite.Domain.Models;
+using PilatesWebsite.Infrastructure.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace PilatesWebsite.Services
+namespace PilatesWebsite.Application.Services
 {
     public class ClassService : IClassService
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using PilatesWebsite.Application.Exceptions;
 using PilatesWebsite.Application.ResponseObjects;
 
-namespace PilatesWebsite.WebAPI.Controllers.BaseController
+namespace PilatesWebsite.WebAPI.Controllers.Base
 {
     public class BaseController : Controller
     {

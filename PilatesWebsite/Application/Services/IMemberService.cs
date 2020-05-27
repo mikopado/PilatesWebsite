@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PilatesWebsite.Domain.Models
+namespace PilatesWebsite.Application.Services
 {
-    public interface IDeletable
+    public interface IMemberService
     {
-        public bool IsDeleted { get; set; }
     }
 }
