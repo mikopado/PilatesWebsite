@@ -37,7 +37,7 @@ namespace PilatesWebsite.Application.Services
         public async Task DeleteClassAsync(Guid id)
         {
             var classToDelete = await FindClassAsync(id);
-            await _repository.DeleteAsync(classToDelete);
+            _repository.DeleteAsync(classToDelete);
             await _uow.SaveAsync();
         }
 
@@ -56,8 +56,8 @@ namespace PilatesWebsite.Application.Services
         public async Task UpdateClassAsync(Guid id, UpdateClassRequest request)
         {
             var originalClass = await FindClassAsync(id);
-            var updatedClass = _mapper.Map(request, originalClass);
-            _repository.Update(updatedClass);
+            _mapper.Map(request, originalClass);
+            _repository.Update(originalClass);
             await _uow.SaveAsync();
         }
         public async Task<IEnumerable<ClassResponse>> GetClassesAsync(Expression<Func<Class, bool>> predicate)

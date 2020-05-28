@@ -41,13 +41,13 @@ namespace PilatesWebsite
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IMembershipService, MembershipService>();
+
             services.AddAutoMapper(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pilates API", Version = "v1" });
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,10 +8,9 @@ namespace PilatesWebsite.Domain.Models
     public class User : DatedEntity, IDeletable
     {
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
+        public string Email { get; set; }
+        // TODO How to handle password. How to store it and if we need to keep as property
+        public string Password { get; set; }
         public bool IsDeleted { get ; set ; }
 
         public Member Member { get; set; }

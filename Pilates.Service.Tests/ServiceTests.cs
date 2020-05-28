@@ -1,9 +1,7 @@
 ﻿using PilatesWebsite.Application.DTO;
 using PilatesWebsite.Application.DTO.Requests;
-using PilatesWebsite.DAL;
-using PilatesWebsite.DAL.Repositories;
-using PilatesWebsite.Models;
-using PilatesWebsite.Services;
+using PilatesWebsite.Application.Services;
+using PilatesWebsite.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

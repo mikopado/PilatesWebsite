@@ -28,9 +28,9 @@ namespace PilatesWebsite.Infrastructure.DAL.Repositories
         }
 
         // Just disable entities not removing from Db
-        public async Task DeleteAsync(T entity)
+        public void DeleteAsync(T entity)
         {
-            (await _entities.ToListAsync()).Remove(entity);
+            _entities.Remove(entity);
         }        
 
         public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)

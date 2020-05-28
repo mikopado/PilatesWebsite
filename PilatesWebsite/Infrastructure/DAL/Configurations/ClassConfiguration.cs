@@ -14,6 +14,7 @@ namespace PilatesWebsite.Infrastructure.DAL.Configurations
         {
             builder.HasOne(cl => cl.Teacher)
                 .WithMany(t => t.Classes)
+                .HasForeignKey(c => c.TeacherId)
                 .IsRequired();    
             
             builder.Property(x => x.Type)

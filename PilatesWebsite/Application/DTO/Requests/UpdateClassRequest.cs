@@ -1,5 +1,6 @@
 ﻿using PilatesWebsite.Domain.Models;
 using System;
+using Newtonsoft.Json;
 
 namespace PilatesWebsite.Application.DTO.Requests
 {

@@ -10,7 +10,7 @@ namespace PilatesWebsite.Infrastructure.DAL.Repositories
     {
         void Add(T entity);
         Task AddAsync(T entity);
-        Task DeleteAsync(T entity);
+        void DeleteAsync(T entity);
         void Update(T entity);
         Task<T> GetAsync(Guid id);
         Task<IEnumerable<T>> GetEntitiesAsync();

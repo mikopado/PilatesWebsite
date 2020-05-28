@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using PilatesWebsite.DAL;
-using PilatesWebsite.DAL.Repositories;
-using PilatesWebsite.Models;
+using PilatesWebsite.Domain.Models;
+using PilatesWebsite.Infrastructure.DAL;
+using PilatesWebsite.Infrastructure.DAL.Repositories;
 using System;
 using System.Linq;
 using Xunit;
@@ -38,7 +38,7 @@ namespace Pilates.Service.Tests
             var classes = await uow.Repository<Class>().GetEntitiesAsync();
             var cls = classes.ToArray()[0];
 
-            await uow.Repository<Class>().DeleteAsync(cls);
+            uow.Repository<Class>().DeleteAsync(cls);
             var r = await uow.SaveAsync();
             Assert.Equal(1, r);
 

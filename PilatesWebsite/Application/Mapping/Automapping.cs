@@ -2,12 +2,9 @@
 using PilatesWebsite.Application.DTO;
 using PilatesWebsite.Application.DTO.Requests;
 using PilatesWebsite.Application.DTO.Responses;
-using PilatesWebsite.Models;
-using PilatesWebsite.Services;
+using PilatesWebsite.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace PilatesWebsite.Application.Mapping
 {
@@ -15,13 +12,11 @@ namespace PilatesWebsite.Application.Mapping
     {
         public Automapping()
         {
-            // TODO move GUID generation to database
-            CreateMap<AddClassRequest, Class>()
-                .ForMember(c => c.Id, opt => opt.MapFrom(src => Guid.NewGuid()));
+            CreateMap<AddClassRequest, Class>();
             CreateMap<UpdateClassRequest, Class>();
             CreateMap<Class, ClassResponseWithTeacher>();
             CreateMap<Class, ClassResponse>();
             CreateMap<Teacher, TeacherResponse>();
-        }
+        }        
     }
 }

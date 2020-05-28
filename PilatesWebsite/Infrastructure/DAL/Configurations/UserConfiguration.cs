@@ -12,17 +12,11 @@ namespace PilatesWebsite.Infrastructure.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(x => x.FirstName)
+            builder.Property(x => x.Email)
                 .IsRequired();
 
-            builder.Property(x => x.LastName)
+            builder.Property(x => x.Password)
                 .IsRequired();
-
-            builder.Property(x => x.Address)
-               .IsRequired();
-
-            builder.Property(x => x.City)
-              .IsRequired();
 
             // Filter all removed entries when query database
             builder.HasQueryFilter(p => !p.IsDeleted);

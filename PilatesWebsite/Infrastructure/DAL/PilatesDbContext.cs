@@ -25,11 +25,10 @@ namespace PilatesWebsite.Infrastructure.DAL
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            DeleteEntries();
             UpdateEntries();
-            
-            return base.SaveChangesAsync(cancellationToken);
+            DeleteEntries();
 
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public DbSet<Class> Classes { get; set; }
