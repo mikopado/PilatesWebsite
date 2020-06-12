@@ -1,10 +1,7 @@
-﻿using PilatesWebsite.Application.DTO;
-using PilatesWebsite.Application.DTO.Requests;
-using PilatesWebsite.Application.Services;
-using PilatesWebsite.Domain.Models;
+﻿using PilatesWebApi.Application.DTO.Requests;
+using PilatesWebApi.Application.Services;
+using PilatesWebApi.Domain.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Pilates.Service.Tests

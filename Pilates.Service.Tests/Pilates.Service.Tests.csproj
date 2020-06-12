@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PilatesWebsite\PilatesWebsite.csproj" />
+    <ProjectReference Include="..\PilatesWebApi\PilatesWebApi.csproj" />
   </ItemGroup>
 
 </Project>

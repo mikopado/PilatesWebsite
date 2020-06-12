@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using PilatesWebsite.Domain.Models;
-using PilatesWebsite.Infrastructure.DAL;
-using PilatesWebsite.Infrastructure.DAL.Repositories;
+using PilatesWebApi.Domain.Models;
+using PilatesWebApi.Infrastructure.DAL;
+using PilatesWebApi.Infrastructure.DAL.Repositories;
 using System;
 using System.Linq;
 using Xunit;
