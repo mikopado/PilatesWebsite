@@ -9,8 +9,7 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [ClassesListComponent, ClassTypeComponent],
   imports: [
-    CommonModule,
-    RouterModule.forChild([{path: '' , component: ClassesListComponent}])
+    CommonModule
   ]
 })
 export class ClassesModule { }

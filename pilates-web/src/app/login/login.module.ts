@@ -9,8 +9,7 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [SignUpComponent, SignInComponent],
   imports: [
-    CommonModule,
-    RouterModule.forChild([{path: '' , component: SignInComponent}])
+    CommonModule    
   ]
 })
 export class LoginModule { }

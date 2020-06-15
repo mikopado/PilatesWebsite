@@ -6,9 +6,14 @@
       [ngClass]="{'hidden': !(isHandset$ | async)}">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a *ngFor="let menuItem of menuItems" 
+        mat-list-item mat-ripple 
+        [style.position]="'relative'"
+        routerLinkActive="selected" 
+        [routerLink]="[menuItem.path]">
+        <mat-icon mat-list-icon *ngIf="menuItem.icon">{{menuItem.icon}}</mat-icon>
+        <span>{{menuItem.title}}</span>
+      </a>      
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,20 +26,17 @@
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>    
+      </button> 
+        <img src="../../../assets/logo.png" alt="logo" style="height:60%">
         <h1>Pilates</h1>
-        <span class="menu-spacer"></span>
-        <div *ngIf="!(isHandset$ | async)">
-          <a mat-button [routerLink]="['/home']" > Home </a>
-          <a mat-button [routerLink]="['/classes']"> Classes </a>
-          <a mat-button  > Book </a>
-          <a mat-button > Contact Us </a>
-          <a mat-button [routerLink]="['/login']"> Sign In </a>    
+        <span class="menu-spacer fill-space"></span>
+        <div *ngIf="!(isHandset$ | async)" >
+          <a *ngFor="let menuItem of menuItems" mat-button [routerLink]="[menuItem.path]">
+            <span>{{menuItem.title}}</span>
+          </a>
         </div>
-      </mat-toolbar-row>   
-     
+      </mat-toolbar-row>        
     </mat-toolbar>
-    <!-- Add Content Here -->
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

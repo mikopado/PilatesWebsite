@@ -4,14 +4,41 @@ import { ClassesListComponent } from './classes/classes-list/classes-list.compon
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { PageNotFoundComponent } from './shared/page-not-found.component';
+import { HomepageComponent } from './home/homepage.component';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'home'},
-  {path: 'classes', component: ClassesListComponent },
-  {path: 'login', component: SignInComponent },
-  {path: 'signup', component: SignUpComponent },
-  {path: '**', component: PageNotFoundComponent }
+  {
+    path: 'home', 
+    component: HomepageComponent,
+    data: {
+      title: 'Home',
+      icon: 'home',
+      isLogin: true
+
+    }
+  },  
+  {
+    path: 'classes', 
+    component: ClassesListComponent,
+    data: {
+      title: 'Classes',
+      icon: 'class',
+      isLogin: true
+    }
+  },
+  {
+    path: 'login', 
+    component: SignInComponent, 
+    data: {
+      title: 'Login',
+      icon: 'login',
+      isLogin: true
+    }
+  },
+  { path: 'signup', component: SignUpComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
