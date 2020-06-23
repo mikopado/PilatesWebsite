@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClassesModule } from './classes/classes.module';
@@ -9,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageModule } from './home/homepage.module';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { HomepageModule } from './home/homepage.module';
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

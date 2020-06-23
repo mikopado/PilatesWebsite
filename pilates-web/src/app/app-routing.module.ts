@@ -28,6 +28,15 @@ const routes: Routes = [
     }
   },
   {
+    path: '', 
+    component: PageNotFoundComponent,
+    data: {
+      title: 'Book',
+      icon: 'class',
+      isLogin: true
+    }
+  },
+  {
     path: 'login', 
     component: SignInComponent, 
     data: {

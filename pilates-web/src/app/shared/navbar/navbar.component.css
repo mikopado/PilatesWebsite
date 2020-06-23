@@ -15,11 +15,9 @@
   top: 0;
   z-index: 1;
 }
-
 .hidden { 
   display : none;
 }
-
 .fill-space {
     flex: 1 1 auto;
 }

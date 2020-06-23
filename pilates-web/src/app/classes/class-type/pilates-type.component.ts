@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-class-type',
+  selector: 'app-pilates-type',
   templateUrl: './class-type.component.html',
   styleUrls: ['./class-type.component.css']
 })
-export class ClassTypeComponent implements OnInit {
+export class PilatesTypeComponent implements OnInit {
 
   constructor() { }
 
