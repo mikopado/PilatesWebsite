@@ -5,6 +5,9 @@ import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { PageNotFoundComponent } from './shared/page-not-found.component';
 import { HomepageComponent } from './home/homepage.component';
+import { YogaTypeComponent } from './classes/class-type/yoga-type.component';
+import { PilatesTypeComponent } from './classes/class-type/pilates-type.component';
+import { ComboTypeComponent } from './classes/class-type/combo-type.component';
 
 
 const routes: Routes = [
@@ -45,6 +48,9 @@ const routes: Routes = [
       isLogin: true
     }
   },
+  { path: 'classes/yoga', component: YogaTypeComponent},
+  { path: 'classes/pilates', component: PilatesTypeComponent },
+  { path: 'classes/combo', component: ComboTypeComponent },
   { path: 'signup', component: SignUpComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }
