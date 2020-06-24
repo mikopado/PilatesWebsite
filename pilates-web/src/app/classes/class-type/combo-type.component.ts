@@ -14,8 +14,8 @@ export class ComboTypeComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        this.type = {title: 'Combo', description:'sdvsmdklvmskmdkmkmd'};
-        this.subtypes = [{title:'Beginner', imageUrl: '"../../../assets/logo.png"', link:''}, {title:'Intermediate', imageUrl: '"../../../assets/logo.png"', link:''}, {title:'Advanced', imageUrl: '"../../../assets/logo.png"', link:''}];
+        this.type = {title: 'Combo', description:'sdvsmdklvmskmdkmkmd', imageUrl:'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png'};
+        this.subtypes = [{title:'Beginner', imageUrl: 'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png', link:''}, {title:'Intermediate', imageUrl: 'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png', link:''}, {title:'Advanced', imageUrl: 'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png', link:''}];
 
     }
 

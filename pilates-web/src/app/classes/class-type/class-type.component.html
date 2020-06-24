@@ -1,7 +1,7 @@
 <div class="container">
     <h1 class="title">{{type.title}}</h1>
-    <div fxLayout="column">
-        <img src="../../../assets/logo.png" alt="">
+    <div fxLayout="column" fxLayoutAlign="center center">
+        <img [src]="type.imageUrl" alt="">
         <p fxFlexAlign="center">
             {{type.description}}
         </p>
@@ -9,7 +9,7 @@
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center center"
         class="row-height">
         <mat-card class="card-picture" *ngFor="let subtype of subtypes">
-            <img mat-card-image src="../../../assets/logo.png">
+            <img mat-card-image [src]="subtype.imageUrl">
             <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
                 <span>{{subtype.title}}</span>
             </mat-card-title>
