@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subtype } from './models/subtype';
+import { Card } from './models/card-type';
+import { ClassType } from './models/class-type';
 
 @Component({
     selector: 'app-combo-type',
@@ -8,12 +9,14 @@ import { Subtype } from './models/subtype';
 })
 export class ComboTypeComponent implements OnInit {
 
-    subtypes: Subtype[];
-    type: string;
+    subtypes: Card[];
+    type: ClassType;
     constructor() { }
 
     ngOnInit(): void {
-        this.type = 'Combo';
+        this.type = {title: 'Combo', description:'sdvsmdklvmskmdkmkmd'};
+        this.subtypes = [{title:'Beginner', imageUrl: '"../../../assets/logo.png"', link:''}, {title:'Intermediate', imageUrl: '"../../../assets/logo.png"', link:''}, {title:'Advanced', imageUrl: '"../../../assets/logo.png"', link:''}];
+
     }
 
 }

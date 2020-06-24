@@ -1,17 +1,17 @@
 <div class="container">
-    <h1 class="title">{{type}}</h1>
-    <mat-card class="card-picture">
-        <img mat-card-image src="#">
-        <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-            <span fxFlex="80%"></span>
-        </mat-card-title>
-    </mat-card>
+    <h1 class="title">{{type.title}}</h1>
+    <div fxLayout="column">
+        <img src="../../../assets/logo.png" alt="">
+        <p fxFlexAlign="center">
+            {{type.description}}
+        </p>
+    </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center center"
         class="row-height">
         <mat-card class="card-picture" *ngFor="let subtype of subtypes">
-            <img mat-card-image src="#">
+            <img mat-card-image src="../../../assets/logo.png">
             <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                <span fxFlex="80%">{{subtype.title}}</span>
+                <span>{{subtype.title}}</span>
             </mat-card-title>
         </mat-card>
     </div>

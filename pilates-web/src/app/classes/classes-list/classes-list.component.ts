@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface Card{
-  title: string,
-  imageUrl: string,
-  link: string
-}
+import { Card } from '../class-type/models/card-type';
 
 @Component({
   selector: 'app-classes-list',
