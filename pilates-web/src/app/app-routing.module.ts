@@ -8,6 +8,7 @@ import { HomepageComponent } from './home/homepage.component';
 import { YogaTypeComponent } from './classes/class-type/yoga-type.component';
 import { PilatesTypeComponent } from './classes/class-type/pilates-type.component';
 import { ComboTypeComponent } from './classes/class-type/combo-type.component';
+import { MembershipListComponent } from './memberships/membership-list/membership-list.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,16 @@ const routes: Routes = [
     component: HomepageComponent,
     data: {
       title: 'Home',
+      icon: 'home',
+      isLogin: true
+
+    }
+  }, 
+  {
+    path: 'about', 
+    component: PageNotFoundComponent,
+    data: {
+      title: 'About',
       icon: 'home',
       isLogin: true
 
@@ -31,10 +42,19 @@ const routes: Routes = [
     }
   },
   {
-    path: 'book', 
+    path: 'memberships', 
+    component: MembershipListComponent,
+    data: {
+      title: 'Membership',
+      icon: 'class',
+      isLogin: true
+    }
+  },
+  {
+    path: 'contactus', 
     component: PageNotFoundComponent,
     data: {
-      title: 'Book',
+      title: 'Contact Us',
       icon: 'class',
       isLogin: true
     }

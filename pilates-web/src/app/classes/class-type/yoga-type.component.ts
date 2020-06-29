@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from './models/card-type';
+import { Card } from '../../core/models/card-type';
 import { ClassType } from './models/class-type';
 
 @Component({
     selector: 'app-yoga-type',
     templateUrl: './class-type.component.html',
-    styleUrls: ['./class-type.component.css', '../classes-list/classes-list.component.css']
+    styleUrls: ['./class-type.component.css', '../../app.component.css']
 })
 export class YogaTypeComponent implements OnInit {
 

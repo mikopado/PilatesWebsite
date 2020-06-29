@@ -8,21 +8,24 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageModule } from './home/homepage.module';
+import { MembershipListComponent } from './memberships/membership-list/membership-list.component';
+import { MembershipModule } from './memberships/membership.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent    
   ],
   imports: [
     BrowserModule,
     HomepageModule,
     ClassesModule,
     LoginModule,
+    MembershipModule,  
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    AppRoutingModule    
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

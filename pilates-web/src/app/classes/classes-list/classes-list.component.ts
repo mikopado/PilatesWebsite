@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../class-type/models/card-type';
+import { Card } from '../../core/models/card-type';
 
 @Component({
   selector: 'app-classes-list',
   templateUrl: './classes-list.component.html',
-  styleUrls: ['./classes-list.component.css']
+  styleUrls: ['./classes-list.component.css', '../../app.component.css']
 })
 export class ClassesListComponent implements OnInit {
 
