@@ -1,1 +1,84 @@
-<p>sign-up works!</p>
+<div>
+    <mat-card class="card">
+        <mat-card-header fxLayoutAlign="center">
+            <mat-card-title class="card-header">Registration Form</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-body">
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="First Name" type="text" formControlName="firstname"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                    </mat-form-field>                   
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="Last Name" type="text" formControlName="lastname"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                    </mat-form-field>                   
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                <mat-form-field style="width:90%">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dob"
+                    [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> 
+            </div>               
+            <div class="form-group" fxLayoutAlign="center center">
+                <mat-icon>place</mat-icon>
+                    <mat-form-field>
+                        <input matInput placeholder="Address" type="text" formControlName="address"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                    </mat-form-field>                   
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="City" type="text" formControlName="city"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                    </mat-form-field>                    
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="Email" type="email" formControlName="email"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <mat-error *ngIf="submitted && f.email.errors">
+                                Please enter a valid email address
+                              </mat-error>
+                              <mat-error *ngIf="signUpForm.hasError('required')">
+                                Email is <strong>required</strong>
+                              </mat-error>
+                    </mat-form-field>                   
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="Confirm Email" type="email" formControlName="confirmEmail"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
+                    </mat-form-field>                  
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="Password" type="password" formControlName="city"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    </mat-form-field>                 
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field>
+                        <input matInput placeholder="Confirm Password" type="password" formControlName="confirmPassword"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                    </mat-form-field>
+                    <!-- <mat-icon *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback" class="error-icon">error
+                    </mat-icon> -->
+                </div>
+                <div class="signup-btn">
+                    <button mat-raised-button color="primary" [disabled]="loading">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Sign up
+                    </button>
+                </div>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

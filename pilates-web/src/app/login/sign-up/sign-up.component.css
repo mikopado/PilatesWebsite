@@ -1,0 +1,11 @@
+.card {
+    width: 400px;
+    margin: 2% auto;
+  }
+  .error-icon{
+    color: red;
+    font-size: 14px;
+}
+.signup-btn{
+    margin-top: 10px;
+}
