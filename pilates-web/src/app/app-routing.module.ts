@@ -9,6 +9,7 @@ import { YogaTypeComponent } from './classes/class-type/yoga-type.component';
 import { PilatesTypeComponent } from './classes/class-type/pilates-type.component';
 import { ComboTypeComponent } from './classes/class-type/combo-type.component';
 import { MembershipListComponent } from './memberships/membership-list/membership-list.component';
+import { WeeklyCalendarComponent } from './classes/weekly-calendar/weekly-calendar.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,7 @@ const routes: Routes = [
   { path: 'classes/yoga', component: YogaTypeComponent},
   { path: 'classes/pilates', component: PilatesTypeComponent },
   { path: 'classes/combo', component: ComboTypeComponent },
+  { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent },
   { path: 'signup', component: SignUpComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }

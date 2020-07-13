@@ -7,16 +7,22 @@ import { RouterModule } from '@angular/router';
 import { YogaTypeComponent } from './class-type/yoga-type.component';
 import { PilatesTypeComponent } from './class-type/pilates-type.component';
 import { ComboTypeComponent } from './class-type/combo-type.component';
+import { WeeklyCalendarComponent } from './weekly-calendar/weekly-calendar.component';
+import { DayCalendarComponent } from './weekly-calendar/day-calendar/day-calendar.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
 @NgModule({
-  declarations: [ClassesListComponent, YogaTypeComponent, PilatesTypeComponent, ComboTypeComponent],
+  declarations: [ClassesListComponent, YogaTypeComponent, PilatesTypeComponent, ComboTypeComponent, WeeklyCalendarComponent, DayCalendarComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    MatTableModule,
+    MatButtonModule
   ]
 })
 export class ClassesModule { }
