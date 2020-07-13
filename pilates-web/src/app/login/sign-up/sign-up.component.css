@@ -9,9 +9,16 @@
 .signup-btn{
     margin-top: 10px;
 }
-#picker{
-  color: black;
-}
 .icons{
   font-size: 16px;
+  color: black;
+}
+.form-group{
+  width: 100%;
+}
+.form-field{
+  width: 80%;
+}
+.mr-icons{
+  margin-right: 4px;
 }
