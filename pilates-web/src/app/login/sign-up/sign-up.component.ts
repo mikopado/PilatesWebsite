@@ -13,6 +13,8 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  hide = true;
+  confirmEmailHide = true;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
