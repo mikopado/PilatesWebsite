@@ -8,10 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DayCalendarComponent implements OnInit {
   displayedColumns: string[] = ['timeShift', 'classType', 'teacher', 'room', 'actions'];
 
-  @Input() day: any;
+  @Input() day: any[];
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.day);
   }
 
 }

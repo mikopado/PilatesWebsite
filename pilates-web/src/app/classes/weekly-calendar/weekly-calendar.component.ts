@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 
+export class WeekPlan {
+  day: string
+  lessons: any[]
+}
 @Component({
   selector: 'app-weekly-calendar',
   templateUrl: './weekly-calendar.component.html',
-  styleUrls: ['./weekly-calendar.component.css']
+  styleUrls: ['./weekly-calendar.component.css', '../../app.component.css']
 })
 export class WeeklyCalendarComponent implements OnInit {
 
-  week: any[][];
+  week: WeekPlan[];
   constructor() { }
 
   ngOnInit(): void {
     this.week = [
-      [
-      {'timeshift': '15.00-18.00', 'classType': 'Yoga', 'teacher': 'Robbie', 'room': 'A3'},
-      {'timeshift': '12.00-13.00', 'classType': 'Pilates', 'teacher': 'Minnie', 'room': 'B3'}
-    ], 
-      [{'timeshift': '11.00-13.00', 'classType': 'Pilates', 'teacher': 'Carl', 'room': 'A1'}]  
+      { day: 'Monday', lessons: [{ 'timeshift': '15.00-18.00', 'lessonType': 'Yoga', 'teacher': 'Robbie', 'room': 'A3' }, { 'timeshift': '12.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Minnie', 'room': 'B3' }] },
+      { day: 'Tuesday', lessons: [{ 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }, { 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }] },
+      { day: 'Wednesday', lessons: [{ 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }, { 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }] },
+      { day: 'Thursday', lessons: [{ 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }, { 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }] },
+      { day: 'Friday', lessons: [{ 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }, { 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }] },
+      { day: 'Saturday', lessons: [{ 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }, { 'timeshift': '11.00-13.00', 'lessonType': 'Pilates', 'teacher': 'Carl', 'room': 'A1' }] },
     ]
+    console.log(this.week);
   }
 
 }

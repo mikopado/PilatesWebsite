@@ -11,7 +11,7 @@ import { WeeklyCalendarComponent } from './weekly-calendar/weekly-calendar.compo
 import { DayCalendarComponent } from './weekly-calendar/day-calendar/day-calendar.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatCardModule,
     RouterModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule
   ]
 })
 export class ClassesModule { }
