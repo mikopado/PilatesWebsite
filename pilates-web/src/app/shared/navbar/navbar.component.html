@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+      [ngClass]="{'hidden': !(isHandset$ | async)}">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a *ngFor="let menuItem of menuItems" 
+        mat-list-item mat-ripple 
+        [style.position]="'relative'"
+        routerLinkActive="selected" 
+        [routerLink]="[menuItem.path]">
+        <mat-icon mat-list-icon *ngIf="menuItem.icon">{{menuItem.icon}}</mat-icon>
+        <span>{{menuItem.title}}</span>
+      </a>      
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">      
+      <mat-toolbar-row>   
+        <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button> 
+        <img src="../../../assets/logo.png" alt="logo" style="height:60%">
+        <h1>Pilates</h1>
+        <span class="menu-spacer fill-space"></span>
+        <div *ngIf="!(isHandset$ | async)" >
+          <a *ngFor="let menuItem of menuItems" mat-button [routerLink]="[menuItem.path]">
+            <span>{{menuItem.title}}</span>
+          </a>
+        </div>
+      </mat-toolbar-row>        
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

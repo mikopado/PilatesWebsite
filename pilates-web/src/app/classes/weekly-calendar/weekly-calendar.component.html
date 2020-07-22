@@ -1,0 +1,7 @@
+<h1 class="title">Weekly Calendar</h1>
+<div class="container" fxLayout="row wrap" fxLayoutAlign="space-evenly">
+<div *ngFor="let day of week" fxFlex="45" class="tab-wrapper">
+    <h2>{{day.day}}</h2>
+    <app-day-calendar [day]="day.lessons"></app-day-calendar>
+</div>
+</div>

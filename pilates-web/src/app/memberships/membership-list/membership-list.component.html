@@ -1,0 +1,13 @@
+<div class="container">
+    <h1 class="title">Pick the membership that fits you</h1>
+    <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around space-around" >
+        <mat-card class="card-picture" *ngFor="let card of cards" fxFlex="30">
+            <mat-card-content [routerLink]="[card.link]" >
+                <img mat-card-image [src]="card.imageUrl">
+                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                    <span>{{card.title}}</span>
+                </mat-card-title>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>  

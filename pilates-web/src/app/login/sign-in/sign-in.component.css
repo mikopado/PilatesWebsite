@@ -1,0 +1,27 @@
+.card {
+    width: 400px;
+    margin: 10% auto;
+  }
+ 
+ .form-group{
+     margin-bottom: 10px;
+ }
+ .field{
+     font-size: 14px;
+ }
+ .checkbox-password{
+     font-size: 12px;
+     margin-bottom: 20px;  
+ }
+ .login-icon{
+     margin-right: 5px;
+     font-size: 20px;
+ }
+ .invalid-feedback{
+     font-size: 10px;
+ }
+ .error-icon{
+     color: red;
+     font-size: 14px;
+ }
+ 
