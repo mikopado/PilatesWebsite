@@ -1,4 +1,4 @@
-export interface AppConfig {
+export interface IAppConfig {
     // authorizationApiUrl: string;
     apiUrl: string;
     environment: string;
