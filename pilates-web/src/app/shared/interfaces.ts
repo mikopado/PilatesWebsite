@@ -1,10 +1,22 @@
 export interface IClass {
     id: string,
-    type: string,
+    type: ClassType,
     level: string,
     teacher: ITeacher,
     timeSlot: Date,
     room: string
+}
+
+export enum ClassType{
+    Yoga,
+    Pilates,
+    Combo
+}
+
+export enum ClassLevel{
+    Beginner,
+    Intermediate,
+    Advanced
 }
 
 export interface IUser {
@@ -30,4 +42,9 @@ export interface IMembership {
     id: string,
     classType: string,
     membershipType: string
+}
+
+export interface IApiResponse<T>{
+    result: T,
+    statusCode: number
 }

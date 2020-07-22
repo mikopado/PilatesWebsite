@@ -2,7 +2,7 @@
     <h1 class="title">Classes</h1>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="space-around center"
         class="row-height">
-        <mat-card class="card-picture" *ngFor="let card of cards">
+        <mat-card class="card-picture" *ngFor="let card of classesService.classesList$ | async">
             <mat-card-content [routerLink]="[card.link]">
                 <img mat-card-image [src]="card.imageUrl">
                 <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">

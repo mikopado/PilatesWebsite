@@ -3,15 +3,19 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AppConfigService } from '../app-config.service';
-import { IClass } from 'src/app/shared/interfaces';
+import { IClass, IApiResponse } from '../../shared/interfaces';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class DataService {
     constructor(private http: HttpClient, private configService: AppConfigService) { }
 
-    getClasses(): Observable<IClass[]> {
-        return this.http.get<IClass[]>(this.configService.settings.apiUrl)
+    getClasses(): Observable<IApiResponse<IClass[]>> {
+        var endpoint = '/api/Classes';
+        console.log(this.configService.settings.apiUrl);
+        return this.http.get<IApiResponse<IClass[]>>(this.configService.settings.apiUrl + endpoint)
             .pipe(catchError(this.handleError));
     }
 

@@ -11,6 +11,8 @@ import { HomepageModule } from './home/homepage.module';
 import { MembershipListComponent } from './memberships/membership-list/membership-list.component';
 import { MembershipModule } from './memberships/membership.module';
 import { AppConfigService } from './core/app-config.service';
+import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './core/services/data.service';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { AppConfigService } from './core/app-config.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     HomepageModule,
     ClassesModule,
     LoginModule,
@@ -30,11 +33,13 @@ import { AppConfigService } from './core/app-config.service';
   ],
   providers: [
     AppConfigService,
-    { provide: APP_INITIALIZER,
+    { 
+      provide: APP_INITIALIZER,
       useFactory: appInitializer,
       deps: [AppConfigService], 
       multi: true 
-    }
+    },
+    DataService
  ],
   bootstrap: [AppComponent]
 })

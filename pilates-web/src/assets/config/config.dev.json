@@ -1,4 +1,4 @@
 {
     "environment": "DEV",
-    "apiUrl": ""
+    "apiUrl": "http://localhost:57619"
 }

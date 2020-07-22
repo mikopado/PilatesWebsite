@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../../core/models/card-type';
-import { ClassType } from './models/class-type';
+import { ClassesService } from '../classes-service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-pilates-type',
@@ -9,13 +10,11 @@ import { ClassType } from './models/class-type';
 })
 export class PilatesTypeComponent implements OnInit {
 
-    subtypes: Card[];
-    type: ClassType;
-    constructor() { }
+    constructor(public readonly classService: ClassesService) { }
 
     ngOnInit(): void {
-        this.type = {title: 'Pilates', description: 'adnfajnvjanjvndjnv', imageUrl: 'https://naturalkaram.com/wp-content/uploads/2019/09/pilates.jpg'};
-        this.subtypes = [{title:'Beginner', imageUrl: 'https://naturalkaram.com/wp-content/uploads/2019/09/pilates.jpg', link:''}, {title:'Intermediate', imageUrl: 'https://naturalkaram.com/wp-content/uploads/2019/09/pilates.jpg', link:''}, {title:'Advanced', imageUrl: 'https://naturalkaram.com/wp-content/uploads/2019/09/pilates.jpg', link:''}];
+        this.classService.getClassSubTypes('Pilates');
+        this.classService.getClassType('Pilates');
 
     }
 

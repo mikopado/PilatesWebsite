@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../../core/models/card-type';
-import { ClassType } from './models/class-type';
+import { ClassesService } from '../classes-service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     selector: 'app-combo-type',
@@ -9,14 +10,11 @@ import { ClassType } from './models/class-type';
 })
 export class ComboTypeComponent implements OnInit {
 
-    subtypes: Card[];
-    type: ClassType;
-    constructor() { }
+    constructor(public readonly classService: ClassesService) { }
 
     ngOnInit(): void {
-        this.type = {title: 'Combo', description:'sdvsmdklvmskmdkmkmd', imageUrl:'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png'};
-        this.subtypes = [{title:'Beginner', imageUrl: 'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png', link:''}, {title:'Intermediate', imageUrl: 'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png', link:''}, {title:'Advanced', imageUrl: 'http://images8.design-editor.com/93/9390973/3958/67B0E24D-85F0-B2D3-094A-AB0EA0CACCEF.png', link:''}];
-
+        this.classService.getClassSubTypes('Combo');
+        this.classService.getClassType('Combo');
     }
 
 }
