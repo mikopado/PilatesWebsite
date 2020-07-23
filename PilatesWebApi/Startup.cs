@@ -33,6 +33,8 @@ namespace PilatesWebApi
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IMembershipService, MembershipService>();
+            services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<IMemberService, MemberService>();
 
             services.AddAutoMapper(typeof(Startup).Assembly);
 

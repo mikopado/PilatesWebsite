@@ -13,9 +13,7 @@ export class PilatesTypeComponent implements OnInit {
     constructor(public readonly classService: ClassesService) { }
 
     ngOnInit(): void {
-        this.classService.getClassSubTypes('Pilates');
-        this.classService.getClassType('Pilates');
-
+        this.classService.getClassTypeDetails('Pilates');
     }
 
 }

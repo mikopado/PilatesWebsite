@@ -1,11 +1,11 @@
 <div class="container">
     <h1 class="title">Pick the membership that fits you</h1>
     <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around space-around" >
-        <mat-card class="card-picture" *ngFor="let card of cards" fxFlex="30">
-            <mat-card-content [routerLink]="[card.link]" >
+        <mat-card class="card-picture" *ngFor="let card of membershipService.membershipCards$ | async" fxFlex="30">
+            <mat-card-content [routerLink]="[card.title.toLowerCase()]" >
                 <img mat-card-image [src]="card.imageUrl">
                 <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                    <span>{{card.title}}</span>
+                    <span>{{card.description}}</span>
                 </mat-card-title>
             </mat-card-content>
         </mat-card>

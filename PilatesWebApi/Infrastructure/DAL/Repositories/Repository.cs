@@ -26,6 +26,11 @@ namespace PilatesWebApi.Infrastructure.DAL.Repositories
             await _entities.AddAsync(entity);
         }
 
+        public async Task AddMultipleAsync(IEnumerable<T> entities)
+        {
+            await _entities.AddRangeAsync(entities);
+        }
+
         // Just disable entities not removing from Db
         public void DeleteAsync(T entity)
         {

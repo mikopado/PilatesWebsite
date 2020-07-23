@@ -1,6 +1,9 @@
-﻿namespace PilatesWebApi.Application.DTO.Requests
+﻿using System.Collections.Generic;
+
+namespace PilatesWebApi.Application.DTO.Requests
 {
-    public class CreateMembershipRequest
+    public class CreateMembershipsRequest
     {
+        public List<MembershipRequest> Memberships { get; set; }
     }
 }

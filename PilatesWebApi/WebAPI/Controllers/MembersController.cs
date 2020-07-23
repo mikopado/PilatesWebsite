@@ -9,11 +9,11 @@ namespace PilatesWebApi.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MemberController : BaseController
+    public class MembersController : BaseController
     {
         private readonly IMemberService _memberService;
 
-        public MemberController(IMemberService memberService)
+        public MembersController(IMemberService memberService)
         {
             _memberService = memberService;
         }

@@ -41,9 +41,9 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddClass([FromBody] AddClassRequest classRequest)
+        public async Task<IActionResult> AddClasses([FromBody] AddClassesRequest classRequest)
         {
-            await _classService.AddClassAsync(classRequest);
+            await _classService.AddClassesAsync(classRequest);
             return Ok(new ApiResponse(HttpStatusCode.OK));
 
         }

@@ -10,6 +10,8 @@ import { PilatesTypeComponent } from './classes/class-type/pilates-type.componen
 import { ComboTypeComponent } from './classes/class-type/combo-type.component';
 import { MembershipListComponent } from './memberships/membership-list/membership-list.component';
 import { WeeklyCalendarComponent } from './classes/weekly-calendar/weekly-calendar.component';
+import { ClassResolver } from './classes/classes.resolver';
+import { MembershipsResolver } from './memberships/memberships.resolver';
 
 
 const routes: Routes = [
@@ -39,7 +41,10 @@ const routes: Routes = [
     data: {
       title: 'Classes',
       icon: 'class',
-      isLogin: true
+      isLogin: true      
+    },
+    resolve: {
+      data: ClassResolver
     }
   },
   {
@@ -49,6 +54,9 @@ const routes: Routes = [
       title: 'Membership',
       icon: 'class',
       isLogin: true
+    },
+    resolve:{
+      data: MembershipsResolver
     }
   },
   {
@@ -69,9 +77,9 @@ const routes: Routes = [
       isLogin: true
     }
   },
-  { path: 'classes/yoga', component: YogaTypeComponent},
-  { path: 'classes/pilates', component: PilatesTypeComponent },
-  { path: 'classes/combo', component: ComboTypeComponent },
+  { path: 'classes/yoga', component: YogaTypeComponent, resolve: {data: ClassResolver}},
+  { path: 'classes/pilates', component: PilatesTypeComponent,resolve: {data: ClassResolver} },
+  { path: 'classes/combo', component: ComboTypeComponent,resolve: {data: ClassResolver} },
   { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent },
   { path: 'signup', component: SignUpComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -80,6 +88,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [ClassResolver, MembershipsResolver]
 })
 export class AppRoutingModule { }

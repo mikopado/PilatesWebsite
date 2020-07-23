@@ -13,8 +13,7 @@ export class ComboTypeComponent implements OnInit {
     constructor(public readonly classService: ClassesService) { }
 
     ngOnInit(): void {
-        this.classService.getClassSubTypes('Combo');
-        this.classService.getClassType('Combo');
+        this.classService.getClassTypeDetails('Combo');
     }
 
 }

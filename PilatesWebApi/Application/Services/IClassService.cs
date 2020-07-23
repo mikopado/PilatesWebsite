@@ -12,7 +12,7 @@ namespace PilatesWebApi.Application.Services
     {
         Task<IEnumerable<ClassResponse>> GetAllClassesAsync();
         Task<ClassResponse> GetClassAsync(Guid id);
-        Task AddClassAsync(AddClassRequest request);
+        Task AddClassesAsync(AddClassesRequest request);
         Task DeleteClassAsync(Guid id);
         Task UpdateClassAsync(Guid id, UpdateClassRequest request);
         Task<IEnumerable<ClassResponse>> GetClassesAsync(Expression<Func<Class, bool>> predicate);

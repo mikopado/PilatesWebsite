@@ -12,7 +12,7 @@ import { MembershipListComponent } from './memberships/membership-list/membershi
 import { MembershipModule } from './memberships/membership.module';
 import { AppConfigService } from './core/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DataService } from './core/services/data.service';
+import { DataService } from './shared/services/data.service';
 
 
 @NgModule({

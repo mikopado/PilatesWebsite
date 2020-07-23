@@ -3,7 +3,7 @@ using System;
 
 namespace PilatesWebApi.Application.DTO.Requests
 {
-    public class AddClassRequest
+    public class ClassRequest
     {
         public Level Level { get; set; }
         public Guid TeacherId { get; set; }

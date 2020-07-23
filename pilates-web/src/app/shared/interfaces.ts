@@ -1,3 +1,5 @@
+import { MembershipType } from '../memberships/models/membership-type';
+
 export interface IClass {
     id: string,
     type: ClassType,
@@ -40,8 +42,8 @@ export interface ITeacher {
 
 export interface IMembership {
     id: string,
-    classType: string,
-    membershipType: string
+    classType: ClassType,
+    type: MembershipType
 }
 
 export interface IApiResponse<T>{

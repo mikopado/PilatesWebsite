@@ -25,10 +25,10 @@ namespace PilatesWebApi.Application.Services
             _repository = _uow.Repository<Class>();
         }
 
-        public async Task AddClassAsync(AddClassRequest request)
+        public async Task AddClassesAsync(AddClassesRequest request)
         {
-            var classToAdd = _mapper.Map<Class>(request);
-            await _repository.AddAsync(classToAdd);
+            var classesToAdd = _mapper.Map<IEnumerable<Class>>(request.Classes);
+            await _repository.AddMultipleAsync(classesToAdd);
             await _uow.SaveAsync();
         }
 

@@ -12,8 +12,7 @@ export class ClassesListComponent implements OnInit {
   constructor(public readonly classesService: ClassesService) { }
 
   ngOnInit(): void {
-    this.classesService.getClassList();
-    
+    this.classesService.getClassList();    
   }
 
 }

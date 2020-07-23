@@ -11,9 +11,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   declarations: [MembershipListComponent],
   imports: [
     CommonModule,
+    RouterModule,
     FlexLayoutModule,
-    MatCardModule,
-    RouterModule
+    MatCardModule
   ]
 })
 export class MembershipModule { }
