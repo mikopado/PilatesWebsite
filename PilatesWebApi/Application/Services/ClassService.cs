@@ -18,11 +18,28 @@ namespace PilatesWebApi.Application.Services
         private readonly IUnitOfWork _uow;
         private IMapper _mapper;
         private IRepository<Class> _repository;
+        private IRepository<ClassCalendar> _calendarRepository;
         public ClassService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _uow = unitOfWork;
             _mapper = mapper;
             _repository = _uow.Repository<Class>();
+            _calendarRepository = _uow.Repository<ClassCalendar>();
+        }
+
+        public async Task AddClassesWithTimetableAsync(AddClassWithTimetableRequest request)
+        {
+            foreach (var cls in request.Classes)
+            {
+                var clsToAdd = _mapper.Map<Class>(cls);
+                await _repository.AddAsync(clsToAdd);
+                var calendar = _mapper.Map<ClassCalendar>(cls);
+                calendar.ClassId = clsToAdd.Id;
+                calendar.Class = clsToAdd;
+                await _calendarRepository.AddAsync(calendar);
+            } 
+            
+            await _uow.SaveAsync();
         }
 
         public async Task AddClassesAsync(AddClassesRequest request)
@@ -97,8 +114,22 @@ namespace PilatesWebApi.Application.Services
 
         public async Task<IEnumerable<ClassCalendarResponse>> GetWeeklyTimetableAsync()
         {
-            var classes = await _repository.GetEntitiesAsync();
-            return _mapper.Map<IEnumerable<ClassCalendarResponse>>(classes);
+            var classes = await _repository.With(x => x.ClassCalendars).ToListAsync();
+            var calendars = classes.SelectMany(x => x.ClassCalendars).ToList();
+            var classCalendars = classes.Join(calendars, 
+                cls => cls.Id, 
+                cal => cal.ClassId, 
+                (cls, cal) => 
+                new ClassCalendarResponse {
+                    ClassId = cls.Id,
+                    EndingTime = cal.EndingTime,
+                    Level = cls.Level,
+                    Room = cls.Room,
+                    StartingTime = cal.StartingTime,
+                    Type = cls.Type,
+                    WeekDay = cal.WeekDay
+                });
+            return classCalendars;
 
         }
     }

@@ -48,6 +48,14 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
 
         }
 
+        [HttpPost("timetable")]
+        public async Task<IActionResult> AddClasseswithTimetable([FromBody] AddClassWithTimetableRequest classRequest)
+        {
+            await _classService.AddClassesWithTimetableAsync(classRequest);
+            return Ok(new ApiResponse(HttpStatusCode.OK));
+
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClass(Guid id)
         {
@@ -74,8 +82,8 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
         [HttpGet("timetable/week")]
         public async Task<IActionResult> GetWeeklyTimetable()
         {
-            //var timetable = await _classService.GetTimetableAsync(start, end);
-            return Ok();
+            var timetable = await _classService.GetWeeklyTimetableAsync();
+            return Ok(new ApiResponse(HttpStatusCode.OK, timetable));
         }
 
         [HttpGet("type/{type}")]

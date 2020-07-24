@@ -35,6 +35,7 @@ namespace PilatesWebApi.Infrastructure.DAL
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<ClassCalendar> ClassCalendars { get; set; }
 
         private void DeleteEntries()
         {

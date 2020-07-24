@@ -20,6 +20,10 @@ namespace PilatesWebApi.Application.Mapping
             CreateMap<TeacherRequest, Teacher>();
             CreateMap<MembershipRequest, Membership>();
             CreateMap<Class, ClassCalendarResponse>();
+            CreateMap<ClassRequest, ClassCalendar>();
+            CreateMap<Class, ClassCalendar>()
+                .ForMember(c => c.ClassId, opt => opt.MapFrom(o => o.Id))
+                .ForAllOtherMembers(i => i.Ignore());
         }
     }
 }

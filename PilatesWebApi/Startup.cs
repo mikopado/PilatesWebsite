@@ -24,10 +24,11 @@ namespace PilatesWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddJsonOptions(options =>
+            services.AddControllers().AddNewtonsoftJson(options =>
             {
-                options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
+            
             // TODO Sorting out services by purpose. Check repository of Architecture best practice??
             services.AddDbContext<PilatesDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("PilatesDb")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -43,6 +44,7 @@ namespace PilatesWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pilates API", Version = "v1" });
             });
             services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

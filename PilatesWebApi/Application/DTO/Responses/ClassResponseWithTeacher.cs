@@ -9,8 +9,6 @@ namespace PilatesWebApi.Application.DTO.Responses
         public ClassType Type { get; set; }
         public Level Level { get; set; }
         public TeacherResponse Teacher { get; set; }
-        public DateTime StartingTime { get; set; }
-        public DateTime EndingTime { get; set; }
         public string Room { get; set; }
     }
 }

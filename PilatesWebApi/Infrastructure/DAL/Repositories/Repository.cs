@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using PilatesWebApi.Application.DTO.Requests;
+using PilatesWebApi.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +13,12 @@ namespace PilatesWebApi.Infrastructure.DAL.Repositories
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DbSet<T> _entities;
+        private readonly DbSet<Class> _entitiess;
 
         public Repository(DbContext context)
         {
             _entities = context.Set<T>();
+            _entitiess = context.Set<Class>();
         }
 
         public void Add(T entity)
@@ -30,7 +35,7 @@ namespace PilatesWebApi.Infrastructure.DAL.Repositories
         {
             await _entities.AddRangeAsync(entities);
         }
-
+        
         // Just disable entities not removing from Db
         public void DeleteAsync(T entity)
         {
