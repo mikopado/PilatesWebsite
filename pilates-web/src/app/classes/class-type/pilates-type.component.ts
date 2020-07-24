@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../../core/models/card-type';
+import { Card } from '../../core/models/card';
 import { ClassesService } from '../classes-service';
 import { BehaviorSubject } from 'rxjs';
 

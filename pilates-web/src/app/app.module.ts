@@ -8,7 +8,6 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageModule } from './home/homepage.module';
-import { MembershipListComponent } from './memberships/membership-list/membership-list.component';
 import { MembershipModule } from './memberships/membership.module';
 import { AppConfigService } from './core/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,14 +21,14 @@ import { DataService } from './shared/services/data.service';
   imports: [
     BrowserModule,
     HttpClientModule,
+    AppRoutingModule,
+    CoreModule,
+    SharedModule,
     HomepageModule,
     ClassesModule,
     LoginModule,
     MembershipModule,  
-    CoreModule,
-    SharedModule,
-    BrowserAnimationsModule,
-    AppRoutingModule
+    BrowserAnimationsModule
   ],
   providers: [
     AppConfigService,

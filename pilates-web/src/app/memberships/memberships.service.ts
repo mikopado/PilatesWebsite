@@ -5,7 +5,7 @@ import { IMembership, ClassType } from '../shared/interfaces';
 import { map, tap } from 'rxjs/operators';
 import { MembershipType } from './models/membership-type';
 import { MembershipExtraDetails } from './models/membership-details';
-import { Card } from '../core/models/card-type';
+import { Card } from '../core/models/card';
 
 
 @Injectable({

@@ -10,7 +10,8 @@ import { IClass, IApiResponse, IMembership } from '../interfaces';
     providedIn: 'root'
 })
 export class DataService {
-    constructor(private http: HttpClient, private configService: AppConfigService) { }
+    constructor(private http: HttpClient, private configService: AppConfigService) { 
+    }
 
     getClasses(): Observable<IApiResponse<IClass[]>> {
         var endpoint = '/api/Classes';

@@ -65,14 +65,14 @@ namespace PilatesWebApi.Application.Services
             return _mapper.Map<IEnumerable<ClassResponse>>(classes);
         }
 
-        public async Task<IEnumerable<ClassResponse>> GetTimetableAsync(DateTime start, DateTime end, Func<Class, bool> predicate = null)
-        {
-            var timetable = await _repository.FindAsync(x => x.StartingTime >= start && x.EndingTime <= end);
-            if (timetable is null) throw new Exception("An error occured while retrieving resources.");
-            if (predicate is null) return _mapper.Map<IEnumerable<ClassResponse>>(timetable);
-            var filteredTimetable = timetable.Where(predicate);
-            return _mapper.Map<IEnumerable<ClassResponse>>(filteredTimetable);
-        }
+        //public async Task<IEnumerable<ClassResponse>> GetTimetableAsync(DateTime start, DateTime end, Func<Class, bool> predicate = null)
+        //{
+        //    var timetable = await _repository.FindAsync(x => x.StartingTime >= start && x.EndingTime <= end);
+        //    if (timetable is null) throw new Exception("An error occured while retrieving resources.");
+        //    if (predicate is null) return _mapper.Map<IEnumerable<ClassResponse>>(timetable);
+        //    var filteredTimetable = timetable.Where(predicate);
+        //    return _mapper.Map<IEnumerable<ClassResponse>>(filteredTimetable);
+        //}
 
         public async Task<ClassResponseWithTeacher> GetClassWithTeacherAsync(Guid id)
         {
@@ -95,5 +95,11 @@ namespace PilatesWebApi.Application.Services
             return cls;
         }
 
+        public async Task<IEnumerable<ClassCalendarResponse>> GetWeeklyTimetableAsync()
+        {
+            var classes = await _repository.GetEntitiesAsync();
+            return _mapper.Map<IEnumerable<ClassCalendarResponse>>(classes);
+
+        }
     }
 }

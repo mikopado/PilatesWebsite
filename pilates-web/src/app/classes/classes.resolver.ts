@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Resolve } from '@angular/router';
 import { ClassesService } from './classes-service';
 import { DataService } from '../shared/services/data.service';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ClassResolver implements Resolve<any>{
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve() {
         return this.dataService.getClasses().pipe(
-            tap(c => console.log(c)),
             map(response => this.classService.classes$.next(response.result))
         );
     }

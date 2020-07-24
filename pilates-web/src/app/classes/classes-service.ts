@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import { DataService } from '../shared/services/data.service';
-import { BehaviorSubject, pipe, Observable, Subject } from 'rxjs';
-import { Card } from '../core/models/card-type';
-import { map, filter, find, take, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { Card } from '../core/models/card';
+import { map } from 'rxjs/operators';
 import { ClassType, ClassLevel, IClass } from '../shared/interfaces';
-import { Router } from '@angular/router';
 import { ClassExtraDetails } from './class-type/models/class-details';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ClassesService {
 
     public classesList$ = new BehaviorSubject<Card[]>(null);
@@ -17,7 +13,8 @@ export class ClassesService {
     public type$ = new BehaviorSubject<Card>(null);
     public classes$ = new BehaviorSubject<IClass[]>(null);
 
-    constructor() {}
+    constructor() {
+    }
 
     getClassList() {
         this.classes$

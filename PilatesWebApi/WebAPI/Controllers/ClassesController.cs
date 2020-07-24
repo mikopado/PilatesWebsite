@@ -64,12 +64,18 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
 
         }
 
-        [HttpGet("timetable/{start}/{end}")]
-        public async Task<IActionResult> GetTimetable(DateTime start, DateTime end)
-        {
-            var timetable = await _classService.GetTimetableAsync(start, end);
-            return Ok(new ApiResponse(HttpStatusCode.OK, timetable));
+        //[HttpGet("timetable/{start}/{end}")]
+        //public async Task<IActionResult> GetTimetable(DateTime start, DateTime end)
+        //{
+        //    var timetable = await _classService.GetTimetableAsync(start, end);
+        //    return Ok(new ApiResponse(HttpStatusCode.OK, timetable));
+        //}
 
+        [HttpGet("timetable/week")]
+        public async Task<IActionResult> GetWeeklyTimetable()
+        {
+            //var timetable = await _classService.GetTimetableAsync(start, end);
+            return Ok();
         }
 
         [HttpGet("type/{type}")]

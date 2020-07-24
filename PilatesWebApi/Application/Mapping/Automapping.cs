@@ -3,6 +3,7 @@ using PilatesWebApi.Application.DTO.Requests;
 using PilatesWebApi.Application.DTO.Responses;
 using PilatesWebApi.Domain.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PilatesWebApi.Application.Mapping
 {
@@ -18,6 +19,7 @@ namespace PilatesWebApi.Application.Mapping
             CreateMap<Membership, MembershipResponse>();
             CreateMap<TeacherRequest, Teacher>();
             CreateMap<MembershipRequest, Membership>();
-        }        
+            CreateMap<Class, ClassCalendarResponse>();
+        }
     }
 }

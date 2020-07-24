@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../../core/models/card-type';
+import { Card } from '../../core/models/card';
 import { ClassesService } from '../classes-service';
 
 @Component({
@@ -9,10 +9,11 @@ import { ClassesService } from '../classes-service';
 })
 export class ClassesListComponent implements OnInit {
 
-  constructor(public readonly classesService: ClassesService) { }
+  constructor(public readonly classesService: ClassesService) { 
+  }
 
   ngOnInit(): void {
-    this.classesService.getClassList();    
+    this.classesService.getClassList(); 
   }
 
 }

@@ -9,8 +9,9 @@ namespace PilatesWebApi.Domain.Models
         public Level Level{ get; set; }
         public Guid TeacherId { get; set; }
         public Teacher Teacher{ get; set; }
-        public DateTime StartingTime { get; set; }
-        public DateTime EndingTime { get; set; }
+        public DayOfWeek WeekDay { get; set; }
+        public TimeSpan StartingTime { get; set; }
+        public TimeSpan EndingTime { get; set; }
         public string Room { get; set; }
         public bool IsDeleted { get ; set ; }
     }
