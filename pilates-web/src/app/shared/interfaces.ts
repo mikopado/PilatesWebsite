@@ -5,7 +5,9 @@ export interface IClass {
     type: ClassType,
     level: string,
     teacher: ITeacher,
-    timeSlot: Date,
+    weekDay: number,
+    startingTime: string,
+    endingTime: string,
     room: string
 }
 

@@ -2,12 +2,15 @@ import { Injectable } from "@angular/core";
 import { Resolve } from '@angular/router';
 import { ClassesService } from './classes-service';
 import { DataService } from '../shared/services/data.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ClassResolver implements Resolve<any>{
     resolve() {
-        return this.dataService.getClasses().pipe(
+        // this.dataService.getClassesCalendar().pipe(
+        //     map(resp => this.classService.weeklyTimetable$.next(resp.result))
+        // ).subscribe();
+        return this.dataService.getClassesCalendar().pipe(
             map(response => this.classService.classes$.next(response.result))
         );
     }

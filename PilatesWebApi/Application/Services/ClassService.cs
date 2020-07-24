@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace PilatesWebApi.Application.Services
@@ -114,7 +116,7 @@ namespace PilatesWebApi.Application.Services
 
         public async Task<IEnumerable<ClassCalendarResponse>> GetWeeklyTimetableAsync()
         {
-            var classes = await _repository.With(x => x.ClassCalendars).ToListAsync();
+            var classes = await _repository.With(x => x.ClassCalendars, y => y.Teacher).ToListAsync();
             var calendars = classes.SelectMany(x => x.ClassCalendars).ToList();
             var classCalendars = classes.Join(calendars, 
                 cls => cls.Id, 
@@ -127,8 +129,9 @@ namespace PilatesWebApi.Application.Services
                     Room = cls.Room,
                     StartingTime = cal.StartingTime,
                     Type = cls.Type,
-                    WeekDay = cal.WeekDay
-                });
+                    WeekDay = cal.WeekDay,
+                    Teacher = _mapper.Map<TeacherResponse>(cls.Teacher)
+                }).ToList();
             return classCalendars;
 
         }

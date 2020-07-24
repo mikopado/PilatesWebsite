@@ -25,6 +25,13 @@ export class DataService {
             .pipe(catchError(this.handleError));
     }
 
+    getClassesCalendar(): Observable<IApiResponse<IClass[]>> {
+        var endpoint = '/api/Classes/timetable/week';
+        return this.http.get<IApiResponse<IClass[]>>(this.configService.settings.apiUrl + endpoint)
+            .pipe(catchError(this.handleError));
+    }
+
+
     private handleError(error: HttpErrorResponse) {
         console.error('server error:', error);
         if (error.error instanceof Error) {

@@ -78,9 +78,9 @@ const routes: Routes = [
     }
   },
   { path: 'classes/yoga', component: YogaTypeComponent, resolve: {data: ClassResolver}},
-  { path: 'classes/pilates', component: PilatesTypeComponent,resolve: {data: ClassResolver} },
-  { path: 'classes/combo', component: ComboTypeComponent,resolve: {data: ClassResolver} },
-  { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent },
+  { path: 'classes/pilates', component: PilatesTypeComponent, resolve: {data: ClassResolver} },
+  { path: 'classes/combo', component: ComboTypeComponent, resolve: {data: ClassResolver} },
+  { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent, resolve: {data: ClassResolver} },
   { path: 'signup', component: SignUpComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }
