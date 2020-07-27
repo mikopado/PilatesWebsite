@@ -13,10 +13,9 @@ import { AppConfigService } from './core/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './shared/services/data.service';
 
-
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Card } from '../core/models/card';
-import { map, groupBy, filter, find, tap } from 'rxjs/operators';
+import { map, groupBy, filter, find, tap, distinct } from 'rxjs/operators';
 import { ClassType, ClassLevel, IClass } from '../shared/interfaces';
 import { ClassExtraDetails } from './class-type/models/class-details';
 import { IWeekPlan, DayOfWeek, IClassTimetable } from './class-type/models/week-plan';
@@ -13,7 +13,7 @@ export class ClassesService {
     public classesSubtype$ = new BehaviorSubject<Card[]>(null);
     public type$ = new BehaviorSubject<Card>(null);
     public classes$ = new BehaviorSubject<IClass[]>(null);
-    public weeklyTimetable$ = new BehaviorSubject<IClassTimetable[]>(null);
+    public weeklyTimetable$ = new BehaviorSubject<IWeekPlan[]>(null);
 
     constructor() {}
 
@@ -41,7 +41,9 @@ export class ClassesService {
         this.classes$
         .pipe(
             map(
-                classes => classes.map(
+                classes => classes                
+                .sort((a, b) => a.weekDay - b.weekDay)
+                .map(
                     cls => ({
                         classType: ClassType[cls.type],
                         room: cls.room,
@@ -51,23 +53,17 @@ export class ClassesService {
                     } as IClassTimetable)
                 )
             )
-        ).subscribe(timetable => this.weeklyTimetable$.next(this.groupBy<IClassTimetable>(timetable, 'day')));
-        console.log(this.weeklyTimetable$.getValue());
-    }
-
-    private groupBy<T>(items: T[], key: string) {
-        return items.reduce(
-            (result, item) => ({
-              ...result,
-              [item[key]]: [
-                ...(result[item[key]] || []),
-                item,
-              ],
-            }), 
-            [],
-          );
-      }
-      
+        ).subscribe(timetable => this.weeklyTimetable$.next(
+            timetable.map(time =>
+            (
+                {
+                    day: time.day,
+                    lessons: timetable.filter(tt => tt.day === time.day).sort((a, b) => parseInt(a.timeslot.slice(0, 2)) - parseInt(b.timeslot.slice(0, 2)))
+                } as IWeekPlan)
+            )
+            .filter((value, index, self) => self.map(mapObj => mapObj['day']).indexOf(value['day']) === index)
+        ));
+    }     
 
     private getClassSubTypes(clas: string) {
         this.classes$
