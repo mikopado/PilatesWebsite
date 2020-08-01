@@ -1,0 +1,4 @@
+{
+    "environment": "PROD",
+    "apiUrl": "http://localhost:57619"
+}
