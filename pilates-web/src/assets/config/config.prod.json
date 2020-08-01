@@ -1,4 +1,4 @@
 {
     "environment": "PROD",
-    "apiUrl": "http://localhost:57619"
+    "apiUrl": "https://fg3vp912cd.execute-api.eu-west-1.amazonaws.com/Prod"
 }

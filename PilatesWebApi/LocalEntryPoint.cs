@@ -1,9 +1,16 @@
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PilatesWebApi
 {
-    public class Program
+    /// <summary>
+    /// The Main function can be used to run the ASP.NET Core application locally using the Kestrel webserver.
+    /// </summary>
+    public class LocalEntryPoint
     {
         public static void Main(string[] args)
         {
