@@ -6,6 +6,8 @@
   .card-picture {
     width: 23%;
     margin-bottom: 2%;
+  }
+  .clickable{
     cursor: pointer;
   }
   
@@ -15,5 +17,6 @@
   .title{
     text-align: center;
     margin-top: 1%;
+    font-size: xx-large;
   }
        

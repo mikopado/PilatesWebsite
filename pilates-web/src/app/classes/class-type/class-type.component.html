@@ -1,18 +1,27 @@
 <div class="container">
     <h1 class="title">{{ (classService.type$ | async).title }}</h1>
     <div fxLayout="column" fxLayoutAlign="center center">
-        <img [src]="(classService.type$ | async).imageUrl" alt="">
-        <p fxFlexAlign="center">
-            {{ (classService.type$ | async).description}}
-        </p>
+        <div class="mat-elevation-z2 cls-box" fxLayout="column" fxLayoutAlign="center center">
+            <img [src]="(classService.type$ | async).imageUrl" alt="">
+            <p class="card-footer">
+                {{ (classService.type$ | async).description}}
+            </p>
+        </div>
+    </div>
+    <div class="btn-row" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%">
+        <button mat-raised-button color="primary" routerLink="/classes/weeklycalendar">Book Class</button>
+        <button mat-raised-button color="primary" routerLink="/memberships">Join Us</button>
     </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center center"
         class="row-height">
         <mat-card class="card-picture" *ngFor="let subtype of classService.classesSubtype$ | async">
-            <img mat-card-image [src]="subtype.imageUrl">
             <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
                 <span>{{subtype.title}}</span>
             </mat-card-title>
+            <img [src]="subtype.imageUrl" fxFlexFill>
+            <mat-card-content>
+                <p class="card-footer">{{subtype.description}}</p>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

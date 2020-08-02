@@ -3,7 +3,7 @@ import { MembershipType } from '../memberships/models/membership-type';
 export interface IClass {
     id: string,
     type: ClassType,
-    level: string,
+    level: ClassLevel,
     teacher: ITeacher,
     weekDay: number,
     startingTime: string,

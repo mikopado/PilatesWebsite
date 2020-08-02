@@ -1,0 +1,17 @@
+.btn-row{
+    margin-top: 5%;
+}
+.btn-row button{
+    width: 8rem;
+    height: 4rem;
+    font-size: large;
+}
+img {
+    max-width: 100%;
+  }
+.cls-box{
+    width: 60%;
+}
+.card-footer{
+    padding-top: 2%;
+}
