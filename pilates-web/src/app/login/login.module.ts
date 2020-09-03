@@ -11,6 +11,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AuthenticationService } from './services/authenticationService';
 
 
 
@@ -27,6 +28,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     FlexLayoutModule,
     MatDatepickerModule,
     MatNativeDateModule
-  ]
+  ],
+  providers: [AuthenticationService]
 })
 export class LoginModule { }

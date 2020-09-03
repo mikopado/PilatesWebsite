@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../services/authenticationService';
 
 @Component({
   selector: 'app-sign-up',
@@ -19,6 +20,7 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class SignUpComponent implements OnInit {
     });
   }
   // convenience getter for easy access to form fields
-  get f() { return this.signUpForm.controls; }
+  get form() { return this.signUpForm.controls; }
   onSubmit() {
     this.submitted = true;
 
@@ -45,15 +47,16 @@ export class SignUpComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //     .pipe(first())
-    //     .subscribe(
-    //         data => {
-    //             this.router.navigate([this.returnUrl]);
-    //         },
-    //         error => {
-    //             this.error = error;
-    //             this.loading = false;
-    //         });
+    this.authenticationService.signUp(this.form.username.value, this.form.password.value, '', '')
+    .then(response => console.log(response));
+        // .pipe(first())
+        // .subscribe(
+        //     data => {
+        //         this.router.navigate([this.returnUrl]);
+        //     },
+        //     error => {
+        //         this.error = error;
+        //         this.loading = false;
+        //     });
   }
 }

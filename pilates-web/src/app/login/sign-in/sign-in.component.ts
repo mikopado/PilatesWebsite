@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../services/authenticationService';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,7 +20,7 @@ export class SignInComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    //private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService
   ) {
     // redirect to home if already logged in
     // if (this.authenticationService.currentUserValue) { 
@@ -38,7 +39,7 @@ export class SignInComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get form() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -49,16 +50,17 @@ export class SignInComponent implements OnInit {
     }
 
     this.loading = true;
-    // this.authenticationService.login(this.f.username.value, this.f.password.value)
-    //     .pipe(first())
-    //     .subscribe(
-    //         data => {
-    //             this.router.navigate([this.returnUrl]);
-    //         },
-    //         error => {
-    //             this.error = error;
-    //             this.loading = false;
-    //         });
+    this.authenticationService.signIn(this.form.username.value, this.form.password.value)
+    .then((response) => console.log(response));
+        // //.pipe(first())
+        // .subscribe(
+        //     data => {
+        //         this.router.navigate([this.returnUrl]);
+        //     },
+        //     error => {
+        //         this.error = error;
+        //         this.loading = false;
+        //     });
   }
 
 }
