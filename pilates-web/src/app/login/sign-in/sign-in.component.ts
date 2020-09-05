@@ -21,14 +21,10 @@ export class SignInComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
-  ) {
-    // redirect to home if already logged in
-    // if (this.authenticationService.currentUserValue) { 
-    //     this.router.navigate(['/']);
-    // }
+  ) {    
   }
 
-  ngOnInit() {
+  ngOnInit() {   
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -39,7 +35,7 @@ export class SignInComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get form() { return this.loginForm.controls; }
+  get f() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -50,17 +46,27 @@ export class SignInComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.signIn(this.form.username.value, this.form.password.value)
-    .then((response) => console.log(response));
-        // //.pipe(first())
-        // .subscribe(
-        //     data => {
-        //         this.router.navigate([this.returnUrl]);
-        //     },
-        //     error => {
-        //         this.error = error;
-        //         this.loading = false;
-        //     });
+    this.authenticationService.signIn(this.f.username.value, this.f.password.value)
+    .then((response) => {
+      this.authenticationService.isAuthenticatedUser.next(true);
+      this.router.navigate([this.returnUrl]);
+    })
+    .catch(err => {
+      this.error = err.message;
+      this.loading = false;
+    });    
+       
+  }
+
+  logOut() {    
+    this.authenticationService.signOut()
+    .then(resp => {
+      this.authenticationService.isAuthenticatedUser.next(false);
+      this.router.navigate([this.returnUrl]);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
 }

@@ -13,6 +13,22 @@
         [routerLink]="[menuItem.path]">
         <mat-icon mat-list-icon *ngIf="menuItem.icon">{{menuItem.icon}}</mat-icon>
         <span>{{menuItem.title}}</span>
+      </a>     
+      <a *ngIf='!(authService.isAuthenticatedUser | async)'
+        mat-list-item mat-ripple 
+        [style.position]="'relative'"
+        routerLinkActive="selected" 
+        [routerLink]="['login']">
+        <mat-icon mat-list-icon>login</mat-icon>
+        <span>Login</span>
+      </a>    
+      <a *ngIf='(authService.isAuthenticatedUser | async)'
+        mat-list-item mat-ripple 
+        [style.position]="'relative'"
+        routerLinkActive="selected" 
+        [routerLink]="['logout']">
+        <mat-icon mat-list-icon>logout</mat-icon>
+        <span>Logout</span>
       </a>      
     </mat-nav-list>
   </mat-sidenav>
@@ -33,6 +49,12 @@
         <div *ngIf="!(isHandset$ | async)" >
           <a *ngFor="let menuItem of menuItems" mat-button [routerLink]="[menuItem.path]">
             <span>{{menuItem.title}}</span>
+          </a>
+          <a mat-button *ngIf="!(authService.isAuthenticatedUser | async)">
+            <span [routerLink]="['login']">Login</span>
+          </a>
+          <a mat-button *ngIf="(authService.isAuthenticatedUser | async)">
+            <span [routerLink]="['logout']">Logout</span>
           </a>
         </div>
       </mat-toolbar-row>        

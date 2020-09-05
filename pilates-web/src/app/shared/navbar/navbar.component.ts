@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MenuService } from '../services/menuService';
+import { AuthenticationService } from 'src/app/login/services/authenticationService';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { MenuService } from '../services/menuService';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   menuItems: any;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,7 +20,9 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private menuService: MenuService) {
-    this.menuItems = this.menuService.getMenuItems();
+  constructor(private breakpointObserver: BreakpointObserver, private menuService: MenuService, public authService: AuthenticationService) {
   }  
+  ngOnInit(): void {
+    this.menuItems = this.menuService.getMenuItems();
+  }
 }

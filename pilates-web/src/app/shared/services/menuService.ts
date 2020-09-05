@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/login/services/authenticationService';
 
 export class MenuItem {
     path: string;   /* The URL path to the page */
@@ -10,15 +11,16 @@ export class MenuItem {
   export class MenuService{
 
     constructor(private router: Router) {}
+       
     getMenuItems(): MenuItem[] {
         return this.router.config
           .filter(route =>
             route.data &&
-            route.data.title)
+            route.data.title)          
           .map(route => {
             if (!route.data.title) {
               throw new Error('Missing title for toolbar menu route ' + route.path);
-            }
+            }            
             return {
               path: route.path,
               title: route.data.title,

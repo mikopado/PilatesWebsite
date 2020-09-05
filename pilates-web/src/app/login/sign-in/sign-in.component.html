@@ -52,6 +52,9 @@
                     </button>
                 </div>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <a [routerLink]="['signUp']">Not already a member?</a>
+                </div>
             </form>
         </mat-card-content>
     </mat-card>

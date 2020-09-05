@@ -12,6 +12,8 @@ import { MembershipModule } from './memberships/membership.module';
 import { AppConfigService } from './core/app-config.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './shared/services/data.service';
+import { AuthenticationService } from './login/services/authenticationService';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { DataService } from './shared/services/data.service';
       deps: [AppConfigService], 
       multi: true 
     },
-    DataService
+    DataService,
+    AuthenticationService,
+    AuthGuardService
  ],
   bootstrap: [AppComponent]
 })

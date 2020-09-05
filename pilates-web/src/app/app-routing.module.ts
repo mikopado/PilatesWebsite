@@ -12,6 +12,7 @@ import { MembershipListComponent } from './memberships/membership-list/membershi
 import { WeeklyCalendarComponent } from './classes/weekly-calendar/weekly-calendar.component';
 import { ClassResolver } from './classes/classes.resolver';
 import { MembershipsResolver } from './memberships/memberships.resolver';
+import { LogoutComponent } from './login/logout/logout.component';
 
 
 const routes: Routes = [
@@ -20,9 +21,7 @@ const routes: Routes = [
     component: HomepageComponent,
     data: {
       title: 'Home',
-      icon: 'home',
-      isLogin: true
-
+      icon: 'home'
     }
   }, 
   {
@@ -30,9 +29,7 @@ const routes: Routes = [
     component: PageNotFoundComponent,
     data: {
       title: 'About',
-      icon: 'home',
-      isLogin: true
-
+      icon: 'home'
     }
   },  
   {
@@ -40,8 +37,7 @@ const routes: Routes = [
     component: ClassesListComponent,
     data: {
       title: 'Classes',
-      icon: 'class',
-      isLogin: true      
+      icon: 'class'
     },
     resolve: {
       data: ClassResolver
@@ -52,8 +48,7 @@ const routes: Routes = [
     component: MembershipListComponent,
     data: {
       title: 'Membership',
-      icon: 'class',
-      isLogin: true
+      icon: 'class'
     },
     resolve:{
       data: MembershipsResolver
@@ -64,24 +59,17 @@ const routes: Routes = [
     component: PageNotFoundComponent,
     data: {
       title: 'Contact Us',
-      icon: 'class',
-      isLogin: true
+      icon: 'class'
     }
   },
-  {
-    path: 'login', 
-    component: SignInComponent, 
-    data: {
-      title: 'Login',
-      icon: 'login',
-      isLogin: true
-    }
-  },
+  { path: 'login', component: SignInComponent },
+  
   { path: 'classes/yoga', component: YogaTypeComponent, resolve: {data: ClassResolver}},
   { path: 'classes/pilates', component: PilatesTypeComponent, resolve: {data: ClassResolver} },
   { path: 'classes/combo', component: ComboTypeComponent, resolve: {data: ClassResolver} },
   { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent, resolve: {data: ClassResolver} },
-  { path: 'signup', component: SignUpComponent },
+  { path: 'signup', component: SignUpComponent }, 
+  { path: 'logout', component: LogoutComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }
 ];

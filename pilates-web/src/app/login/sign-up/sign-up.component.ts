@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authenticationService';
 
 @Component({
@@ -10,34 +10,44 @@ import { AuthenticationService } from '../services/authenticationService';
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
+  verifyCodeForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
+  codeError = '';
   hide = true;
   confirmEmailHide = true;
+  isCodeVerified = false;
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
+    this.returnUrl = './login';
     this.signUpForm = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      dob: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
+      dob: [''],
+      address: [''],
+      city: [''],
       email: ['', Validators.required],
       confirmEmail: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
+
+    this.verifyCodeForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      verificationCode: ['', Validators.required]      
+    });
   }
   // convenience getter for easy access to form fields
-  get form() { return this.signUpForm.controls; }
+  get f() { return this.signUpForm.controls; }
+  get fcode() { return this.verifyCodeForm.controls; }
+
   onSubmit() {
     this.submitted = true;
 
@@ -47,16 +57,35 @@ export class SignUpComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.signUp(this.form.username.value, this.form.password.value, '', '')
-    .then(response => console.log(response));
-        // .pipe(first())
-        // .subscribe(
-        //     data => {
-        //         this.router.navigate([this.returnUrl]);
-        //     },
-        //     error => {
-        //         this.error = error;
-        //         this.loading = false;
-        //     });
+    this.authenticationService.signUp(this.f.email.value, this.f.password.value, this.f.firstname.value, this.f.lastname.value)
+    .then(response => {
+      this.isCodeVerified = true; 
+      this.loading = false;
+      //TODO Create user to DB. Call Api 
+      console.log(response);
+    })
+    .catch(err => {
+      this.error = err; 
+      this.loading = false
+    });        
   }
+
+  onSubmitCode() {
+    // stop here if form is invalid
+    if (this.verifyCodeForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
+    this.authenticationService.verifyCode(this.fcode.email.value, this.fcode.verificationCode.value)
+    .then(response => { 
+      this.router.navigate([this.returnUrl]);
+    })
+    .catch(err => { 
+      this.codeError = err.message; 
+      this.loading = false;
+    });        
+  }
+
+  //TODO Remember me - Forgot Password
 }

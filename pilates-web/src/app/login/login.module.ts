@@ -10,16 +10,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { AuthenticationService } from './services/authenticationService';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { RouterModule } from '@angular/router';
+import { LogoutComponent } from './logout/logout.component';
 
 
 
 @NgModule({
-  declarations: [SignUpComponent, SignInComponent],
+  declarations: [SignUpComponent, SignInComponent, LogoutComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
@@ -29,6 +31,6 @@ import { AuthenticationService } from './services/authenticationService';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [AuthenticationService]
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })
 export class LoginModule { }

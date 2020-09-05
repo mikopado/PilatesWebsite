@@ -1,33 +1,52 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Auth } from 'aws-amplify';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthenticationService {
-    constructor(private http: HttpClient) {}
+    
+    public isAuthenticatedUser = new BehaviorSubject<boolean>(false);
+
+    constructor() { }
     async signIn(username: string, password: string) {
-        try {
-            const user = await Auth.signIn(username, password);
-            return user;
-        } catch(error){
-            console.log('Error sign in', error);
-        }
+        const user = await Auth.signIn(username, password);
+        this.isAuthenticatedUser.next(true);
+        return user;
     }
 
-    async signUp(username: string, password: string, email: string, phone_number: string) { // To pass an object
-        try {
-            const { user } = await Auth.signUp({
-                username,
-                password,
-                attributes: {
-                    email, //optional to create to the Cognito Console
-                    phone_number
-                }
+    async signUp(username: string, password: string, givenName: string, familyName: string) { // To pass an object
+        const { user } = await Auth.signUp({
+            username,
+            password,
+            attributes: {
+                given_name: givenName,
+                family_name: familyName //optional to create to the Cognito Console
+            }
+        });
+        console.log(user);
+        return user;
+    }
+
+    async verifyCode(email: string, code: string) {
+        const response = await Auth.confirmSignUp(email, code);
+        console.log(response);
+        return response;
+    }
+
+    async signOut() {
+        this.isAuthenticatedUser.next(false);
+        return await Auth.signOut();
+    }
+
+    currentAuthenticatedUser() {
+        Auth.currentAuthenticatedUser()
+            .then(res => {
+                this.isAuthenticatedUser.next(true);
+            })
+            .catch(err => {
+                this.isAuthenticatedUser.next(false);
             });
-            console.log(user);
-            return user;
-        } catch(error){
-            console.log('Error sign up', error);
-        }
     }
 }

@@ -1,5 +1,5 @@
 <div>
-    <mat-card class="card">
+    <mat-card *ngIf="!isCodeVerified" class="card">
         <mat-card-header fxLayoutAlign="center">
             <mat-card-title class="card-header">Registration Form</mat-card-title>
         </mat-card-header>
@@ -22,7 +22,7 @@
                 <div class="form-group" fxLayoutAlign="center center">
                 <mat-form-field class="form-field">
                     <mat-label>Date of Birth</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dob"
+                    <input matInput [matDatepicker]="picker" formControlName="dob" 
                     [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
                     <mat-datepicker-toggle matSuffix [for]="picker" class="icons" id="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -89,6 +89,42 @@
                 </div>
                 <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
             </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="isCodeVerified" class="card">
+        <mat-card-header fxLayoutAlign="center">
+            <mat-card-title class="card-header">Verification Code Form</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-body">
+        <form [formGroup]="verifyCodeForm" (ngSubmit)="onSubmitCode()" fxLayout="column" fxLayoutAlign="center center">
+            <div class="form-group" fxLayoutAlign="center center">
+                <mat-form-field class="form-field">
+                    <input matInput placeholder="Email" type="text" formControlName="email"
+                        class="form-control" [ngClass]="{ 'is-invalid': submitted && fcode.email.errors }" />
+                        <mat-icon matSuffix class="icons mr-icons">email</mat-icon>
+                        <mat-error *ngIf="submitted && fcode.email.errors">
+                            Please enter a valid email address
+                          </mat-error>
+                          <mat-error *ngIf="verifyCodeForm.hasError('required')">
+                            Email is <strong>required</strong>
+                          </mat-error>
+                </mat-form-field>                   
+            </div>
+            <div class="form-group" fxLayoutAlign="center center">
+                <mat-form-field class="form-field">
+                    <input matInput placeholder="Verification Code" type="text" formControlName="verificationCode"
+                        class="form-control" [ngClass]="{ 'is-invalid': submitted && fcode.verificationCode.errors }" />
+                        <mat-icon matSuffix class="icons mr-icons">vpn_key</mat-icon>                        
+                </mat-form-field>                   
+            </div>
+            <div class="code-btn">
+                <button mat-raised-button color="primary" [disabled]="loading">
+                    <span *ngIf="loading" class="spinner-border"></span>
+                    Verify Code
+                </button>
+            </div>
+            <div *ngIf="codeError" class="alert alert-danger mt-3 mb-0">{{codeError}}</div>
+        </form>
         </mat-card-content>
     </mat-card>
 </div>
