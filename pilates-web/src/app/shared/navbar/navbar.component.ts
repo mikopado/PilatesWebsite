@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { MenuService } from '../services/menuService';
-import { AuthenticationService } from 'src/app/login/services/authenticationService';
+import { AuthenticationService } from 'src/app/shared/services/authenticationService';
 
 
 @Component({

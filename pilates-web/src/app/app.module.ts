@@ -12,7 +12,7 @@ import { MembershipModule } from './memberships/membership.module';
 import { AppConfigService } from './core/app-config.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './shared/services/data.service';
-import { AuthenticationService } from './login/services/authenticationService';
+import { AuthenticationService } from './shared/services/authenticationService';
 import { AuthGuard } from './shared/services/auth-guard.service';
 import { TokenInterceptor } from './shared/services/token.interceptor';
 

@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { AuthenticationService } from '../../../app/login/services/authenticationService';
+import { AuthenticationService } from './authenticationService';
 import { Observable, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 

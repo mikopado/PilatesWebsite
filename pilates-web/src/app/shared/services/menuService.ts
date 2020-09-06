@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Injectable, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/app/login/services/authenticationService';
+import { AuthenticationService } from 'src/app/shared/services/authenticationService';
 
 export class MenuItem {
     path: string;   /* The URL path to the page */
