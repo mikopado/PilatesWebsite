@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PilatesWebApi.Application.DTO.Requests;
 using PilatesWebApi.Application.ResponseObjects;
@@ -78,7 +79,6 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
         //    var timetable = await _classService.GetTimetableAsync(start, end);
         //    return Ok(new ApiResponse(HttpStatusCode.OK, timetable));
         //}
-
         [HttpGet("timetable/week")]
         public async Task<IActionResult> GetWeeklyTimetable()
         {

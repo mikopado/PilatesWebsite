@@ -10,10 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomepageModule } from './home/homepage.module';
 import { MembershipModule } from './memberships/membership.module';
 import { AppConfigService } from './core/app-config.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './shared/services/data.service';
 import { AuthenticationService } from './login/services/authenticationService';
-import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AuthGuard } from './shared/services/auth-guard.service';
+import { TokenInterceptor } from './shared/services/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,9 +40,14 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
       deps: [AppConfigService], 
       multi: true 
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     DataService,
-    AuthenticationService,
-    AuthGuardService
+    AuthGuard,
+    AuthenticationService
  ],
   bootstrap: [AppComponent]
 })

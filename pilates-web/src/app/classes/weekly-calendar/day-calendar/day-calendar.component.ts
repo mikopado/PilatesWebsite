@@ -5,14 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './day-calendar.component.html',
   styleUrls: ['./day-calendar.component.css']
 })
-export class DayCalendarComponent implements OnInit {
+export class DayCalendarComponent {
   displayedColumns: string[] = ['timeShift', 'classType', 'teacher', 'room', 'actions'];
 
   @Input() day: any[];
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.day);
-  }
+  constructor() { } 
 
 }

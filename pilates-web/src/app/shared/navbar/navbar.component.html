@@ -6,30 +6,14 @@
       [ngClass]="{'hidden': !(isHandset$ | async)}">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a *ngFor="let menuItem of menuItems" 
-        mat-list-item mat-ripple 
-        [style.position]="'relative'"
-        routerLinkActive="selected" 
-        [routerLink]="[menuItem.path]">
-        <mat-icon mat-list-icon *ngIf="menuItem.icon">{{menuItem.icon}}</mat-icon>
-        <span>{{menuItem.title}}</span>
-      </a>     
-      <a *ngIf='!(authService.isAuthenticatedUser | async)'
-        mat-list-item mat-ripple 
-        [style.position]="'relative'"
-        routerLinkActive="selected" 
-        [routerLink]="['login']">
-        <mat-icon mat-list-icon>login</mat-icon>
-        <span>Login</span>
-      </a>    
-      <a *ngIf='(authService.isAuthenticatedUser | async)'
-        mat-list-item mat-ripple 
-        [style.position]="'relative'"
-        routerLinkActive="selected" 
-        [routerLink]="['logout']">
-        <mat-icon mat-list-icon>logout</mat-icon>
-        <span>Logout</span>
-      </a>      
+      <ng-container *ngFor="let menuItem of menuItems">
+        <a *ngIf="menuItem.isStatic || menuItem.isLogout === (authService.isAuthenticatedUser$ | async)" 
+          mat-list-item
+          mat-ripple [style.position]="'relative'" routerLinkActive="selected" [routerLink]="[menuItem.path]">
+          <mat-icon mat-list-icon *ngIf="menuItem.icon">{{menuItem.icon}}</mat-icon>
+          <span>{{menuItem.title}}</span>
+        </a>
+      </ng-container>      
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -47,15 +31,13 @@
         <h1>Pilates</h1>
         <span class="menu-spacer fill-space"></span>
         <div *ngIf="!(isHandset$ | async)" >
-          <a *ngFor="let menuItem of menuItems" mat-button [routerLink]="[menuItem.path]">
-            <span>{{menuItem.title}}</span>
-          </a>
-          <a mat-button *ngIf="!(authService.isAuthenticatedUser | async)">
-            <span [routerLink]="['login']">Login</span>
-          </a>
-          <a mat-button *ngIf="(authService.isAuthenticatedUser | async)">
-            <span [routerLink]="['logout']">Logout</span>
-          </a>
+      <ng-container *ngFor="let menuItem of menuItems">
+        <a *ngIf="menuItem.isStatic || menuItem.isLogout === (authService.isAuthenticatedUser$ | async)" 
+          mat-button
+          [routerLink]="[menuItem.path]">
+          <span>{{menuItem.title}}</span>
+        </a>
+      </ng-container>
         </div>
       </mat-toolbar-row>        
     </mat-toolbar>

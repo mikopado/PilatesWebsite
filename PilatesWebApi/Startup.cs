@@ -1,14 +1,21 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using PilatesWebApi.Application;
 using PilatesWebApi.Application.Services;
 using PilatesWebApi.Infrastructure.DAL;
 using PilatesWebApi.Infrastructure.DAL.Repositories;
+using System;
+using System.Net;
 
 namespace PilatesWebApi
 {
@@ -36,6 +43,8 @@ namespace PilatesWebApi
             services.AddScoped<IMembershipService, MembershipService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<IUserService, UserService>();
+
 
             services.AddAutoMapper(typeof(Startup).Assembly);
 
@@ -44,6 +53,28 @@ namespace PilatesWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pilates API", Version = "v1" });
             });
             services.AddCors();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuerSigningKey = true,
+                       ValidateIssuer = true,
+                       ValidateAudience = false,
+                       ValidIssuer = Configuration["Authorization:Issuer"],
+                       ValidateLifetime = true,
+                       // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                       ClockSkew = TimeSpan.Zero,
+                       IssuerSigningKeyResolver = (s, securityToken, identifier, parameters) =>
+                       {
+                           // get JsonWebKeySet from AWS
+                           var json = new WebClient().DownloadString(parameters.ValidIssuer + "/.well-known/jwks.json");
+                           var keys = JsonConvert.DeserializeObject<JsonWebKeySet>(json).Keys;
+                           return keys;
+                       },
+                   };
+
+               });
 
         }
 
@@ -69,6 +100,8 @@ namespace PilatesWebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

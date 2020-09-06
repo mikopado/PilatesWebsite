@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-logout',
   template: ''
 })
-export class LogoutComponent implements OnInit {
+export class SignOutComponent implements OnInit {
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
@@ -15,11 +15,8 @@ export class LogoutComponent implements OnInit {
   }
 
   signOut(){
-    console.log('sign out');
     this.authService.signOut()
     .then(res => { 
-      console.log(this.authService.currentAuthenticatedUser());
-      this.authService.isAuthenticatedUser.next(false)
       this.router.navigate(['/']);
     })
     .catch(err => console.log(err));

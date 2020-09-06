@@ -12,64 +12,92 @@ import { MembershipListComponent } from './memberships/membership-list/membershi
 import { WeeklyCalendarComponent } from './classes/weekly-calendar/weekly-calendar.component';
 import { ClassResolver } from './classes/classes.resolver';
 import { MembershipsResolver } from './memberships/memberships.resolver';
-import { LogoutComponent } from './login/logout/logout.component';
+import { SignOutComponent } from './login/signout/signout.component';
+import { AuthGuard } from './shared/services/auth-guard.service';
 
 
 const routes: Routes = [
   {
-    path: 'home', 
+    path: 'home',
     component: HomepageComponent,
     data: {
       title: 'Home',
-      icon: 'home'
+      icon: 'home',
+      isStatic: true,
+      isLogout: false
     }
-  }, 
+  },
   {
-    path: 'about', 
+    path: 'about',
     component: PageNotFoundComponent,
     data: {
       title: 'About',
-      icon: 'home'
+      icon: 'home',
+      isStatic: true,
+      isLogout: false
     }
-  },  
+  },
   {
-    path: 'classes', 
+    path: 'classes',
     component: ClassesListComponent,
     data: {
       title: 'Classes',
-      icon: 'class'
+      icon: 'class',
+      isStatic: true,
+      isLogout: false
     },
     resolve: {
       data: ClassResolver
     }
   },
   {
-    path: 'memberships', 
+    path: 'memberships',
     component: MembershipListComponent,
     data: {
       title: 'Membership',
-      icon: 'class'
+      icon: 'class',
+      isStatic: true,
+      isLogout: false
     },
-    resolve:{
+    resolve: {
       data: MembershipsResolver
     }
   },
   {
-    path: 'contactus', 
+    path: 'contactus',
     component: PageNotFoundComponent,
     data: {
       title: 'Contact Us',
-      icon: 'class'
+      icon: 'contact_support',
+      isStatic: true,
+      isLogout: false
     }
   },
-  { path: 'login', component: SignInComponent },
-  
-  { path: 'classes/yoga', component: YogaTypeComponent, resolve: {data: ClassResolver}},
-  { path: 'classes/pilates', component: PilatesTypeComponent, resolve: {data: ClassResolver} },
-  { path: 'classes/combo', component: ComboTypeComponent, resolve: {data: ClassResolver} },
-  { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent, resolve: {data: ClassResolver} },
-  { path: 'signup', component: SignUpComponent }, 
-  { path: 'logout', component: LogoutComponent },
+  {
+    path: 'login',
+    component: SignInComponent, 
+    data: {
+      title: 'Login',
+      icon: 'login',
+      isStatic: false,
+      isLogout: false
+    }
+  },
+  {
+    path: 'logout', 
+    component: SignOutComponent, 
+    data: {
+      title: 'Logout',
+      icon: 'logout',
+      isStatic: false,
+      isLogout: true
+    }
+  },
+  { path: 'classes/yoga', component: YogaTypeComponent, resolve: { data: ClassResolver } },
+  { path: 'classes/pilates', component: PilatesTypeComponent, resolve: { data: ClassResolver } },
+  { path: 'classes/combo', component: ComboTypeComponent, resolve: { data: ClassResolver } },
+  { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent, resolve: { data: ClassResolver },  canActivate: [AuthGuard] },
+  { path: 'signup', component: SignUpComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }
 ];

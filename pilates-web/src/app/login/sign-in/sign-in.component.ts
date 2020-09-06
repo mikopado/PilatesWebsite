@@ -48,7 +48,6 @@ export class SignInComponent implements OnInit {
     this.loading = true;
     this.authenticationService.signIn(this.f.username.value, this.f.password.value)
     .then((response) => {
-      this.authenticationService.isAuthenticatedUser.next(true);
       this.router.navigate([this.returnUrl]);
     })
     .catch(err => {
@@ -61,7 +60,6 @@ export class SignInComponent implements OnInit {
   logOut() {    
     this.authenticationService.signOut()
     .then(resp => {
-      this.authenticationService.isAuthenticatedUser.next(false);
       this.router.navigate([this.returnUrl]);
     })
     .catch(err => {

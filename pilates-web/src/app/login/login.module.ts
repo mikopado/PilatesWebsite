@@ -12,12 +12,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
-import { LogoutComponent } from './logout/logout.component';
+import { SignOutComponent } from './signout/signout.component';
 
 
 
 @NgModule({
-  declarations: [SignUpComponent, SignInComponent, LogoutComponent],
+  declarations: [SignUpComponent, SignInComponent, SignOutComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -6,6 +6,8 @@ export class MenuItem {
     path: string;   /* The URL path to the page */
     title: string;  /* The Title of the page */
     icon?: string;  /* An optional icon for the page title */
+    isStatic?: boolean;
+    isLogout?: boolean;
   }
   @Injectable()
   export class MenuService{
@@ -24,7 +26,9 @@ export class MenuItem {
             return {
               path: route.path,
               title: route.data.title,
-              icon: route.data.icon
+              icon: route.data.icon,
+              isStatic: route.data.isStatic,
+              isLogout: route.data.isLogout
             };
           });
       }

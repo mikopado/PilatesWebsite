@@ -7,12 +7,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthenticationService {
     
-    public isAuthenticatedUser = new BehaviorSubject<boolean>(false);
+    public isAuthenticatedUser$ = new BehaviorSubject<boolean>(false);
 
     constructor() { }
     async signIn(username: string, password: string) {
         const user = await Auth.signIn(username, password);
-        this.isAuthenticatedUser.next(true);
+        if(user){
+            this.isAuthenticatedUser$.next(true);
+        }
         return user;
     }
 
@@ -25,28 +27,29 @@ export class AuthenticationService {
                 family_name: familyName //optional to create to the Cognito Console
             }
         });
-        console.log(user);
         return user;
     }
 
     async verifyCode(email: string, code: string) {
         const response = await Auth.confirmSignUp(email, code);
-        console.log(response);
         return response;
     }
 
     async signOut() {
-        this.isAuthenticatedUser.next(false);
-        return await Auth.signOut();
+        try{
+            await Auth.signOut( { global: true } );
+            this.isAuthenticatedUser$.next(false);
+        }catch {
+            this.isAuthenticatedUser$.next(true);
+        }       
     }
 
-    currentAuthenticatedUser() {
-        Auth.currentAuthenticatedUser()
-            .then(res => {
-                this.isAuthenticatedUser.next(true);
-            })
-            .catch(err => {
-                this.isAuthenticatedUser.next(false);
-            });
+    async currentAuthenticatedUser() {
+        try {
+            const user = await Auth.currentAuthenticatedUser();
+            return { userSession: user.signInUserSession, isAuthenticated: true };
+        } catch {
+            return { userSession: null, isAuthenticated : false };
+        }        
     }
 }
