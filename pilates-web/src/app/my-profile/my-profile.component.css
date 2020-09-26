@@ -1,0 +1,51 @@
+.form-group{
+    width: 100%;
+  }
+  .form-field{
+    width: 80%;
+  }
+  .save-icon{
+    margin-left: 5px;
+    font-size: 20px;
+}
+div.save-btn{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+.edit-icon{
+    font-size: 20px;
+    color: grey;
+}
+.container{
+    margin-top: 2%;
+}
+.item-spacing{
+    justify-content: space-evenly;
+}
+.round-border{
+    border: .5px solid rgba(0,0,0,.2);
+    border-radius: 5px;
+}
+.divider-section{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.mg-right{
+    margin-right: 2%;
+}
+.extra-section{
+    width: 80%;
+    height: 50%;
+}
+.wd-80{
+    width: 80%;
+}
+.fill-area{
+    width: 100%;
+    height: 80%;
+}
+.scrollable{
+    overflow-y: scroll;
+}

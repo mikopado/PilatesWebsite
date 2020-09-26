@@ -1,0 +1,106 @@
+<div fxLayout="row" fxLayout.xs="column" class="container">
+    <div fxFlex="50%" fxFlexOffset="5">
+        <div class="form-field" fxLayoutAlign="space-between baseline">
+            <h3>Personal Information</h3>
+        <button mat-icon-button color="disabled" (click)="isEdit = !isEdit">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+        </div>
+    <div>
+        <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" formControlName="firstName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" [readonly]="!isEdit" />
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" formControlName="lastName" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" [readonly]="!isEdit" />
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dob"
+                    [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [readonly]="!isEdit">
+                <mat-datepicker-toggle matSuffix [for]="picker" class="icons" id="picker" [disabled]="!isEdit"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput type="text" formControlName="address"
+                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }" [readonly]="!isEdit" />
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>City</mat-label>
+                <input matInput type="text" formControlName="city" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }" [readonly]="!isEdit" />
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly />
+            </mat-form-field>
+        </div>  
+        <div class="form-group save-btn">
+            <button mat-raised-button color="primary" [disabled]="loading || !isEdit">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Save
+                <mat-icon class="save-icon">save_alt</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        </form>
+
+            <!-- UserDetails
+            <p>{{ member.email }}</p>
+            <p>{{ membership.id }}</p> -->
+    </div>
+</div>
+    <div fxFlex="50%" fxLayout="column">
+        <div class="extra-section">
+        <h3>Classes Booked</h3>  
+        <div *ngFor="let cls of (classesBooked$ | async)" class="round-border fill-area scrollable">
+        <mat-grid-list cols="6" rowHeight="50px">
+            <mat-grid-tile>{{cls.day}}</mat-grid-tile>   
+            <mat-grid-tile>{{cls.timeslot}}</mat-grid-tile>
+            <mat-grid-tile>{{cls.classType}}</mat-grid-tile>
+            <mat-grid-tile>{{cls.teacher}}</mat-grid-tile>
+            <mat-grid-tile>{{cls.room}}</mat-grid-tile>
+            <mat-grid-tile><button mat-button color="primary">Cancel</button></mat-grid-tile>
+          </mat-grid-list>
+          <mat-divider></mat-divider>  
+
+        </div>
+        <!-- <mat-list class="round-border fill-area scrollable" fxLayoutAlign="baseline">
+            <mat-list-item *ngFor="let cls of (classesBooked$ | async)" >
+            <span class="mg-right">{{cls.day}} | </span>             
+             <span class="mg-right">{{cls.timeslot}} | </span> 
+             <span class="mg-right">{{cls.classType}} | </span> 
+             <span class="mg-right">{{cls.teacher}} | </span>
+             <span class="mg-right">{{cls.room}} | </span>  
+             <button mat-button color="primary">Cancel</button>
+             <mat-divider></mat-divider>            
+            </mat-list-item>
+        </mat-list> -->
+    </div>
+        <mat-divider class="divider-section wd-80"></mat-divider>
+        <div class="extra-section">
+        <h3>Active Membership</h3>
+        <div class="round-border" >
+            <div fxLayoutAlign="center">You have an active Membership of </div>
+            <div fxLayoutAlign="center" class="divider-section"><strong>{{(userMembership$ | async).classType}}</strong> - <strong>{{(userMembership$ | async).type}}</strong></div>
+        </div>
+    </div>
+    </div>
+</div>

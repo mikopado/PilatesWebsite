@@ -23,17 +23,27 @@ export enum ClassLevel{
     Advanced
 }
 
-export interface IUser {
+export interface IUserMemberResponse {
+    user: IUser,
+    member: IMember,
+    membership: IMembership,
+    classes: IClass[]
+}
+
+// export interface IUserMember {
+//     user: IUser,
+//     member: IMember,
+//     membership: IMembership
+// }
+
+export interface IMember{
     id: string,
     firstName: string,
     lastName: string,
     address: string,
-    city: string
-}
-
-export interface IMember {
-    user: IUser,
-    membership: IMembership
+    dob: Date,
+    city: string,
+    email: string
 }
 
 export interface ITeacher {
@@ -48,7 +58,18 @@ export interface IMembership {
     type: MembershipType
 }
 
+export interface IUserMembership {
+    classType: string,
+    type: string
+}
+
+export interface IUser {
+    id: string,
+    email: string
+}
+
 export interface IApiResponse<T>{
     result: T,
     statusCode: number
 }
+

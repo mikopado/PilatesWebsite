@@ -14,6 +14,7 @@ import { ClassResolver } from './classes/classes.resolver';
 import { MembershipsResolver } from './memberships/memberships.resolver';
 import { SignOutComponent } from './login/signout/signout.component';
 import { AuthGuard } from './shared/services/auth-guard.service';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,17 @@ const routes: Routes = [
       isStatic: true,
       isLogout: false
     }
+  },
+  {
+    path: 'profile', 
+    component: MyProfileComponent, 
+    data: {
+      title: 'My Profile',
+      icon: 'person',
+      isStatic: true,
+      isLogout: false
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
