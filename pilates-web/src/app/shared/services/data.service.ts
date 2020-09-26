@@ -3,7 +3,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppConfigService } from '../../core/app-config.service';
-import { IClass, IApiResponse, IMembership } from '../interfaces';
+import { IClass, IApiResponse, IMembership, IUser, IUserMemberResponse } from '../interfaces';
+import { throwError } from 'rxjs';
 
 
 @Injectable({
@@ -31,13 +32,28 @@ export class DataService {
             .pipe(catchError(this.handleError));
     }
 
+    registerUser(user: IUser): Observable<IApiResponse<any>>{
+        var endpoint = '/api/user';
+        return this.http.post<IApiResponse<any>>(this.configService.settings.apiUrl + endpoint, user)
+            .pipe(catchError(this.handleError));
+    }
+
+    getUser(userId: string): Observable<IApiResponse<IUserMemberResponse>>{
+        var endpoint = '/api/user';
+        return this.http.get<IApiResponse<IUserMemberResponse>>(this.configService.settings.apiUrl + endpoint, 
+            {params: {id: userId}}
+            )
+            .pipe(catchError(this.handleError));
+    }
+
+
 
     private handleError(error: HttpErrorResponse) {
         console.error('server error:', error);
         if (error.error instanceof Error) {
             const errMessage = error.error.message;
-            return Observable.throw(errMessage);
+            return throwError( new Error(errMessage) )
         }
-        return Observable.throw(error || 'Server error');
+        return throwError(error || 'Server error');
     }
 }

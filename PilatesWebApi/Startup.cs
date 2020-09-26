@@ -33,7 +33,9 @@ namespace PilatesWebApi
         {
             services.AddControllers().AddNewtonsoftJson(options =>
             {
-                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                //options.SerializerSettings.DefaultValueHandling = DefaultValueHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             
             // TODO Sorting out services by purpose. Check repository of Architecture best practice??

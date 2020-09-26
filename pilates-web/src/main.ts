@@ -8,15 +8,15 @@ import { environment } from './environments/environment';
 Amplify.configure({
   Auth: {
     region: 'eu-west-1',
-    userPoolId: 'eu-west-1_Zc2vdZfbp',
-    userPoolWebClientId: 'eeqed5ram44rf8psa1338eldc',
-    oauth: {
-      domain: 'https://pilatespool.auth.eu-west-1.amazoncognito.com',
-      scope: ['email', 'openid'],
-      redirectSignIn: 'http://localhost:4200',
-      redirectSignOut: 'http://localhost:4200',
-      responseType: 'code'
-    }
+    userPoolId: 'eu-west-1_P2jJSK3QI',
+    userPoolWebClientId: '2j0p9jd10h8qcn11qq2jb9sac8',
+    // oauth: {
+    //   domain: 'https://yogame.auth.eu-west-1.amazoncognito.com',
+    //   scope: ['email', 'openid'],
+    //   redirectSignIn: 'http://localhost:4200',
+    //   redirectSignOut: 'http://localhost:4200',
+    //   responseType: 'code'
+    // }
   }
 });
 

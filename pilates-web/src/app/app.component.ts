@@ -9,18 +9,17 @@ import { AppConfigService } from './core/app-config.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'pilates-web';  
   constructor(
     private authenticationService: AuthenticationService, 
     private httpClient: HttpClient, 
     private configService: AppConfigService) {
     // To Warm up the Lambda Api
-    this.httpClient.get(this.configService.settings.apiUrl + '/api/Health')
-    .subscribe();
+    this.httpClient.get(this.configService.settings.apiUrl + '/api/Health').subscribe();
   }
   
   ngOnInit(): void {
-    this.authenticationService.currentAuthenticatedUser();  
+    this.authenticationService.currentAuthenticatedUser()
+    .then(res => this.authenticationService.isAuthenticatedUser$.next(res.isAuthenticated));  
   }
   
 }

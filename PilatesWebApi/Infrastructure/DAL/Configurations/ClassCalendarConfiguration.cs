@@ -15,7 +15,7 @@ namespace PilatesWebApi.Infrastructure.DAL.Configurations
             builder.HasOne(cl => cl.Class)
                 .WithMany(t => t.ClassCalendars)
                 .HasForeignKey(c => c.ClassId)
-                .IsRequired();        
+                .IsRequired();
 
         }
     }

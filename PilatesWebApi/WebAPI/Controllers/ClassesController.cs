@@ -50,7 +50,7 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
         }
 
         [HttpPost("timetable")]
-        public async Task<IActionResult> AddClasseswithTimetable([FromBody] AddClassWithTimetableRequest classRequest)
+        public async Task<IActionResult> AddClassesWithTimetable([FromBody] AddClassWithTimetableRequest classRequest)
         {
             await _classService.AddClassesWithTimetableAsync(classRequest);
             return Ok(new ApiResponse(HttpStatusCode.OK));

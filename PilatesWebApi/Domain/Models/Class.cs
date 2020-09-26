@@ -14,5 +14,7 @@ namespace PilatesWebApi.Domain.Models
         public bool IsDeleted { get ; set ; }
 
         public ICollection<ClassCalendar> ClassCalendars { get; set; }
+        public ICollection<ClassBooking> ClassBookings { get; set; }
+
     }
 }

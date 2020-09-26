@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authenticationService';
+import { DataService } from 'src/app/shared/services/data.service';
+import { map } from 'rxjs/operators';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,13 +17,15 @@ export class SignInComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
+  error = '';  
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dataService: DataService,
+    private userService: UserService
   ) {    
   }
 
@@ -47,8 +52,18 @@ export class SignInComponent implements OnInit {
 
     this.loading = true;
     this.authenticationService.signIn(this.f.username.value, this.f.password.value)
-    .then((response) => {
-      this.router.navigate([this.returnUrl]);
+    .then((user) => {
+      this.dataService.getUser(user.attributes.sub)
+      .pipe(
+        map(res =>  { 
+          this.userService.userMember$.next({ ...res.result.member, email: res.result.user.email });
+          this.userService.userMembership$.next(res.result.membership);
+          this.userService.userClasses$.next(res.result.classes);
+          this.loading = false;
+          this.router.navigate([this.returnUrl]); 
+        } )
+      )
+      .subscribe();   
     })
     .catch(err => {
       this.error = err.message;

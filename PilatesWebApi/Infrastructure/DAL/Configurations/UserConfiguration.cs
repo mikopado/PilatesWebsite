@@ -9,10 +9,7 @@ namespace PilatesWebApi.Infrastructure.DAL.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.Property(x => x.Email)
-                .IsRequired();
-
-            builder.Property(x => x.Password)
-                .IsRequired();
+                .IsRequired();           
 
             // Filter all removed entries when query database
             builder.HasQueryFilter(p => !p.IsDeleted);

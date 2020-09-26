@@ -28,11 +28,8 @@ namespace PilatesWebApiInfrastructure.DAL.Configurations
             builder.Property(x => x.City)
                 .IsRequired();
 
-            builder.Property(x => x.Age)
-                .IsRequired();
-
-            builder.Property(x => x.Email)
-                .IsRequired();
+            builder.Property(x => x.Dob)
+                .IsRequired();           
 
             // Filter all removed entries when query database
             builder.HasQueryFilter(p => !p.IsDeleted);

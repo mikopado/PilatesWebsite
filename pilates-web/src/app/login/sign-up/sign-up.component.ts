@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authenticationService';
+import { DataService } from 'src/app/shared/services/data.service';
+import { map, catchError, tap } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,17 +25,13 @@ export class SignUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
     this.returnUrl = './login';
-    this.signUpForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      dob: [''],
-      address: [''],
-      city: [''],
+    this.signUpForm = this.formBuilder.group({     
       email: ['', Validators.required],
       confirmEmail: ['', Validators.required],
       password: ['', Validators.required],
@@ -57,15 +56,19 @@ export class SignUpComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService.signUp(this.f.email.value, this.f.password.value, this.f.firstname.value, this.f.lastname.value)
+    this.authenticationService.signUp(this.f.email.value, this.f.password.value)
     .then(response => {
       this.isCodeVerified = true; 
-      this.loading = false;
       //TODO Create user to DB. Call Api 
-      console.log(response);
+      this.dataService.registerUser({ id: response.userSub, email: response.user.getUsername()})
+      .pipe(
+        tap(resp => this.loading = false ),
+        catchError(err =>  { this.loading = false; this.error = err.message; return throwError(err); })
+        )
+        .subscribe();
     })
     .catch(err => {
-      this.error = err; 
+      this.error = err.message; 
       this.loading = false
     });        
   }

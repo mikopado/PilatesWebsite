@@ -18,16 +18,11 @@ export class AuthenticationService {
         return user;
     }
 
-    async signUp(username: string, password: string, givenName: string, familyName: string) { // To pass an object
-        const { user } = await Auth.signUp({
+    async signUp(username: string, password: string) { // To pass an object
+        return await Auth.signUp({
             username,
-            password,
-            attributes: {
-                given_name: givenName,
-                family_name: familyName //optional to create to the Cognito Console
-            }
+            password            
         });
-        return user;
     }
 
     async verifyCode(email: string, code: string) {
@@ -47,9 +42,9 @@ export class AuthenticationService {
     async currentAuthenticatedUser() {
         try {
             const user = await Auth.currentAuthenticatedUser();
-            return { userSession: user.signInUserSession, isAuthenticated: true };
+            return { userSession: user.signInUserSession, isAuthenticated: true, userAttributes: user.attributes };
         } catch {
-            return { userSession: null, isAuthenticated : false };
+            return { userSession: null, isAuthenticated : false, userAttributes: null };
         }        
     }
 }
