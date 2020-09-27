@@ -1,0 +1,66 @@
+<div class="ice-cold-gradient" fxLayoutAlign="center">
+    <div class="text-wrapper">
+    <h1 fxLayoutAlign="center">You are one step closer from enjoying a relaxing course of {{membership.classType}}
+         <br>for the duration of {{membership.period}} 
+         <br>at an amazing price of only {{membership.price}}€!
+        <br>Hurry up!
+    </h1>
+</div>
+</div>
+<div>
+    <mat-card class="card">
+        <mat-card-header fxLayoutAlign="center">
+            <mat-card-title class="card-header">Membership Form</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-body">
+            <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field class="form-field">
+                        <input matInput placeholder="First Name" type="text" formControlName="firstname"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                        <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field class="form-field">
+                        <input matInput placeholder="Last Name" type="text" formControlName="lastname"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                        <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field class="form-field">
+                        <mat-label>Date of Birth</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dob"
+                            [ngClass]="{ 'is-invalid': submitted && f.dob.errors }">
+                        <mat-datepicker-toggle matSuffix [for]="picker" class="icons dob-icon" id="picker">
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field class="form-field">
+                        <mat-label>Address</mat-label>
+                        <input matInput type="text" formControlName="address"
+                            [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                        <mat-icon matSuffix class="icons mr-icons">place</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="form-group" fxLayoutAlign="center center">
+                    <mat-form-field class="form-field">
+                        <input matInput placeholder="City" type="text" formControlName="city" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                        <mat-icon matSuffix class="icons mr-icons">location_city</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="signup-btn">
+                    <button mat-raised-button color="primary" [disabled]="loading">
+                        <span *ngIf="loading" class="spinner-border"></span>
+                        Checkout
+                    </button>
+                </div>
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

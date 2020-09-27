@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppConfigService } from '../../core/app-config.service';
-import { IClass, IApiResponse, IMembership, IUser, IUserMemberResponse } from '../interfaces';
+import { IClass, IApiResponse, IMembership, IUser, IUserMemberResponse, IRegisterMember } from '../interfaces';
 import { throwError } from 'rxjs';
 
 
@@ -43,6 +43,12 @@ export class DataService {
         return this.http.get<IApiResponse<IUserMemberResponse>>(this.configService.settings.apiUrl + endpoint, 
             {params: {id: userId}}
             )
+            .pipe(catchError(this.handleError));
+    }
+
+    registerMember(member: IRegisterMember): Observable<IApiResponse<any>>{
+        var endpoint = '/api/members';
+        return this.http.post<IApiResponse<any>>(this.configService.settings.apiUrl + endpoint, member)
             .pipe(catchError(this.handleError));
     }
 

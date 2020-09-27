@@ -30,14 +30,7 @@ export interface IUserMemberResponse {
     classes: IClass[]
 }
 
-// export interface IUserMember {
-//     user: IUser,
-//     member: IMember,
-//     membership: IMembership
-// }
-
 export interface IMember{
-    id: string,
     firstName: string,
     lastName: string,
     address: string,
@@ -55,17 +48,33 @@ export interface ITeacher {
 export interface IMembership {
     id: string,
     classType: ClassType,
-    type: MembershipType
+    type: MembershipType,
+    expirationTime: Date,
+    price: number,
+    days: number
 }
 
 export interface IUserMembership {
     classType: string,
-    type: string
+    type: string,
+    expirationTime: Date,
+    price: number,
+    period: string
 }
 
 export interface IUser {
     id: string,
     email: string
+}
+
+export interface IRegisterMember{
+    firstName: string,
+    lastName: string,
+    address: string,
+    dob: Date,
+    city: string,
+    userId: string,
+    membershipId: string
 }
 
 export interface IApiResponse<T>{

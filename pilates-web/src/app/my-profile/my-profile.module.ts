@@ -9,7 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
@@ -32,7 +32,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatDividerModule,
     MatListModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    MatNativeDateModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })

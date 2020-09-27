@@ -15,6 +15,7 @@ import { MembershipsResolver } from './memberships/memberships.resolver';
 import { SignOutComponent } from './login/signout/signout.component';
 import { AuthGuard } from './shared/services/auth-guard.service';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MembershipComponent } from './memberships/membership/membership.component';
 
 
 const routes: Routes = [
@@ -110,6 +111,7 @@ const routes: Routes = [
   { path: 'classes/combo', component: ComboTypeComponent, resolve: { data: ClassResolver } },
   { path: 'classes/weeklycalendar', component: WeeklyCalendarComponent, resolve: { data: ClassResolver },  canActivate: [AuthGuard] },
   { path: 'signup', component: SignUpComponent },
+  { path: 'memberships/:type/:id', component: MembershipComponent, canActivate:[AuthGuard] },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', component: PageNotFoundComponent }
 ];

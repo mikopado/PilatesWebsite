@@ -2,9 +2,9 @@
     <div fxFlex="50%" fxFlexOffset="5">
         <div class="form-field" fxLayoutAlign="space-between baseline">
             <h3>Personal Information</h3>
-        <button mat-icon-button color="disabled" (click)="isEdit = !isEdit">
+        <button mat-icon-button color="disabled" disabled="!(userService.userMembership | async)" (click)="isEdit = !isEdit">
                 <mat-icon class="edit-icon">edit</mat-icon>
-            </button>
+        </button>
         </div>
     <div>
         <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
@@ -61,16 +61,14 @@
         </div>
         <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
         </form>
-
-            <!-- UserDetails
-            <p>{{ member.email }}</p>
-            <p>{{ membership.id }}</p> -->
+           
     </div>
 </div>
     <div fxFlex="50%" fxLayout="column">
         <div class="extra-section">
         <h3>Classes Booked</h3>  
-        <div *ngFor="let cls of (classesBooked$ | async)" class="round-border fill-area scrollable">
+        <section *ngIf="(classesBooked$ | async)" class="round-border fill-area scrollable">
+        <div *ngFor="let cls of (classesBooked$ | async)">
         <mat-grid-list cols="6" rowHeight="50px">
             <mat-grid-tile>{{cls.day}}</mat-grid-tile>   
             <mat-grid-tile>{{cls.timeslot}}</mat-grid-tile>
@@ -79,27 +77,20 @@
             <mat-grid-tile>{{cls.room}}</mat-grid-tile>
             <mat-grid-tile><button mat-button color="primary">Cancel</button></mat-grid-tile>
           </mat-grid-list>
-          <mat-divider></mat-divider>  
-
-        </div>
-        <!-- <mat-list class="round-border fill-area scrollable" fxLayoutAlign="baseline">
-            <mat-list-item *ngFor="let cls of (classesBooked$ | async)" >
-            <span class="mg-right">{{cls.day}} | </span>             
-             <span class="mg-right">{{cls.timeslot}} | </span> 
-             <span class="mg-right">{{cls.classType}} | </span> 
-             <span class="mg-right">{{cls.teacher}} | </span>
-             <span class="mg-right">{{cls.room}} | </span>  
-             <button mat-button color="primary">Cancel</button>
-             <mat-divider></mat-divider>            
-            </mat-list-item>
-        </mat-list> -->
+          <mat-divider></mat-divider> 
+        </div> 
+    </section>       
     </div>
         <mat-divider class="divider-section wd-80"></mat-divider>
         <div class="extra-section">
         <h3>Active Membership</h3>
-        <div class="round-border" >
+        <div class="round-border" *ngIf="(userService.userMembership$ | async)" >
             <div fxLayoutAlign="center">You have an active Membership of </div>
-            <div fxLayoutAlign="center" class="divider-section"><strong>{{(userMembership$ | async).classType}}</strong> - <strong>{{(userMembership$ | async).type}}</strong></div>
+            <div fxLayoutAlign="center" class="divider-section"><strong>{{(userService.userMembership$ | async).classType}}</strong> - <strong>{{(userService.userMembership$ | async).type}}</strong></div>
+        </div>
+        <div class="round-border" *ngIf="!(userService.userMembership$ | async)" >
+            <div fxLayoutAlign="center">You do not have any active Membership</div>
+            <div fxLayoutAlign="center" ><button mat-button color="primary">Purchase one</button></div>
         </div>
     </div>
     </div>

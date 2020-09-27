@@ -4,4 +4,8 @@ export interface Card {
   description: string
 }
 
+export interface MembershipCard extends Card {
+  id: string
+}
+
   

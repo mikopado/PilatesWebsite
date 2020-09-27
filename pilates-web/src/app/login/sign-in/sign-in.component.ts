@@ -5,6 +5,8 @@ import { AuthenticationService } from '../../shared/services/authenticationServi
 import { DataService } from 'src/app/shared/services/data.service';
 import { map } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/services/user.service';
+import { ClassType, IMembership, IUserMembership } from 'src/app/shared/interfaces';
+import { MembershipType } from 'src/app/memberships/models/membership-type';
 
 @Component({
   selector: 'app-sign-in',
@@ -57,7 +59,7 @@ export class SignInComponent implements OnInit {
       .pipe(
         map(res =>  { 
           this.userService.userMember$.next({ ...res.result.member, email: res.result.user.email });
-          this.userService.userMembership$.next(res.result.membership);
+          this.getUserMembership(res.result.membership);
           this.userService.userClasses$.next(res.result.classes);
           this.loading = false;
           this.router.navigate([this.returnUrl]); 
@@ -70,6 +72,19 @@ export class SignInComponent implements OnInit {
       this.loading = false;
     });    
        
+  }
+
+  private getUserMembership(membership: IMembership) {
+    if(membership !== undefined){
+      this.userService.userMembership$.next(
+        {
+          ...membership,
+          type: MembershipType[membership.type],
+          classType: ClassType[membership.classType],
+          period: ''
+        } as IUserMembership
+      );
+    }   
   }
 
   logOut() {    

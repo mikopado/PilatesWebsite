@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PilatesWebApi.Application.DTO.Requests;
+using PilatesWebApi.Application.ResponseObjects;
 using PilatesWebApi.Application.Services;
 using PilatesWebApi.WebAPI.Controllers.Base;
 using System;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PilatesWebApi.WebAPI.Controllers
@@ -21,7 +23,8 @@ namespace PilatesWebApi.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterMember([FromBody] RegisterMemberRequest request)
         {
-            throw new NotImplementedException();
+            await _memberService.AddMemberAsync(request);
+            return Ok(new ApiResponse(HttpStatusCode.OK));
         }
 
         [HttpGet]

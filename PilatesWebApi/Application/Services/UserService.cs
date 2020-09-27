@@ -18,6 +18,7 @@ namespace PilatesWebApi.Application.Services
         private IRepository<User> _userRepository;
         private IRepository<Member> _memberRepository;
         private IRepository<ClassBooking> _classBookingRepository;
+        private IRepository<MemberMembership> _memberMembershipRepository;
         private readonly IMapper _mapper;
 
         public UserService(IUnitOfWork unitOfWork, IMapper mapper)
@@ -26,16 +27,17 @@ namespace PilatesWebApi.Application.Services
             _userRepository = _uow.Repository<User>();
             _memberRepository = _uow.Repository<Member>();
             _classBookingRepository = _uow.Repository<ClassBooking>();
+            _memberMembershipRepository = _uow.Repository<MemberMembership>();
             _mapper = mapper;
         }
 
         public async Task<UserMemberResponse> GetAsync(Guid id)
         {
             var result = new UserMemberResponse();
-            var userDetails = await _memberRepository
-                .With(m => m.User, mb => mb.Membership)
+            var member = await _memberRepository
+                .With(m => m.User)
                 .FirstOrDefaultAsync(u => u.UserId == id);
-            if (userDetails is null) 
+            if (member is null) 
             {
                 var user = await _userRepository.GetAsync(id);
                 if(user is null) throw new NotFoundException($"Resource with id: {id} cannot be found.");
@@ -44,11 +46,15 @@ namespace PilatesWebApi.Application.Services
                 return result;
             }
 
-            result.Member = _mapper.Map<MemberResponse>(userDetails);
-            result.Membership = _mapper.Map<MembershipResponse>(userDetails.Membership);
-            result.User = _mapper.Map<UserResponse>(userDetails.User);
+            result.Member = _mapper.Map<MemberResponse>(member);
+            result.User = _mapper.Map<UserResponse>(member.User);
+            var memberships = await _memberMembershipRepository.With(m => m.Membership)
+                .Where(m => m.MemberId == member.Id)
+                .Select(m => m)
+                .ToListAsync();
+            result.Membership = _mapper.Map<MembershipResponse>(memberships.FirstOrDefault());
             var classes = await _classBookingRepository.With(c => c.Class, cl => cl.Class.ClassCalendars, t => t.Class.Teacher)
-                .Where(x => x.MemberId == userDetails.Id)
+                .Where(x => x.MemberId == member.Id)
                 .Select(cl => cl.Class)
                 .ToListAsync();            
             result.Classes = _mapper.Map<IEnumerable<ClassCalendarResponse>>(classes);

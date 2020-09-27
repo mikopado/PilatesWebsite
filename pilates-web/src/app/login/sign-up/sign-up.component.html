@@ -1,48 +1,10 @@
 <div>
     <mat-card *ngIf="!isCodeVerified" class="card">
         <mat-card-header fxLayoutAlign="center">
-            <mat-card-title class="card-header">Registration Form</mat-card-title>
+            <mat-card-title class="card-header">Sign Up</mat-card-title>
         </mat-card-header>
         <mat-card-content class="card-body">
             <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
-                <!-- <div class="form-group" fxLayoutAlign="center center">
-                    <mat-form-field class="form-field">
-                        <input matInput placeholder="First Name" type="text" formControlName="firstname"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
-                            <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
-                    </mat-form-field>                   
-                </div>
-                <div class="form-group" fxLayoutAlign="center center">
-                    <mat-form-field class="form-field">
-                        <input matInput placeholder="Last Name" type="text" formControlName="lastname"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
-                            <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
-                    </mat-form-field>                   
-                </div>
-                <div class="form-group" fxLayoutAlign="center center">
-                <mat-form-field class="form-field">
-                    <mat-label>Date of Birth</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="dob" 
-                    [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
-                    <mat-datepicker-toggle matSuffix [for]="picker" class="icons" id="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field> 
-            </div>                  
-            <div class="form-group" fxLayoutAlign="center center">              
-                <mat-form-field class="form-field">
-                    <mat-label>Address</mat-label>
-                    <input matInput type="text" formControlName="address"
-                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
-                    <mat-icon matSuffix class="icons mr-icons">place</mat-icon>
-                    </mat-form-field>                   
-                </div>
-                <div class="form-group" fxLayoutAlign="center center">
-                    <mat-form-field class="form-field">
-                        <input matInput placeholder="City" type="text" formControlName="city"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
-                            <mat-icon matSuffix class="icons mr-icons">location_city</mat-icon>
-                    </mat-form-field>                    
-                </div> -->
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
                         <input matInput placeholder="Email" type="email" formControlName="email"

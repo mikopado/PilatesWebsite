@@ -14,11 +14,10 @@ namespace PilatesWebApi.Domain.Models
         public string Address { get; set; }
         public string City { get; set; }
         public User User { get; set; }
-        public Guid UserId { get; set; }
-        public Membership Membership { get; set; }
-        public Guid MembershipId { get; set; }
+        public Guid UserId { get; set; }       
         public bool IsDeleted { get ; set ; }
 
         public ICollection<ClassBooking> ClassBookings { get; set;  }
+        public ICollection<MemberMembership> Memberships { get; set; }
     }
 }

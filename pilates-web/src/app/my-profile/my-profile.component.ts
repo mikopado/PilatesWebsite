@@ -22,7 +22,6 @@ export class MyProfileComponent implements OnInit {
   error = '';  
   isEdit = false;
   public classesBooked$ = new BehaviorSubject<IClassTimetable[]>(null);
-  public userMembership$ = new BehaviorSubject<IUserMembership>(null);
 
   constructor(
     public userService: UserService, 
@@ -50,15 +49,20 @@ export class MyProfileComponent implements OnInit {
       from(this.authService.currentAuthenticatedUser()).pipe(
         map(res =>
         this.dataService.getUser(res.userAttributes.sub).pipe(  
-          tap(c => console.log(c.result.classes)),         
             map(user => { 
               this.getUserMembership(user.result.membership);
               this.userService.userClasses$.next(user.result.classes);
               this.getBookingClasses(user.result.classes);
-              this.userService.userMember$.next({
-                ...user.result.member,
-                email: user.result.user.email
-              } as IMember)
+              if(user.result.member !== undefined){
+                this.userService.userMember$.next({
+                  ...user.result.member,
+                  email: user.result.user.email
+                } as IMember)
+              }else{
+                this.userService.userMember$.next({
+                  email: user.result.user.email
+                } as IMember)
+              }              
               this.editUserForm.patchValue({...this.userService.userMember$.getValue()});
             })
           ).subscribe()
@@ -72,29 +76,34 @@ export class MyProfileComponent implements OnInit {
   }
 
   private getUserMembership(membership: IMembership) {
-    this.userMembership$.next(
-      {
-        type: MembershipType[membership.type],
-        classType: ClassType[membership.classType]
-      } as IUserMembership
-    );
+    if(membership !== undefined){
+      this.userService.userMembership$.next(
+        {
+          ...membership,
+          type: MembershipType[membership.type],
+          classType: ClassType[membership.classType],
+          period: ''
+        } as IUserMembership
+      );
+    }   
   }
 
   private getBookingClasses(classes: IClass[]){
-    console.log(classes);
-    this.classesBooked$.next(
-    classes
-    .sort((a, b) => a.weekDay - b.weekDay)
-    .map(
-        cls =>          
-          ({
-            classType: ClassType[cls.type],
-            room: cls.room,
-            teacher: cls.teacher.firstName.concat(' ', cls.teacher.lastName),
-            timeslot: cls.startingTime.slice(0, cls.startingTime.lastIndexOf(':')).concat(' - ', cls.endingTime.slice(0, cls.endingTime.lastIndexOf(':'))),
-            day: DayOfWeek[cls.weekDay]
-        } as IClassTimetable)
-    ))
+    if(classes.length > 0){
+      this.classesBooked$.next(
+        classes
+        .sort((a, b) => a.weekDay - b.weekDay)
+        .map(
+            cls =>          
+              ({
+                classType: ClassType[cls.type],
+                room: cls.room,
+                teacher: cls.teacher.firstName.concat(' ', cls.teacher.lastName),
+                timeslot: cls.startingTime.slice(0, cls.startingTime.lastIndexOf(':')).concat(' - ', cls.endingTime.slice(0, cls.endingTime.lastIndexOf(':'))),
+                day: DayOfWeek[cls.weekDay]
+            } as IClassTimetable)
+        ))
+    }    
   }
 
   onSubmit() {

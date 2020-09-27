@@ -16,6 +16,9 @@ namespace PilatesWebApi.Infrastructure.DAL.Configurations
                 .HasConversion<string>()
                 .IsRequired();
 
+            builder.Property(x => x.Price)
+                .IsRequired();
+
             // Filter all removed entries when query database
             builder.HasQueryFilter(p => !p.IsDeleted);
         }

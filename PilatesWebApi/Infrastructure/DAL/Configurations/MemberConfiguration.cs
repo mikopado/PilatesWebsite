@@ -7,10 +7,7 @@ namespace PilatesWebApiInfrastructure.DAL.Configurations
     public class MemberConfiguration : IEntityTypeConfiguration<Member>
     {
         public void Configure(EntityTypeBuilder<Member> builder)
-        {
-            builder.HasOne(m => m.Membership)
-                .WithMany(ms => ms.Members)
-                .HasForeignKey(m => m.MembershipId);
+        {          
 
             builder.HasOne(m => m.User)
                 .WithOne(u => u.Member)

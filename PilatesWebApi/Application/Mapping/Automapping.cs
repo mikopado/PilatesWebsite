@@ -20,7 +20,8 @@ namespace PilatesWebApi.Application.Mapping
             CreateMap<Class, ClassResponse>();
             CreateMap<ClassCalendar, ClassResponse>();
             CreateMap<Teacher, TeacherResponse>();
-            CreateMap<Membership, MembershipResponse>();
+            CreateMap<Membership, MembershipResponse>()
+                .ForMember(m => m.Days, opt => opt.MapFrom(o => o.DurationInDay));
             CreateMap<TeacherRequest, Teacher>();
             CreateMap<MembershipRequest, Membership>();
             CreateMap<Class, ClassCalendarResponse>()
@@ -31,14 +32,15 @@ namespace PilatesWebApi.Application.Mapping
             CreateMap<Class, ClassCalendar>()
                 .ForMember(c => c.ClassId, opt => opt.MapFrom(o => o.Id))
                 .ForAllOtherMembers(i => i.Ignore());
-            CreateMap<RegisterUserRequest, User>();
-            //CreateMap<User, Member>()
-            //    .ForMember(m => m.User, opt => opt.MapFrom(u => u))
-            //    .ForAllOtherMembers(i => i.Ignore());
-            //CreateMap<User, UserResponse>();
+            CreateMap<RegisterUserRequest, User>();          
             CreateMap<Member, MemberResponse>();
             CreateMap<User, UserResponse>();
-            CreateMap<Membership, MembershipResponse>();
+            CreateMap<MemberMembership, MembershipResponse>()
+                .ForMember(m => m.ClassType, opt => opt.MapFrom(o => o.Membership.ClassType))
+                .ForMember(m => m.Type, opt => opt.MapFrom(o => o.Membership.Type))
+                .ForMember(m => m.Price, opt => opt.MapFrom(o => o.Membership.Price))
+                .ForMember(m => m.Days, opt => opt.MapFrom(o => o.Membership.DurationInDay));
+            CreateMap<RegisterMemberRequest, Member>();
 
         }
     }

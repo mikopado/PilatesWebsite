@@ -5,7 +5,7 @@ import { IMembership, ClassType } from '../shared/interfaces';
 import { map, tap } from 'rxjs/operators';
 import { MembershipType } from './models/membership-type';
 import { MembershipExtraDetails } from './models/membership-details';
-import { Card } from '../core/models/card';
+import { Card, MembershipCard } from '../core/models/card';
 
 
 @Injectable({
@@ -14,15 +14,13 @@ import { Card } from '../core/models/card';
 export class MembershipsService {
 
     public memberships$ = new BehaviorSubject<IMembership[]>(null);
-    public membershipCards$ = new BehaviorSubject<Card[]>(null);
+    public membershipCards$ = new BehaviorSubject<MembershipCard[]>(null);
 
     constructor() {}
 
     getMembershipCards(){
         this.memberships$.pipe(
-            tap(m => console.log(m)),
-            map(memberships =>  
-                
+            map(memberships =>                  
                     memberships.map(m => {
                         const membDetails = MembershipExtraDetails.find(
                             md => md.name.charAt(0).toUpperCase() + md.name.slice(1) === ClassType[m.classType]
@@ -30,8 +28,9 @@ export class MembershipsService {
                         return ({
                             title: ClassType[m.classType],
                             imageUrl: membDetails.imageLink,
-                            description: MembershipType[m.type] + membDetails.description
-                        } as Card)
+                            description: MembershipType[m.type] + membDetails.description,
+                            id: m.id
+                        } as MembershipCard)
                     })  
                 )
         ).subscribe(res => this.membershipCards$.next(res));
