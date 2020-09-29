@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { of, throwError } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { ClassType, IMembership, IRegisterMember, IUserMembership } from 'src/app/shared/interfaces';
+import { ClassType, IRegisterMember, IUserMembership } from 'src/app/shared/interfaces';
 import { AuthenticationService } from 'src/app/shared/services/authenticationService';
-import { DataService } from 'src/app/shared/services/data.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { MembershipsService } from '../memberships.service';
 import { MembershipType } from '../models/membership-type';
@@ -23,19 +22,21 @@ export class MembershipComponent implements OnInit {
   membership: IUserMembership;
   membershipId: string;
   user: any; 
+  justRegistered = false;
+  alreadyMember = false;
 
   constructor(private formBuilder: FormBuilder, 
     private activatedRoute: ActivatedRoute, 
     private membershipService: MembershipsService,
     private userService: UserService,
-    private authService: AuthenticationService,
-    private router: Router) { 
+    private authService: AuthenticationService
+    ) { 
   }
 
   ngOnInit(): void {
     this.memberForm = this.formBuilder.group({     
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
       dob: ['', Validators.required]
@@ -57,7 +58,14 @@ export class MembershipComponent implements OnInit {
     });
 
     this.authService.currentAuthenticatedUser()
-    .then(u => this.user = u.userAttributes);
+      .then(u => this.user = u.userAttributes);
+
+    this.checkMember();
+  }
+
+  private checkMember(){
+    this.userService.userMember$.subscribe(user => this.memberForm.patchValue({ ...user }));
+    this.userService.userMembership$.subscribe(x => this.alreadyMember = true);    
   }
 
   private toMonth(days: number){
@@ -83,14 +91,14 @@ export class MembershipComponent implements OnInit {
       address: this.f.address.value,
       city: this.f.city.value,
       dob: this.f.dob.value,
-      firstName: this.f.firstname.value,
-      lastName: this.f.lastname.value,
+      firstName: this.f.firstName.value,
+      lastName: this.f.lastName.value,
       membershipId: this.membershipId,
       userId: this.user.sub
     } as IRegisterMember
     this.userService.registerUserMember(member, this.user.email, this.membership) 
       .pipe(
-        tap(c => {this.router.navigate(['/']); this.loading = false;}),
+        tap(c => {this.justRegistered = true; this.loading = false;}),
         catchError(err => { this.loading = false; this.error = err.message; return of() })
         )
         .subscribe();          

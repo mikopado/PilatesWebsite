@@ -26,3 +26,10 @@
     color: rgba(0, 0, 0, 0.87);
     font-size: 150%;
   }
+  .full-wd{
+    width: 100%;
+    height: 90vh;
+  }
+  .font-big{
+    font-size: xx-large;
+  }

@@ -1,13 +1,32 @@
-<div class="ice-cold-gradient" fxLayoutAlign="center">
+<div class="ice-cold-gradient full-wd" *ngIf="alreadyMember" fxLayoutAlign="center center">
+    <div class="text-wrapper">    
+    <h1><span class="font-big">Sorry!</span>
+        <br>You already have an active membership. 
+        <br>Enjoy your membership! 
+       <br>Then you can dive into new experience with
+       <br><span class="font-big">YogaMe</span>
+   </h1>
+</div>
+</div>
+<div class="ice-cold-gradient full-wd" *ngIf="justRegistered && !alreadyMember" fxLayoutAlign="center center">
+    <div class="text-wrapper">    
+    <h1><span class="font-big">Congratulations!</span>
+        <br>You have just registered 
+        <br>for {{membership.period}} of {{membership.classType}} 
+       <br><span class="font-big">Welcome on YogaMe!</span>
+   </h1>
+</div>
+</div>
+<div class="ice-cold-gradient" fxLayoutAlign="center" *ngIf="!justRegistered || !alreadyMember">
     <div class="text-wrapper">
     <h1 fxLayoutAlign="center">You are one step closer from enjoying a relaxing course of {{membership.classType}}
          <br>for the duration of {{membership.period}} 
          <br>at an amazing price of only {{membership.price}}€!
         <br>Hurry up!
-    </h1>
+    </h1>    
 </div>
 </div>
-<div>
+<div *ngIf="!justRegistered || !alreadyMember">
     <mat-card class="card">
         <mat-card-header fxLayoutAlign="center">
             <mat-card-title class="card-header">Membership Form</mat-card-title>
@@ -16,15 +35,15 @@
             <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
-                        <input matInput placeholder="First Name" type="text" formControlName="firstname"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                        <input matInput placeholder="First Name" type="text" formControlName="firstName"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
                     </mat-form-field>
                 </div>
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
-                        <input matInput placeholder="Last Name" type="text" formControlName="lastname"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                        <input matInput placeholder="Last Name" type="text" formControlName="lastName"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
                     </mat-form-field>
                 </div>
