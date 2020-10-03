@@ -4,6 +4,7 @@ export interface IWeekPlan {
   }
 
 export interface IClassTimetable{
+    classId: string,
     day: string,
     timeslot: string,
     room: string,

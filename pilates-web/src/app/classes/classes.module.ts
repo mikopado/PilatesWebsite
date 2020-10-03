@@ -13,10 +13,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ClassesService } from './classes-service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BookingDialogComponent } from './weekly-calendar/dialogs/booking-dialog/booking-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
-  declarations: [ClassesListComponent, YogaTypeComponent, PilatesTypeComponent, ComboTypeComponent, WeeklyCalendarComponent, DayCalendarComponent],
+  declarations: [ClassesListComponent, YogaTypeComponent, PilatesTypeComponent, ComboTypeComponent, WeeklyCalendarComponent, DayCalendarComponent, BookingDialogComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -24,8 +30,13 @@ import { ClassesService } from './classes-service';
     RouterModule,
     MatTableModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
-  providers: [ClassesService]
+  providers: [ClassesService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })
 export class ClassesModule { }

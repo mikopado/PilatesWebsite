@@ -38,7 +38,7 @@ namespace Pilates.Service.Tests
             var classes = await uow.Repository<Class>().GetEntitiesAsync();
             var cls = classes.ToArray()[0];
 
-            uow.Repository<Class>().DeleteAsync(cls);
+            uow.Repository<Class>().Delete(cls);
             var r = await uow.SaveAsync();
             Assert.Equal(1, r);
 

@@ -12,6 +12,7 @@ namespace PilatesWebApi.Infrastructure.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<ClassBooking> builder)
         {
+           
             builder.HasOne(cl => cl.Class)
                 .WithMany(t => t.ClassBookings)
                 .HasForeignKey(c => c.ClassId)
@@ -21,6 +22,9 @@ namespace PilatesWebApi.Infrastructure.DAL.Configurations
                .WithMany(t => t.ClassBookings)
                .HasForeignKey(m => m.MemberId)
                .IsRequired();
+
+            builder.Property(c => c.Date)
+                .IsRequired();
 
             // Filter all removed entries when query database
             builder.HasQueryFilter(p => !p.IsDeleted);

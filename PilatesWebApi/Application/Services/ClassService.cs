@@ -54,7 +54,7 @@ namespace PilatesWebApi.Application.Services
         public async Task DeleteClassAsync(Guid id)
         {
             var classToDelete = await FindClassAsync(id);
-            _repository.DeleteAsync(classToDelete);
+            _repository.Delete(classToDelete);
             await _uow.SaveAsync();
         }
 
@@ -123,7 +123,7 @@ namespace PilatesWebApi.Application.Services
                 cal => cal.ClassId, 
                 (cls, cal) => 
                 new ClassCalendarResponse {
-                    ClassId = cls.Id,
+                    Id = cls.Id,
                     EndingTime = cal.EndingTime,
                     Level = cls.Level,
                     Room = cls.Room,
@@ -134,6 +134,34 @@ namespace PilatesWebApi.Application.Services
                 }).ToList();
             return classCalendars;
 
+        }
+
+        public async Task<Guid> BookClassAsync(ClassBookingRequest request)
+        {
+            var member = (await _uow.Repository<Member>().FindAsync(m => m.UserId == request.UserId)).FirstOrDefault();
+            if (member is null) throw new NotFoundException($"The user with id: {request.UserId} is not a member.");
+            var validateBooking = await _uow.Repository<ClassBooking>()
+                .FindAsync(b => b.ClassId == request.ClassId && b.MemberId == member.Id && b.Date == request.Date);
+            if (validateBooking != null && validateBooking.Any()) throw new Exception("Member has already booked this class!");
+            await _uow.Repository<ClassBooking>().AddAsync(
+                new ClassBooking
+                {
+                    ClassId = request.ClassId,
+                    MemberId = member.Id,
+                    Date = request.Date
+                });
+            await _uow.SaveAsync();
+            return (await _uow.Repository<ClassBooking>()
+                .FindAsync(b => b.ClassId == request.ClassId && b.MemberId == member.Id && b.Date == request.Date)).FirstOrDefault().Id;
+
+        }
+
+        public async Task CancelClassBookingAsync(Guid id)
+        {
+            var classBooking = await _uow.Repository<ClassBooking>().GetAsync(id);
+            if (classBooking is null) throw new NotFoundException($"The resource with id: {id} cannot been found.");
+            _uow.Repository<ClassBooking>().Delete(classBooking);
+            await _uow.SaveAsync();
         }
     }
 }

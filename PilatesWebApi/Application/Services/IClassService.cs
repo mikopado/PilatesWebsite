@@ -21,5 +21,7 @@ namespace PilatesWebApi.Application.Services
         Task<IEnumerable<ClassCalendarResponse>> GetWeeklyTimetableAsync();
         Task<ClassResponseWithTeacher> GetClassWithTeacherAsync(Guid id);
         Task<IEnumerable<ClassResponseWithTeacher>> GetClassesWithTeacherAsync();
+        Task<Guid> BookClassAsync(ClassBookingRequest request);
+        Task CancelClassBookingAsync(Guid id);
     }
 }

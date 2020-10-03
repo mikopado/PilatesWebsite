@@ -52,6 +52,24 @@ export class DataService {
             .pipe(catchError(this.handleError));
     }
 
+    bookClass(classId: string, userId: string, date: Date): Observable<IApiResponse<string>>{
+        var endpoint = '/api/classes/booking';
+        var data = {
+            classId: classId,
+            userId: userId,
+            date: date
+        }
+        return this.http.post<IApiResponse<string>>(this.configService.settings.apiUrl + endpoint, data)
+            .pipe(catchError(this.handleError));
+    }
+
+    cancelClassBooking(classBookingId: string): Observable<IApiResponse<any>>{
+        var endpoint = '/api/classes/booking';        
+        return this.http.delete<IApiResponse<any>>(this.configService.settings.apiUrl + endpoint, 
+            {params: {id: classBookingId}}
+            )
+            .pipe(catchError(this.handleError));
+    }
 
 
     private handleError(error: HttpErrorResponse) {

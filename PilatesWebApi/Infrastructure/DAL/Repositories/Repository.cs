@@ -37,7 +37,7 @@ namespace PilatesWebApi.Infrastructure.DAL.Repositories
         }
         
         // Just disable entities not removing from Db
-        public void DeleteAsync(T entity)
+        public void Delete(T entity)
         {
             _entities.Remove(entity);
         }        

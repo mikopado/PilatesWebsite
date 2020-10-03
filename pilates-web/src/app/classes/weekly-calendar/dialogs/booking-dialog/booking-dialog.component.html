@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Book a Class</h2>
+<p>You are about to book the following class</p>
+<div class="bordered">{{data.timeslot}} - {{data.classType}} - {{data.teacher}} - {{data.room}}</div>
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field class="full-wd" appearance="outline">
+        <mat-label>Pick the date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker" id="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutAlign="end" fxLayoutGap="2%">
+    <button class="mat-raised-button mat-primary" (click)="book()">Book</button>
+    <button class="mat-raised-button" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

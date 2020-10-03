@@ -13,8 +13,8 @@ namespace PilatesWebApi.Domain.Models
         public Member Member { get; set; }
         public Guid ClassId { get; set; }
         public Class Class { get; set; }
+        public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
-
 
     }
 }

@@ -46,6 +46,7 @@ export class ClassesService {
                         .sort((a, b) => a.weekDay - b.weekDay)
                         .map(
                             cls => ({
+                                classId: cls.id,
                                 classType: ClassType[cls.type],
                                 room: cls.room,
                                 teacher: cls.teacher.firstName.concat(' ', cls.teacher.lastName),
@@ -64,6 +65,10 @@ export class ClassesService {
                 )
                     .filter((value, index, self) => self.map(mapObj => mapObj['day']).indexOf(value['day']) === index)
             ));
+    }
+
+    bookClass(classId: string, userId: string, date: Date){
+
     }
 
     private getClassSubTypes(clas: string) {

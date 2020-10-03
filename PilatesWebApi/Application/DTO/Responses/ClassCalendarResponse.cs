@@ -8,7 +8,7 @@ namespace PilatesWebApi.Application.DTO.Responses
 {
     public class ClassCalendarResponse
     {
-        public Guid ClassId { get; set; }
+        public Guid Id { get; set; }
         public ClassType Type { get; set; }
         public Level Level { get; set; }
         public DayOfWeek WeekDay { get; set; }

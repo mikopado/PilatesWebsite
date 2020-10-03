@@ -27,7 +27,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let day" >
-             <button mat-raised-button color="primary">Book</button>
+             <button mat-raised-button color="primary" (click)="bookClass(day)">Book</button>
         </td>
       </ng-container>
   
