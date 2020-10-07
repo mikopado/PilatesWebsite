@@ -65,11 +65,7 @@ export class ClassesService {
                 )
                     .filter((value, index, self) => self.map(mapObj => mapObj['day']).indexOf(value['day']) === index)
             ));
-    }
-
-    bookClass(classId: string, userId: string, date: Date){
-
-    }
+    }    
 
     private getClassSubTypes(clas: string) {
         this.classes$

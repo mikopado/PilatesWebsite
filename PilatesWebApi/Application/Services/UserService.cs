@@ -53,11 +53,11 @@ namespace PilatesWebApi.Application.Services
                 .Select(m => m)
                 .ToListAsync();
             result.Membership = _mapper.Map<MembershipResponse>(memberships.FirstOrDefault());
-            var classes = await _classBookingRepository.With(c => c.Class, cl => cl.Class.ClassCalendars, t => t.Class.Teacher)
+           var classes = await _classBookingRepository.With(c => c.Class, cl => cl.Class.ClassCalendars, t => t.Class.Teacher)
                 .Where(x => x.MemberId == member.Id)
-                .Select(cl => cl.Class)
+                .Select(cl => cl)
                 .ToListAsync();            
-            result.Classes = _mapper.Map<IEnumerable<ClassCalendarResponse>>(classes);
+            result.Classes = _mapper.Map<IEnumerable<ClassBookingResponse>>(classes);
 
             return result;
         }
@@ -67,6 +67,15 @@ namespace PilatesWebApi.Application.Services
             var user = _mapper.Map<User>(userRequest);
             await _userRepository.AddAsync(user);
             await _uow.SaveAsync();
+        }
+
+        public async Task<ClassBookingResponse> GetBookedClassAsync(Guid bookingId)
+        {
+            var bookedClass = await _uow.Repository<ClassBooking>()
+                .With(c => c.Class, c => c.Class.ClassCalendars, c => c.Class.Teacher)
+                .FirstOrDefaultAsync(c => c.Id == bookingId);
+            if (bookedClass is null) throw new NotFoundException($"The resource with id: {bookingId} cannot been found.");
+            return _mapper.Map<ClassBookingResponse>(bookedClass);
         }
     }
 }

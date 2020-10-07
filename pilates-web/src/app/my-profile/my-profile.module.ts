@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
   declarations: [MyProfileComponent],
   imports: [
     CommonModule,
+    RouterModule,
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,

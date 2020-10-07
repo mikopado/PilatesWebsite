@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { IMember, IMembership, IClass, IRegisterMember, IUserMembership } from '../interfaces';
+import { map, tap } from 'rxjs/operators';
+import { IMember, IMembership, IClass, IRegisterMember, IUserMembership, IClassBooking } from '../interfaces';
+import { AuthenticationService } from './authenticationService';
 import { DataService } from './data.service';
 
 
@@ -12,9 +13,9 @@ export class UserService {
 
     public userMember$ = new BehaviorSubject<IMember>(null);
     public userMembership$ = new BehaviorSubject<IUserMembership>(null);
-    public userClasses$ = new BehaviorSubject<IClass[]>(null);
+    public userClasses$ = new BehaviorSubject<IClassBooking[]>(null);
 
-    constructor(private dataService: DataService) { 
+    constructor(private dataService: DataService, private authService: AuthenticationService) { 
     }
 
     registerUserMember(member: IRegisterMember, email: string, membership: IUserMembership){
@@ -29,6 +30,35 @@ export class UserService {
                 );
                 this.userMembership$.next(membership);
             })
+        )
+    }
+
+    bookClass(classId: string, date: Date){
+        return this.authService.currentAuthenticatedUser()
+        .then(res => {
+            this.dataService.bookClass(classId, res.userAttributes.sub, date)
+            .pipe(
+                map(response => 
+                    this.dataService.getBookedClass(response.result)
+                    .pipe(
+                         map(r => {               
+                             this.userClasses$.next([...this.userClasses$.getValue(), r.result])
+                            })
+                    ).subscribe()
+                )
+            ).subscribe()
+        })
+        
+    }
+
+    cancelClassBooking(classBookingId: string){
+        return this.dataService.cancelClassBooking(classBookingId)
+        .pipe(
+            map(r => 
+                { 
+                    this.userClasses$.next(this.userClasses$.getValue().filter(x => x.id !== classBookingId));
+                }
+            )
         )
     }
 }

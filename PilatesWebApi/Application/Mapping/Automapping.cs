@@ -41,6 +41,15 @@ namespace PilatesWebApi.Application.Mapping
                 .ForMember(m => m.Price, opt => opt.MapFrom(o => o.Membership.Price))
                 .ForMember(m => m.Days, opt => opt.MapFrom(o => o.Membership.DurationInDay));
             CreateMap<RegisterMemberRequest, Member>();
+            CreateMap<ClassBooking, ClassBookingResponse>()
+               .ForMember(c => c.Id, opt => opt.MapFrom(o => o.Id))
+               .ForMember(c => c.Level, opt => opt.MapFrom(o => o.Class.Level))
+               .ForMember(c => c.Type, opt => opt.MapFrom(o => o.Class.Type))
+               .ForMember(c => c.Room, opt => opt.MapFrom(o => o.Class.Room))
+               .ForMember(c => c.Teacher, opt => opt.MapFrom(o => o.Class.Teacher))
+               .ForMember(c => c.StartingTime, opt => opt.MapFrom((src, dest) => { return src.Class.ClassCalendars?.Any() ?? false ? src.Class.ClassCalendars.First().StartingTime : default; }))
+               .ForMember(c => c.EndingTime, opt => opt.MapFrom((src, dest) => { return src.Class.ClassCalendars?.Any() ?? false ? src.Class.ClassCalendars.First().EndingTime : default; }));
+
 
         }
     }

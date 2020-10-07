@@ -28,22 +28,26 @@ export class AppComponent implements OnInit {
     this.authenticationService.currentAuthenticatedUser()
     .then(res => { 
       this.authenticationService.isAuthenticatedUser$.next(res.isAuthenticated);
-      this.dataService.getUser(res.userAttributes.sub).pipe(  
-        map(user => { 
-          this.getUserMembership(user.result.membership);
-          this.userService.userClasses$.next(user.result.classes);
-          if(user.result.member !== undefined){
-            this.userService.userMember$.next({
-              ...user.result.member,
-              email: user.result.user.email
-            } as IMember)
-          }else{
-            this.userService.userMember$.next({
-              email: user.result.user.email
-            } as IMember)
-          }              
-        })
-      ).subscribe()    
+      if(res.userAttributes !== undefined){
+        this.dataService.getUser(res.userAttributes.sub).pipe(  
+          map(user => { 
+            this.getUserMembership(user.result.membership);
+            console.log(user.result.classes);
+            this.userService.userClasses$.next(user.result.classes);
+            if(user.result.member !== undefined){
+              this.userService.userMember$.next({
+                ...user.result.member,
+                email: user.result.user.email
+              } as IMember)
+            }else{
+              this.userService.userMember$.next({
+                email: user.result.user.email
+              } as IMember)
+            }              
+          })
+        ).subscribe()  
+      }
+        
     });  
   }
   

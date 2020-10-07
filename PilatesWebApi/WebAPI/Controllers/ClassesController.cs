@@ -73,12 +73,7 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
 
         }
 
-        //[HttpGet("timetable/{start}/{end}")]
-        //public async Task<IActionResult> GetTimetable(DateTime start, DateTime end)
-        //{
-        //    var timetable = await _classService.GetTimetableAsync(start, end);
-        //    return Ok(new ApiResponse(HttpStatusCode.OK, timetable));
-        //}
+        
         [HttpGet("timetable/week")]
         public async Task<IActionResult> GetWeeklyTimetable()
         {
@@ -115,11 +110,18 @@ namespace PilatesWebApi.WebAPI.Controllers.Controllers
             return Ok(new ApiResponse(HttpStatusCode.OK, bookingId));
         }
 
-        [HttpDelete("booking/{id}")]
+        [HttpDelete("booking")]
         public async Task<IActionResult> CancelClassBooking(Guid id)
         {
             await _classService.CancelClassBookingAsync(id);
             return Ok(new ApiResponse(HttpStatusCode.OK));
+        }
+
+        [HttpGet("booked/{id}")]
+        public async Task<IActionResult> GetBookedClasses(Guid id)
+        {
+            var bookedClass = await _classService.GetBookedClassAsync(id);
+            return Ok(new ApiResponse(HttpStatusCode.OK, bookedClass));
         }
     }
 }

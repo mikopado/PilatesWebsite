@@ -83,16 +83,7 @@ namespace PilatesWebApi.Application.Services
             if (classes is null) throw new NotFoundException("Resource cannot be found");
             return _mapper.Map<IEnumerable<ClassResponse>>(classes);
         }
-
-        //public async Task<IEnumerable<ClassResponse>> GetTimetableAsync(DateTime start, DateTime end, Func<Class, bool> predicate = null)
-        //{
-        //    var timetable = await _repository.FindAsync(x => x.StartingTime >= start && x.EndingTime <= end);
-        //    if (timetable is null) throw new Exception("An error occured while retrieving resources.");
-        //    if (predicate is null) return _mapper.Map<IEnumerable<ClassResponse>>(timetable);
-        //    var filteredTimetable = timetable.Where(predicate);
-        //    return _mapper.Map<IEnumerable<ClassResponse>>(filteredTimetable);
-        //}
-
+       
         public async Task<ClassResponseWithTeacher> GetClassWithTeacherAsync(Guid id)
         {
             var classWithTeacher = await _repository.With(x => x.Teacher).FirstOrDefaultAsync(x => x.Id == id);
@@ -162,6 +153,16 @@ namespace PilatesWebApi.Application.Services
             if (classBooking is null) throw new NotFoundException($"The resource with id: {id} cannot been found.");
             _uow.Repository<ClassBooking>().Delete(classBooking);
             await _uow.SaveAsync();
+        }
+
+        public async Task<ClassBookingResponse> GetBookedClassAsync(Guid bookingId)
+        {
+            var bookedClass = await _uow.Repository<ClassBooking>()
+                .With(c => c.Class, c => c.Class.ClassCalendars, c => c.Class.Teacher)
+                .FirstOrDefaultAsync(c => c.Id == bookingId);
+            if (bookedClass is null) throw new NotFoundException($"The resource with id: {bookingId} cannot been found.");
+           var c = _mapper.Map<ClassBookingResponse>(bookedClass);
+            return c;
         }
     }
 }

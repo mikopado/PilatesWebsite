@@ -11,6 +11,6 @@ namespace PilatesWebApi.Application.DTO.Responses
         public UserResponse User { get; set; }
         public MemberResponse Member { get; set; }
         public MembershipResponse Membership { get; set; }
-        public IEnumerable<ClassCalendarResponse> Classes { get; set; }
+        public IEnumerable<ClassBookingResponse> Classes { get; set; }
     }
 }

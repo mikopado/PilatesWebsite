@@ -19,10 +19,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { SuccessDialogComponent } from './weekly-calendar/dialogs/success-dialog/success-dialog.component';
+import { FailDialogComponent } from './weekly-calendar/dialogs/fail-dialog/fail-dialog.component';
 
 
 @NgModule({
-  declarations: [ClassesListComponent, YogaTypeComponent, PilatesTypeComponent, ComboTypeComponent, WeeklyCalendarComponent, DayCalendarComponent, BookingDialogComponent],
+  declarations: [ClassesListComponent, YogaTypeComponent, PilatesTypeComponent, ComboTypeComponent, WeeklyCalendarComponent, DayCalendarComponent, BookingDialogComponent, SuccessDialogComponent, FailDialogComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,

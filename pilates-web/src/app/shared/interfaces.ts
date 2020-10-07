@@ -11,6 +11,17 @@ export interface IClass {
     room: string
 }
 
+export interface IClassBooking {
+    id: string,
+    type: ClassType,
+    level: ClassLevel,
+    teacher: ITeacher,
+    date: Date,
+    startingTime: string,
+    endingTime: string,
+    room: string
+}
+
 export enum ClassType{
     Yoga,
     Pilates,
@@ -27,7 +38,7 @@ export interface IUserMemberResponse {
     user: IUser,
     member: IMember,
     membership: IMembership,
-    classes: IClass[]
+    classes: IClassBooking[]
 }
 
 export interface IMember{

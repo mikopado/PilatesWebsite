@@ -10,5 +10,7 @@ namespace PilatesWebApi.Application.Services
     {
         Task<UserMemberResponse> GetAsync(Guid Id);
         Task RegisterUserAsync(RegisterUserRequest userRequest);
+        Task<ClassBookingResponse> GetBookedClassAsync(Guid bookingId);
+        
     }
 }

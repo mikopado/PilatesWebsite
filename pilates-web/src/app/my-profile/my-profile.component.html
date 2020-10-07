@@ -70,18 +70,20 @@
         <section *ngIf="(classesBooked$ | async)" class="round-border fill-area scrollable">
         <div *ngFor="let cls of (classesBooked$ | async)">
         <mat-grid-list cols="6" rowHeight="50px">
-            <mat-grid-tile>{{cls.day}}</mat-grid-tile>   
+            <mat-grid-tile>{{cls.date}}</mat-grid-tile>   
             <mat-grid-tile>{{cls.timeslot}}</mat-grid-tile>
             <mat-grid-tile>{{cls.classType}}</mat-grid-tile>
             <mat-grid-tile>{{cls.teacher}}</mat-grid-tile>
             <mat-grid-tile>{{cls.room}}</mat-grid-tile>
-            <mat-grid-tile><button mat-button color="primary">Cancel</button></mat-grid-tile>
+            <mat-grid-tile>
+                <button mat-button color="primary" (click)="cancelClassBooking(cls.classId)">Cancel</button>
+            </mat-grid-tile>
           </mat-grid-list>
           <mat-divider></mat-divider> 
         </div> 
     </section>       
     </div>
-        <mat-divider class="divider-section wd-80"></mat-divider>
+        <mat-divider class="divider-section wd-90"></mat-divider>
         <div class="extra-section">
         <h3>Active Membership</h3>
         <div class="round-border" *ngIf="(userService.userMembership$ | async)" >
@@ -90,7 +92,7 @@
         </div>
         <div class="round-border" *ngIf="!(userService.userMembership$ | async)" >
             <div fxLayoutAlign="center">You do not have any active Membership</div>
-            <div fxLayoutAlign="center" ><button mat-button color="primary">Purchase one</button></div>
+            <div fxLayoutAlign="center"><button mat-button color="primary" [routerLink]="['/memberships']">Purchase one</button></div>
         </div>
     </div>
     </div>

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { IClass } from 'src/app/shared/interfaces';
+import { DayOfWeek } from 'src/app/classes/class-type/models/week-plan';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -10,6 +10,8 @@ import { IClass } from 'src/app/shared/interfaces';
 })
 export class BookingDialogComponent implements OnInit {
   form: FormGroup;
+  minDate: Date;
+  maxDate: Date;
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<BookingDialogComponent>,
@@ -18,11 +20,11 @@ export class BookingDialogComponent implements OnInit {
     this.form = fb.group({
       date: ['', Validators.required],
     });
-
+    this.minDate = new Date();
+    this.maxDate = new Date(this.minDate.getFullYear() + 1, 11, 31);
   }
-  // Find a way to select only date related to the week day selected and ignore the rest. 
-  //As well as ignoring past weeks
-  ngOnInit(): void {
+ 
+  ngOnInit(): void {   
   }
 
   book() {
@@ -31,5 +33,11 @@ export class BookingDialogComponent implements OnInit {
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  dateFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    const dayOfClass = parseInt(DayOfWeek[this.data.day]);
+    return day === dayOfClass;
   }
 }

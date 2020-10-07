@@ -5,11 +5,12 @@ export interface IWeekPlan {
 
 export interface IClassTimetable{
     classId: string,
-    day: string,
+    day?: string,
     timeslot: string,
     room: string,
     teacher: string,
-    classType: string
+    classType: string,
+    date?: string
 }
 
 export enum DayOfWeek {

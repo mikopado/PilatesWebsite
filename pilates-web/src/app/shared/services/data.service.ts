@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AppConfigService } from '../../core/app-config.service';
-import { IClass, IApiResponse, IMembership, IUser, IUserMemberResponse, IRegisterMember } from '../interfaces';
+import { IClass, IApiResponse, IMembership, IUser, IUserMemberResponse, IRegisterMember, IClassBooking } from '../interfaces';
 import { throwError } from 'rxjs';
 
 
@@ -67,6 +67,14 @@ export class DataService {
         var endpoint = '/api/classes/booking';        
         return this.http.delete<IApiResponse<any>>(this.configService.settings.apiUrl + endpoint, 
             {params: {id: classBookingId}}
+            )
+            .pipe(catchError(this.handleError));
+    }
+
+    getBookedClass(bookingId: string): Observable<IApiResponse<IClassBooking>>{
+        var endpoint = '/api/user/classes';        
+        return this.http.get<IApiResponse<IClassBooking>>(this.configService.settings.apiUrl + endpoint, 
+            {params: {id: bookingId}}
             )
             .pipe(catchError(this.handleError));
     }

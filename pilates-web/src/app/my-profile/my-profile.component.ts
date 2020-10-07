@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
-import { IClass, ClassType } from '../shared/interfaces';
-import { AuthenticationService } from '../shared/services/authenticationService';
-import { DataService } from '../shared/services/data.service';
+import { ClassType, IClassBooking } from '../shared/interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IClassTimetable, DayOfWeek } from '../classes/class-type/models/week-plan';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,8 +22,6 @@ export class MyProfileComponent implements OnInit {
 
   constructor(
     public userService: UserService, 
-    private authService: AuthenticationService, 
-    private dataService: DataService,
     private formBuilder: FormBuilder) { }
 
   get f() { return this.editUserForm.controls; }
@@ -45,14 +42,14 @@ export class MyProfileComponent implements OnInit {
   private initializeUserDetails() {    
       this.getBookingClasses(this.userService.userClasses$.getValue());
       this.userService.userMember$.subscribe(user => this.editUserForm.patchValue({...user}));
-  }
+  } 
   
 
-  private getBookingClasses(classes: IClass[]){
+  private getBookingClasses(classes: IClassBooking[]){
     if(classes !== null && classes.length > 0){
       this.classesBooked$.next(
         classes
-        .sort((a, b) => a.weekDay - b.weekDay)
+        .sort((a, b) => a.date.valueOf() - b.date.valueOf())
         .map(
             cls =>          
               ({
@@ -60,10 +57,18 @@ export class MyProfileComponent implements OnInit {
                 room: cls.room,
                 teacher: cls.teacher.firstName.concat(' ', cls.teacher.lastName),
                 timeslot: cls.startingTime.slice(0, cls.startingTime.lastIndexOf(':')).concat(' - ', cls.endingTime.slice(0, cls.endingTime.lastIndexOf(':'))),
-                day: DayOfWeek[cls.weekDay]
+                date: new Date(cls.date).toDateString().slice(0, new Date(cls.date).toDateString().lastIndexOf(' ')),
+                classId: cls.id
             } as IClassTimetable)
         ))
     }    
+  }
+
+  cancelClassBooking(classBookingId: string){
+    this.userService.cancelClassBooking(classBookingId)
+    .pipe(
+      map(m => this.getBookingClasses(this.userService.userClasses$.getValue()))
+    ).subscribe()
   }
 
   onSubmit() {
