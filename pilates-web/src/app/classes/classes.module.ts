@@ -21,6 +21,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { SuccessDialogComponent } from './weekly-calendar/dialogs/success-dialog/success-dialog.component';
 import { FailDialogComponent } from './weekly-calendar/dialogs/fail-dialog/fail-dialog.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { FailDialogComponent } from './weekly-calendar/dialogs/fail-dialog/fail-
     MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    SharedModule
   ],
   providers: [ClassesService, {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from 'src/app/core/models/card';
 import { MembershipsService } from '../memberships.service';
 
 @Component({
@@ -9,10 +8,13 @@ import { MembershipsService } from '../memberships.service';
 })
 export class MembershipListComponent implements OnInit {
 
+  loading: boolean = false;
   constructor(public readonly membershipService: MembershipsService) { }
 
   ngOnInit(): void {
-    this.membershipService.getMembershipCards();    
+    this.loading = true;
+    this.membershipService.getMembershipCards()
+    .subscribe(res => { this.membershipService.membershipCards$.next(res); this.loading = false;});;    
   }
 
 }

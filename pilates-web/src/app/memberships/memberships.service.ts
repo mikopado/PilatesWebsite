@@ -19,7 +19,7 @@ export class MembershipsService {
     constructor() {}
 
     getMembershipCards(){
-        this.memberships$.pipe(
+        return this.memberships$.pipe(
             map(memberships =>                  
                     memberships.map(m => {
                         const membDetails = MembershipExtraDetails.find(
@@ -33,6 +33,6 @@ export class MembershipsService {
                         } as MembershipCard)
                     })  
                 )
-        ).subscribe(res => this.membershipCards$.next(res));
+        )
     }
 }

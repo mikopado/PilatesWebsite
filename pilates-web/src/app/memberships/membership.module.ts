@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -28,7 +29,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCheckboxModule,
     FlexLayoutModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })

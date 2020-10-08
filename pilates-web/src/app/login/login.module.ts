@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 import { SignOutComponent } from './signout/signout.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -29,7 +30,8 @@ import { SignOutComponent } from './signout/signout.component';
     MatCheckboxModule,
     FlexLayoutModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })

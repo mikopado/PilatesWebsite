@@ -21,7 +21,6 @@ export class MembershipComponent implements OnInit {
   error = '';
   membership: IUserMembership;
   membershipId: string;
-  user: any; 
   justRegistered = false;
   alreadyMember = false;
 
@@ -55,10 +54,7 @@ export class MembershipComponent implements OnInit {
       }
     })
       ).subscribe();
-    });
-
-    this.authService.currentAuthenticatedUser()
-      .then(u => this.user = u.userAttributes);
+    });   
 
     this.checkMember();
   }
@@ -94,9 +90,9 @@ export class MembershipComponent implements OnInit {
       firstName: this.f.firstName.value,
       lastName: this.f.lastName.value,
       membershipId: this.membershipId,
-      userId: this.user.sub
+      userId: this.authService.currentUser$.getValue().id
     } as IRegisterMember
-    this.userService.registerUserMember(member, this.user.email, this.membership) 
+    this.userService.registerUserMember(member, this.authService.currentUser$.getValue().email, this.membership) 
       .pipe(
         tap(c => {this.justRegistered = true; this.loading = false;}),
         catchError(err => { this.loading = false; this.error = err.message; return of() })

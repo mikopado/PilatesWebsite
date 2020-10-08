@@ -15,7 +15,6 @@ import { DataService } from './shared/services/data.service';
 import { AuthenticationService } from './shared/services/authenticationService';
 import { AuthGuard } from './shared/services/auth-guard.service';
 import { TokenInterceptor } from './shared/services/token.interceptor';
-import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MyProfileModule } from './my-profile/my-profile.module';
 import { UserService } from './shared/services/user.service';
 

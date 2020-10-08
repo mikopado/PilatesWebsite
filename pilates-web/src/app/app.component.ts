@@ -27,12 +27,10 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.authenticationService.currentAuthenticatedUser()
     .then(res => { 
-      this.authenticationService.isAuthenticatedUser$.next(res.isAuthenticated);
-      if(res.userAttributes !== undefined){
+      if(res.userAttributes !== null){
         this.dataService.getUser(res.userAttributes.sub).pipe(  
           map(user => { 
             this.getUserMembership(user.result.membership);
-            console.log(user.result.classes);
             this.userService.userClasses$.next(user.result.classes);
             if(user.result.member !== undefined){
               this.userService.userMember$.next({

@@ -18,7 +18,7 @@ export class ClassesService {
     constructor() { }
 
     getClassList() {
-        this.classes$
+        return this.classes$
             .pipe(
                 map(
                     classes =>
@@ -30,7 +30,7 @@ export class ClassesService {
                                     imageUrl: ClassExtraDetails.find(c => c.name === ClassType[cls.type].toLowerCase()).imageLink
                                 } as Card))
                 )
-            ).subscribe(res => this.classesList$.next(res));
+            )
     }
 
     getClassTypeDetails(clsName: string) {

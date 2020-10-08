@@ -90,6 +90,7 @@ export interface IRegisterMember{
 
 export interface IApiResponse<T>{
     result: T,
-    statusCode: number
+    statusCode: number,
+    message: string
 }
 

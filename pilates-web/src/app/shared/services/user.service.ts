@@ -33,22 +33,18 @@ export class UserService {
         )
     }
 
-    bookClass(classId: string, date: Date){
-        return this.authService.currentAuthenticatedUser()
-        .then(res => {
-            this.dataService.bookClass(classId, res.userAttributes.sub, date)
+    bookClass(classId: string, date: Date){         
+        return this.dataService.bookClass(classId, this.authService.currentUser$.getValue().id, date)
             .pipe(
-                map(response => 
+                map(response =>
                     this.dataService.getBookedClass(response.result)
-                    .pipe(
-                         map(r => {               
-                             this.userClasses$.next([...this.userClasses$.getValue(), r.result])
+                        .pipe(
+                            map(r => {
+                                this.userClasses$.next([...this.userClasses$.getValue(), r.result])
                             })
-                    ).subscribe()
+                        )
                 )
-            ).subscribe()
-        })
-        
+            )
     }
 
     cancelClassBooking(classBookingId: string){

@@ -15,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatGridListModule,
     MatTableModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SharedModule
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })
