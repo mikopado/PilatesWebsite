@@ -1,6 +1,16 @@
-<div id="background">
-    <div class="centered">
-        <h1 class="mat-display-4">Pilates & Yoga</h1>
-        <h3 class="mat-h3" style="text-align: center;">Exercise your mind and your body in ....</h3>
-    </div>
-</div>  
+<ngb-carousel
+    #carousel
+    [showNavigationArrows]="true" 
+    [showNavigationIndicators]="true"
+    interval="4000"
+    [keyboard]="true"
+    [wrap]="true"
+    [pauseOnHover]="false">
+    <ng-template *ngFor="let item of images" ngbSlide >
+        <div class="full-wd tile" [style.background]="'url(' + item.img + ')'">
+        </div>
+        <div class="carousel-caption">
+            <p>{{item.text}}</p>
+        </div>
+    </ng-template>    
+</ngb-carousel>

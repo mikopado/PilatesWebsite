@@ -27,8 +27,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button> 
-        <img src="../../../assets/logo.png" alt="logo" style="height:60%">
-        <h1>Pilates</h1>
+        <img src="../../../assets/logo.png" alt="logo" style="height:100%">        
         <span class="menu-spacer fill-space"></span>
         <div *ngIf="!(isHandset$ | async)" >
       <ng-container *ngFor="let menuItem of menuItems">
