@@ -7,10 +7,11 @@
     [wrap]="true"
     [pauseOnHover]="false">
     <ng-template *ngFor="let item of images" ngbSlide >
-        <div class="full-wd tile" [style.background]="'url(' + item.img + ')'">
-        </div>
+        <div class="full-wd tile" [style.background]="'url(' + item.img + ')'">        
         <div class="carousel-caption">
-            <p>{{item.text}}</p>
+            <p class="quote">{{item.text}}</p>
+            <p class="author">{{item.author}}</p>
         </div>
+    </div>
     </ng-template>    
 </ngb-carousel>

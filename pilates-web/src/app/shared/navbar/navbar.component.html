@@ -31,7 +31,7 @@
         <span class="menu-spacer fill-space"></span>
         <div *ngIf="!(isHandset$ | async)" >
       <ng-container *ngFor="let menuItem of menuItems">
-        <a *ngIf="menuItem.isStatic || menuItem.isLogout === (authService.isAuthenticatedUser$ | async)" 
+        <a class="underline" *ngIf="menuItem.isStatic || menuItem.isLogout === (authService.isAuthenticatedUser$ | async)" 
           mat-button
           [routerLink]="[menuItem.path]">
           <span>{{menuItem.title}}</span>

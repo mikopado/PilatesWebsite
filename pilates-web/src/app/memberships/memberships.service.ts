@@ -19,15 +19,18 @@ export class MembershipsService {
     constructor() {}
 
     getMembershipCards(){
+        let details = [];
         return this.memberships$.pipe(
             map(memberships =>                  
-                    memberships.map(m => {
+                    memberships.sort((a,b) => a.classType - b.classType)
+                    .map(m => {
                         const membDetails = MembershipExtraDetails.find(
                             md => md.name.charAt(0).toUpperCase() + md.name.slice(1) === ClassType[m.classType]
                         );
+                        details.push(membDetails);
                         return ({
                             title: ClassType[m.classType],
-                            imageUrl: membDetails.imageLink,
+                            imageUrl: details.filter(m => m.name === membDetails.name).length === 1 ? membDetails.imageLink[0] : membDetails.imageLink[1],
                             description: MembershipType[m.type] + membDetails.description,
                             id: m.id
                         } as MembershipCard)

@@ -5,7 +5,7 @@
             <mat-card-content [routerLink]="[card.title.toLowerCase(), card.id]" >
                 <img mat-card-image [src]="card.imageUrl">
                 <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                    <span>{{card.description}}</span>
+                    <span class="spacing">{{card.description}}</span>
                 </mat-card-title>
             </mat-card-content>
         </mat-card>
