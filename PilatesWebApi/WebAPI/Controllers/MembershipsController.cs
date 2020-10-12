@@ -49,16 +49,6 @@ namespace PilatesWebApi.WebAPI.Controllers
             if (memberships is null) return NotFound(new ApiResponse(HttpStatusCode.NotFound, "No memberships have been found!"));
             return Ok(new ApiResponse(HttpStatusCode.OK, memberships));
 
-        }
-
-        //[HttpGet("{membershipType:string?}/{classType:string?}")]
-        //public async Task<IActionResult> GetMemberships(string membershipType = null, string classType = null)
-        //{
-        //    // TODO adding membershiptype and classType
-        //    var memberships = await _membershipService.GetMembershipsAsync();
-        //    if (memberships is null) return NotFound(new ApiResponse(HttpStatusCode.NotFound, "No memberships have been found!"));
-        //    return Ok(new ApiResponse(HttpStatusCode.OK, memberships));
-
-        //}
+        }       
     }
 }

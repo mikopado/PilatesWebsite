@@ -16,6 +16,7 @@ import { SignOutComponent } from './login/signout/signout.component';
 import { AuthGuard } from './shared/services/auth-guard.service';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MembershipComponent } from './memberships/membership/membership.component';
+import { AboutComponent } from './about/about.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    component: PageNotFoundComponent,
+    component: AboutComponent,
     data: {
       title: 'About',
       icon: 'home',

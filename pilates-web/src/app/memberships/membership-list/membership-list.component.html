@@ -4,9 +4,9 @@
         <mat-card class="card-picture" *ngFor="let card of membershipService.membershipCards$ | async" fxFlex="30">
             <mat-card-content [routerLink]="[card.title.toLowerCase(), card.id]" >
                 <img mat-card-image [src]="card.imageUrl">
-                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                    <span class="spacing">{{card.description}}</span>
-                </mat-card-title>
+                <mat-card-subtitle fxLayout.gt-xs="row" fxLayout.xs="column">
+                    <span class="spacing card-title-font">{{card.description}}</span>
+                </mat-card-subtitle>
             </mat-card-content>
         </mat-card>
     </div>

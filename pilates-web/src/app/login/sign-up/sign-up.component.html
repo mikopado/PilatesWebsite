@@ -1,14 +1,14 @@
 <div>
     <mat-card *ngIf="!isCodeVerified" class="card">
         <mat-card-header fxLayoutAlign="center">
-            <mat-card-title class="card-header">Sign Up</mat-card-title>
+            <mat-card-title class="card-head">Sign Up</mat-card-title>
         </mat-card-header>
         <mat-card-content class="card-body">
             <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
                         <input matInput placeholder="Email" type="email" formControlName="email"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                             <mat-icon matSuffix class="icons mr-icons">email</mat-icon>
                             <mat-error *ngIf="submitted && f.email.errors">
                                 Please enter a valid email address
@@ -21,14 +21,14 @@
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
                         <input matInput placeholder="Confirm Email" type="email" formControlName="confirmEmail"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
+                            [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
                             <mat-icon matSuffix class="icons mr-icons"> email</mat-icon>
                     </mat-form-field>                  
                 </div>
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
                         <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                   <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon class="icons mr-icons">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </button>
@@ -55,14 +55,14 @@
     </mat-card>
     <mat-card *ngIf="isCodeVerified" class="card">
         <mat-card-header fxLayoutAlign="center">
-            <mat-card-title class="card-header">Verification Code Form</mat-card-title>
+            <mat-card-title class="card-head">Verification Code Form</mat-card-title>
         </mat-card-header>
         <mat-card-content class="card-body">
         <form [formGroup]="verifyCodeForm" (ngSubmit)="onSubmitCode()" fxLayout="column" fxLayoutAlign="center center">
             <div class="form-group" fxLayoutAlign="center center">
                 <mat-form-field class="form-field">
                     <input matInput placeholder="Email" type="text" formControlName="email"
-                        class="form-control" [ngClass]="{ 'is-invalid': submitted && fcode.email.errors }" />
+                       [ngClass]="{ 'is-invalid': submitted && fcode.email.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">email</mat-icon>
                         <mat-error *ngIf="submitted && fcode.email.errors">
                             Please enter a valid email address
@@ -75,7 +75,7 @@
             <div class="form-group" fxLayoutAlign="center center">
                 <mat-form-field class="form-field">
                     <input matInput placeholder="Verification Code" type="text" formControlName="verificationCode"
-                        class="form-control" [ngClass]="{ 'is-invalid': submitted && fcode.verificationCode.errors }" />
+                        [ngClass]="{ 'is-invalid': submitted && fcode.verificationCode.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">vpn_key</mat-icon>                        
                 </mat-form-field>                   
             </div>

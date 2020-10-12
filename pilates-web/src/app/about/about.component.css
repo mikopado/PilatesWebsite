@@ -1,0 +1,19 @@
+.banner{
+    width: 100%;
+    height: 45vh;
+    background: url('../../assets/about1.jpg') no-repeat;
+    background-size: cover;
+}
+.logo-font{
+    font-family: 'Sniglet', cursive;
+    color: #EAAC8B;
+}
+.content{
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+.content p{
+    line-height: 3rem;
+    width: 80%;
+}

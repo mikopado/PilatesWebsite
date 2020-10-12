@@ -4,7 +4,7 @@
     margin-bottom: 18%;
   }
   .card-picture {
-    width: 23%;
+    width: 30%;
     margin-bottom: 2%;
   }
   .clickable{
@@ -16,7 +16,12 @@
   }
   .title{
     text-align: center;
-    margin-top: 1%;
-    font-size: xx-large;
+    margin-top: 3%;
+    font-size: 2.5em;
+    color: teal;
   }
+  .card-title-font{
+    font-size: 1.5em;
+  }
+  
        

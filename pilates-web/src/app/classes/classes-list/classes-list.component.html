@@ -4,9 +4,9 @@
         <mat-card class="card-picture clickable" *ngFor="let card of classesService.classesList$ | async"
             [routerLink]="[card.title.toLowerCase()]">
             <img mat-card-image [src]="card.imageUrl">
-            <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
-                <span fxFlex="80%">{{card.title}}</span>
-            </mat-card-title>
+            <mat-card-subtitle fxLayout.gt-xs="row" fxLayout.xs="column">
+                <span fxFlex="80%" class="card-title-font">{{card.title}}</span>
+            </mat-card-subtitle>
         </mat-card>
     </div>
 </div>

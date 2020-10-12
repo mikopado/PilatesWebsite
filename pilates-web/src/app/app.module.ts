@@ -17,6 +17,7 @@ import { AuthGuard } from './shared/services/auth-guard.service';
 import { TokenInterceptor } from './shared/services/token.interceptor';
 import { MyProfileModule } from './my-profile/my-profile.module';
 import { UserService } from './shared/services/user.service';
+import { AboutModule } from './about/about.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UserService } from './shared/services/user.service';
     LoginModule,
     MembershipModule,  
     BrowserAnimationsModule,
-    MyProfileModule
+    MyProfileModule,
+    AboutModule
   ],
   providers: [
     AppConfigService,

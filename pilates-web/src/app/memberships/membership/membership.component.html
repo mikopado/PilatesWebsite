@@ -4,7 +4,7 @@
         <br>You already have an active membership. 
         <br>Enjoy your membership! 
        <br>Then you can dive into new experience with
-       <br><span class="font-big">YogaMe</span>
+       <br><span class="font-big logo-font">Yoga me</span>
    </h1>
 </div>
 </div>
@@ -13,7 +13,7 @@
     <h1><span class="font-big">Congratulations!</span>
         <br>You have just registered 
         <br>for {{membership.period}} of {{membership.classType}} 
-       <br><span class="font-big">Welcome on YogaMe!</span>
+       <br><span class="font-big">Welcome on <span class="logo-font">Yoga me!</span></span>
    </h1>
 </div>
 </div>
@@ -29,21 +29,21 @@
 <div *ngIf="!justRegistered || !alreadyMember">
     <mat-card class="card">
         <mat-card-header fxLayoutAlign="center">
-            <mat-card-title class="card-header">Membership Form</mat-card-title>
+            <mat-card-title class="card-head">Membership Form</mat-card-title>
         </mat-card-header>
         <mat-card-content class="card-body">
             <form [formGroup]="memberForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="center center">
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
                         <input matInput placeholder="First Name" type="text" formControlName="firstName"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
                     </mat-form-field>
                 </div>
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
                         <input matInput placeholder="Last Name" type="text" formControlName="lastName"
-                            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">person</mat-icon>
                     </mat-form-field>
                 </div>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group" fxLayoutAlign="center center">
                     <mat-form-field class="form-field">
-                        <input matInput placeholder="City" type="text" formControlName="city" class="form-control"
+                        <input matInput placeholder="City" type="text" formControlName="city"
                             [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
                         <mat-icon matSuffix class="icons mr-icons">location_city</mat-icon>
                     </mat-form-field>

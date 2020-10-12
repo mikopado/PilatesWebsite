@@ -12,7 +12,6 @@ export class MembershipListComponent implements OnInit {
   constructor(public readonly membershipService: MembershipsService) { }
 
   ngOnInit(): void {
-    this.loading = true;
     this.membershipService.getMembershipCards()
     .subscribe(res => { this.membershipService.membershipCards$.next(res); this.loading = false;});;    
   }

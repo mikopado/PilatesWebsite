@@ -24,3 +24,6 @@
 .underline{
   text-decoration: none;
 }
+a.underline:hover{
+  color: white;
+}
