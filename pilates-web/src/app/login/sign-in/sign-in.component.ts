@@ -3,10 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authenticationService';
 import { DataService } from 'src/app/shared/services/data.service';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ClassType, IMembership, IUserMembership } from 'src/app/shared/interfaces';
 import { MembershipType } from 'src/app/memberships/models/membership-type';
+import { SpinnerService } from 'src/app/core/spinner.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -16,7 +17,6 @@ import { MembershipType } from 'src/app/memberships/models/membership-type';
 export class SignInComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading = false;
   submitted = false;
   returnUrl: string;
   error = '';  
@@ -27,7 +27,8 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private dataService: DataService,
-    private userService: UserService
+    private userService: UserService,
+    public spinnerService: SpinnerService
   ) {    
   }
 
@@ -51,16 +52,16 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.spinnerService.startLoading();
     this.authenticationService.signIn(this.f.username.value, this.f.password.value)
     .then((user) => {
       this.dataService.getUser(user.attributes.sub)
       .pipe(
+        finalize(() => this.spinnerService.stopLoading()),
         map(res =>  { 
           this.userService.userMember$.next({ ...res.result.member, email: res.result.user.email });
           this.getUserMembership(res.result.membership);
           this.userService.userClasses$.next(res.result.classes);
-          this.loading = false;
           this.router.navigate([this.returnUrl]); 
         } )
       )
@@ -68,7 +69,7 @@ export class SignInComponent implements OnInit {
     })
     .catch(err => {
       this.error = err.message;
-      this.loading = false;
+      this.spinnerService.stopLoading()
     });    
        
   }

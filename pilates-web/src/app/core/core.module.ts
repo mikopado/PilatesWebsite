@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { EnsureModuleLoadedOnceGuard } from './ensure-module-loaded-once-guard';
 import { AppConfigService } from './app-config.service';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinnerService } from './spinner.service';
 
 export function appInitializer(
   appConfigService: AppConfigService,
@@ -13,11 +16,13 @@ export function appInitializer(
 }
 
 @NgModule({
-  declarations: [FooterComponent],
+  declarations: [FooterComponent, SpinnerComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressSpinnerModule
   ],
-  exports: [FooterComponent]
+  providers: [SpinnerService],
+  exports: [FooterComponent, SpinnerComponent]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard { // Ensure CoreModule is only loaded into AppModule
 

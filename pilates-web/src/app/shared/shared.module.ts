@@ -10,14 +10,13 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { MenuService } from './services/menuService';
-import { SpinnerComponent } from './spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, PageNotFoundComponent, SpinnerComponent],
+  declarations: [NavbarComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     LayoutModule,
@@ -30,6 +29,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatProgressSpinnerModule
   ],
   providers: [MenuService],
-  exports: [NavbarComponent, PageNotFoundComponent, SpinnerComponent]
+  exports: [NavbarComponent, PageNotFoundComponent]
 })
 export class SharedModule { }

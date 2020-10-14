@@ -53,8 +53,8 @@
             </mat-form-field>
         </div>  
         <div class="form-group save-btn">
-            <button mat-raised-button color="primary" [disabled]="loading || !isEdit">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <button mat-raised-button color="primary" [disabled]="(spinnerService.loading$ | async) || !isEdit">
+                <span *ngIf="(spinnerService.loading$ | async)" class="spinner-border spinner-border-sm mr-1"></span>
                 Save
                 <mat-icon class="save-icon">save_alt</mat-icon>
             </button>
@@ -97,4 +97,3 @@
     </div>
     </div>
 </div>
-<app-spinner [show]="loading"></app-spinner>

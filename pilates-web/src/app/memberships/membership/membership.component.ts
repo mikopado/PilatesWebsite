@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, finalize, map, tap } from 'rxjs/operators';
+import { SpinnerService } from 'src/app/core/spinner.service';
 import { ClassType, IRegisterMember, IUserMembership } from 'src/app/shared/interfaces';
 import { AuthenticationService } from 'src/app/shared/services/authenticationService';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -16,7 +17,6 @@ import { MembershipType } from '../models/membership-type';
 })
 export class MembershipComponent implements OnInit {
   memberForm: FormGroup;
-  loading = false;
   submitted = false;
   error = '';
   membership: IUserMembership;
@@ -28,7 +28,8 @@ export class MembershipComponent implements OnInit {
     private activatedRoute: ActivatedRoute, 
     private membershipService: MembershipsService,
     private userService: UserService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    public spinnerService: SpinnerService
     ) { 
   }
 
@@ -82,7 +83,7 @@ export class MembershipComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.spinnerService.startLoading();
     const member = {
       address: this.f.address.value,
       city: this.f.city.value,
@@ -94,8 +95,8 @@ export class MembershipComponent implements OnInit {
     } as IRegisterMember
     this.userService.registerUserMember(member, this.authService.currentUser$.getValue().email, this.membership) 
       .pipe(
-        tap(c => {this.justRegistered = true; this.loading = false;}),
-        catchError(err => { this.loading = false; this.error = err.message; return of() })
+        finalize(() => {this.justRegistered = true; this.spinnerService.stopLoading();}),
+        catchError(err => { this.error = err.message; return of() })
         )
         .subscribe();          
   }

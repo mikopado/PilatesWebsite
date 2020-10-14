@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authenticationService';
 import { DataService } from 'src/app/shared/services/data.service';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, tap, finalize } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { SpinnerService } from 'src/app/core/spinner.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +15,6 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   verifyCodeForm: FormGroup;
-  loading = false;
   submitted = false;
   returnUrl: string;
   error = '';
@@ -26,7 +26,8 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private dataService: DataService
+    private dataService: DataService,
+    public spinnerService: SpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -55,21 +56,21 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.spinnerService.startLoading();
     this.authenticationService.signUp(this.f.email.value, this.f.password.value)
     .then(response => {
       this.isCodeVerified = true; 
       //TODO Create user to DB. Call Api 
       this.dataService.registerUser({ id: response.userSub, email: response.user.getUsername()})
       .pipe(
-        tap(resp => this.loading = false ),
-        catchError(err =>  { this.loading = false; this.error = err.message; return throwError(err); })
+        finalize(() => this.spinnerService.stopLoading() ),
+        catchError(err =>  { this.error = err.message; return throwError(err); })
         )
         .subscribe();
     })
     .catch(err => {
       this.error = err.message; 
-      this.loading = false
+      this.spinnerService.stopLoading();
     });        
   }
 
@@ -79,14 +80,14 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.spinnerService.startLoading();
     this.authenticationService.verifyCode(this.fcode.email.value, this.fcode.verificationCode.value)
     .then(response => { 
       this.router.navigate([this.returnUrl]);
     })
     .catch(err => { 
       this.codeError = err.message; 
-      this.loading = false;
+      this.spinnerService.stopLoading();
     });        
   }
 

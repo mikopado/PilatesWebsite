@@ -8,14 +8,12 @@ import { ClassesService } from '../classes-service';
 })
 export class ClassesListComponent implements OnInit {
 
-  loading: boolean = false;
   constructor(public readonly classesService: ClassesService) { 
   }
 
   ngOnInit(): void {
-    this.loading = true;
     this.classesService.getClassList()
-    .subscribe(res =>{ this.classesService.classesList$.next(res); this.loading = false }); 
+    .subscribe(res =>{ this.classesService.classesList$.next(res); }); 
   }
 
 }

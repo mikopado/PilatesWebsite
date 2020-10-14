@@ -73,8 +73,8 @@
                     </mat-form-field>
                 </div>
                 <div class="signup-btn">
-                    <button mat-raised-button color="primary" [disabled]="loading">
-                        <span *ngIf="loading" class="spinner-border"></span>
+                    <button mat-raised-button color="primary" [disabled]="(spinnerService.loading$ | async)">
+                        <span *ngIf="(spinnerService.loading$ | async)" class="spinner-border"></span>
                         Checkout
                     </button>
                 </div>
@@ -83,4 +83,3 @@
         </mat-card-content>
     </mat-card>
 </div>
-<app-spinner [show]="loading"></app-spinner>

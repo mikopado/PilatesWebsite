@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IClassTimetable, DayOfWeek } from '../classes/class-type/models/week-plan';
 import { map, skipWhile, tap } from 'rxjs/operators';
+import { SpinnerService } from '../core/spinner.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -15,14 +16,14 @@ export class MyProfileComponent implements OnInit {
   
   editUserForm: FormGroup;
   submitted = false;
-  loading = false;
   error = '';  
   isEdit = false;
   public classesBooked$ = new BehaviorSubject<IClassTimetable[]>(null);
 
   constructor(
     public userService: UserService, 
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    public spinnerService: SpinnerService) { }
 
   get f() { return this.editUserForm.controls; }
 
@@ -74,7 +75,7 @@ export class MyProfileComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.loading = true;
+    this.spinnerService.startLoading();
     // stop here if form is invalid
     if (this.editUserForm.invalid) {
       return;
