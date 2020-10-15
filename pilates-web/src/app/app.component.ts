@@ -4,9 +4,10 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from './core/app-config.service';
 import { DataService } from './shared/services/data.service';
 import { UserService } from './shared/services/user.service';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { ClassType, IMember, IMembership, IUserMembership } from './shared/interfaces';
 import { MembershipType } from './memberships/models/membership-type';
+import { SpinnerService } from './core/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -19,16 +20,19 @@ export class AppComponent implements OnInit {
     private httpClient: HttpClient, 
     private configService: AppConfigService,
     private dataService: DataService,
-    private userService: UserService) {
+    private userService: UserService,
+    private spinnerService: SpinnerService) {
     // To Warm up the Lambda Api
     this.httpClient.get(this.configService.settings.apiUrl + '/api/Health').subscribe();
   }
   
   ngOnInit(): void {
+    this.spinnerService.startLoading();
     this.authenticationService.currentAuthenticatedUser()
     .then(res => { 
       if(res.userAttributes !== null){
         this.dataService.getUser(res.userAttributes.sub).pipe(  
+          finalize(() => this.spinnerService.stopLoading()),
           map(user => { 
             this.getUserMembership(user.result.membership);
             this.userService.userClasses$.next(user.result.classes);

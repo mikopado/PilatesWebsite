@@ -17,6 +17,7 @@ import { AuthGuard } from './shared/services/auth-guard.service';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MembershipComponent } from './memberships/membership/membership.component';
 import { AboutComponent } from './about/about.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 const routes: Routes = [
@@ -68,7 +69,7 @@ const routes: Routes = [
   },
   {
     path: 'contactus',
-    component: PageNotFoundComponent,
+    component: ContactUsComponent,
     data: {
       title: 'Contact Us',
       icon: 'contact_support',

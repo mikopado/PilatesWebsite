@@ -1,4 +1,4 @@
-<div class="ice-cold-gradient full-wd" *ngIf="alreadyMember" fxLayoutAlign="center center">
+<div class="ice-cold-gradient full-wd" *ngIf="alreadyMember && !justRegistered" fxLayoutAlign="center center">
     <div class="text-wrapper">    
     <h1><span class="font-big">Sorry!</span>
         <br>You already have an active membership. 
@@ -8,7 +8,7 @@
    </h1>
 </div>
 </div>
-<div class="ice-cold-gradient full-wd" *ngIf="justRegistered && !alreadyMember" fxLayoutAlign="center center">
+<div class="ice-cold-gradient full-wd" *ngIf="justRegistered" fxLayoutAlign="center center">
     <div class="text-wrapper">    
     <h1><span class="font-big">Congratulations!</span>
         <br>You have just registered 
@@ -17,7 +17,7 @@
    </h1>
 </div>
 </div>
-<div class="ice-cold-gradient" fxLayoutAlign="center" *ngIf="!justRegistered || !alreadyMember">
+<div class="ice-cold-gradient" fxLayoutAlign="center" *ngIf="!alreadyMember">
     <div class="text-wrapper">
     <h1 fxLayoutAlign="center">You are one step closer from enjoying a relaxing course of {{membership.classType}}
          <br>for the duration of {{membership.period}} 
@@ -26,7 +26,7 @@
     </h1>    
 </div>
 </div>
-<div *ngIf="!justRegistered || !alreadyMember">
+<div *ngIf="!alreadyMember">
     <mat-card class="card">
         <mat-card-header fxLayoutAlign="center">
             <mat-card-title class="card-head">Membership Form</mat-card-title>

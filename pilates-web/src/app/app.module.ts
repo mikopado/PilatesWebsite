@@ -18,6 +18,7 @@ import { TokenInterceptor } from './shared/services/token.interceptor';
 import { MyProfileModule } from './my-profile/my-profile.module';
 import { UserService } from './shared/services/user.service';
 import { AboutModule } from './about/about.module';
+import { ContactUsModule } from './contact-us/contact-us.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AboutModule } from './about/about.module';
     MembershipModule,  
     BrowserAnimationsModule,
     MyProfileModule,
-    AboutModule
+    AboutModule,
+    ContactUsModule
   ],
   providers: [
     AppConfigService,
@@ -45,11 +47,11 @@ import { AboutModule } from './about/about.module';
       deps: [AppConfigService], 
       multi: true 
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // },
     DataService,
     AuthGuard,
     AuthenticationService, 

@@ -62,7 +62,12 @@ export class MembershipComponent implements OnInit {
 
   private checkMember(){
     this.userService.userMember$.subscribe(user => this.memberForm.patchValue({ ...user }));
-    this.userService.userMembership$.subscribe(x => this.alreadyMember = true);    
+    this.userService.userMembership$.subscribe(um => 
+      { 
+        if(um !== null) {
+          this.alreadyMember = true
+        }
+      });    
   }
 
   private toMonth(days: number){

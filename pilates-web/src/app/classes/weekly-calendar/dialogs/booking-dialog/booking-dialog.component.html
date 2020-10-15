@@ -2,7 +2,7 @@
 <p>You are about to book the following class</p>
 <div class="bordered">{{data.cls.timeslot}} - {{data.cls.classType}} - {{data.cls.teacher}} - {{data.cls.room}}</div>
 <mat-dialog-content [formGroup]="form">
-    <mat-form-field class="full-wd" appearance="outline">
+    <mat-form-field class="fill-wd" appearance="outline">
         <mat-label>Pick the date</mat-label>
         <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [min]="minDate" [max]="maxDate" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="picker" id="picker">
