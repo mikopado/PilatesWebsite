@@ -10,7 +10,8 @@ export interface IClassTimetable{
     room: string,
     teacher: string,
     classType: string,
-    date?: string
+    date?: string,
+    level: string
 }
 
 export enum DayOfWeek {

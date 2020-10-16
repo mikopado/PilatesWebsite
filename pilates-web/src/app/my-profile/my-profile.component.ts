@@ -40,7 +40,7 @@ export class MyProfileComponent implements OnInit {
     this.initializeUserDetails();    
   }
 
-  private initializeUserDetails() {    
+  private initializeUserDetails() {   
       this.getBookingClasses(this.userService.userClasses$);
       this.userService.userMember$.subscribe(user => this.editUserForm.patchValue({...user}));
   } 
@@ -51,7 +51,8 @@ export class MyProfileComponent implements OnInit {
       classes.pipe(
         skipWhile(value => !value),
         map(arr =>
-          arr.sort((a, b) => a.date.valueOf() - b.date.valueOf())
+          arr
+          .sort((a, b) => (new Date(a.date) as any) - (new Date(b.date) as any))
             .map(
               cls =>
                 ({

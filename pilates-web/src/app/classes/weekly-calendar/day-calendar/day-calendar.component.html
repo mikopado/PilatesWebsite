@@ -7,10 +7,10 @@
     </ng-container>
   
     <!-- Class Type Column -->
-    <ng-container matColumnDef="classType">
+    <!-- <ng-container matColumnDef="classType">
       <th mat-header-cell *matHeaderCellDef> Class </th>
       <td mat-cell *matCellDef="let cls"> {{cls.classType}} </td>
-    </ng-container>
+    </ng-container> -->
   
     <!-- Teacher Column -->
     <ng-container matColumnDef="teacher">
@@ -22,7 +22,13 @@
     <ng-container matColumnDef="room">
       <th mat-header-cell *matHeaderCellDef> Room </th>
       <td mat-cell *matCellDef="let cls"> {{cls.room}} </td>
-    </ng-container>  
+    </ng-container> 
+    
+    <!-- Level Column -->
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef> Level </th>
+      <td mat-cell *matCellDef="let cls"> {{cls.level}} </td>
+    </ng-container> 
     
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> </th>

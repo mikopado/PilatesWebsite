@@ -38,11 +38,12 @@ export class ClassesService {
         this.getClassSubTypes(clsName);
     }
 
-    getWeeklyTimetable() {
+    getWeeklyTimetable(type: string) {
         this.classes$
             .pipe(
                 map(
                     classes => classes
+                        .filter(cls => ClassType[cls.type] === type)
                         .sort((a, b) => a.weekDay - b.weekDay)
                         .map(
                             cls => ({
@@ -51,7 +52,8 @@ export class ClassesService {
                                 room: cls.room,
                                 teacher: cls.teacher.firstName.concat(' ', cls.teacher.lastName),
                                 timeslot: cls.startingTime.slice(0, cls.startingTime.lastIndexOf(':')).concat(' - ', cls.endingTime.slice(0, cls.endingTime.lastIndexOf(':'))),
-                                day: DayOfWeek[cls.weekDay]
+                                day: DayOfWeek[cls.weekDay],
+                                level: ClassLevel[cls.level]
                             } as IClassTimetable)
                         )
                 )

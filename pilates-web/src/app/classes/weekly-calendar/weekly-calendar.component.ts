@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IWeekPlan, IClassTimetable } from '../class-type/models/week-plan';
 import { ClassesService } from '../classes-service';
-import { KeyValue } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-weekly-calendar',
@@ -9,12 +8,12 @@ import { KeyValue } from '@angular/common';
   styleUrls: ['./weekly-calendar.component.css', '../../app.component.css']
 })
 export class WeeklyCalendarComponent implements OnInit {
-
-  constructor(public readonly classService : ClassesService) { }
+  classType: string;
+  constructor(public readonly classService : ClassesService, private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.classService.getWeeklyTimetable();    
-    
+    this.classType = this.route.snapshot.params.type;
+    this.classService.getWeeklyTimetable(this.classType);   
   }
 
     

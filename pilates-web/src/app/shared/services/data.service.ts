@@ -5,13 +5,17 @@ import { catchError } from 'rxjs/operators';
 import { AppConfigService } from '../../core/app-config.service';
 import { IClass, IApiResponse, IMembership, IUser, IUserMemberResponse, IRegisterMember, IClassBooking } from '../interfaces';
 import { throwError } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
-    constructor(private http: HttpClient, private configService: AppConfigService) { 
+    constructor(
+        private http: HttpClient, 
+        private configService: AppConfigService,
+        private datePipe: DatePipe) { 
     }
 
     getClasses(): Observable<IApiResponse<IClass[]>> {
@@ -57,7 +61,7 @@ export class DataService {
         var data = {
             classId: classId,
             userId: userId,
-            date: date
+            date: this.datePipe.transform(date, 'MM/dd/yyyy')
         }
         return this.http.post<IApiResponse<string>>(this.configService.settings.apiUrl + endpoint, data)
             .pipe(catchError(this.handleError));

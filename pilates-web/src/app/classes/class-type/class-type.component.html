@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="btn-row" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%">
-        <button mat-raised-button color="primary" routerLink="/classes/weeklycalendar">Book Class</button>
+        <button mat-raised-button color="primary" [routerLink]="['/classes', 'weeklycalendar', (classService.type$ | async).title]">Book Class</button>
         <button mat-raised-button color="primary" routerLink="/memberships">Join Us</button>
     </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="5%" fxLayoutAlign="center center"

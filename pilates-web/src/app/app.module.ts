@@ -19,6 +19,7 @@ import { MyProfileModule } from './my-profile/my-profile.module';
 import { UserService } from './shared/services/user.service';
 import { AboutModule } from './about/about.module';
 import { ContactUsModule } from './contact-us/contact-us.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ContactUsModule } from './contact-us/contact-us.module';
     DataService,
     AuthGuard,
     AuthenticationService, 
-    UserService
+    UserService,
+    DatePipe
  ],
   bootstrap: [AppComponent]
 })

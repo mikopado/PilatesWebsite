@@ -33,7 +33,7 @@ export class UserService {
         )
     }
 
-    bookClass(classId: string, date: Date){         
+    bookClass(classId: string, date: Date){ 
         return this.dataService.bookClass(classId, this.authService.currentUser$.getValue().id, date)
             .pipe(
                 map(response =>
@@ -42,7 +42,7 @@ export class UserService {
                             map(r => {
                                 this.userClasses$.next([...this.userClasses$.getValue(), r.result])
                             })
-                        )
+                        ).subscribe()
                 )
             )
     }

@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Failed</h2>
-<p>Unfortunately something went wrong when booking a class!</p>
-<p>{{ data }}</p>
+<p *ngIf="data.default">Unfortunately something went wrong when booking a class!</p>
+<p>{{ data.message }}</p>
 <mat-dialog-actions fxLayoutAlign="end">
     <button class="mat-raised-button mat-primary" (click)="ok()">OK</button>
 </mat-dialog-actions>

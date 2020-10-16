@@ -14,5 +14,5 @@
     "template"      : "serverless.template",
     "template-parameters" : "\"ShouldCreateBucket\"=\"false\";\"BucketName\"=\"pilates-api\"",
     "s3-bucket"           : "pilates-api",
-    "stack-name"          : "pilates-web-api"
+    "stack-name"          : "yogame-web-api"
 }

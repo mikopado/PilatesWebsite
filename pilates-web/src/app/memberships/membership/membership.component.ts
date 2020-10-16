@@ -100,10 +100,10 @@ export class MembershipComponent implements OnInit {
     } as IRegisterMember
     this.userService.registerUserMember(member, this.authService.currentUser$.getValue().email, this.membership) 
       .pipe(
-        finalize(() => {this.justRegistered = true; this.spinnerService.stopLoading();}),
-        catchError(err => { this.error = err.message; return of() })
+        finalize(() => this.spinnerService.stopLoading()),
+        catchError(err => { this.justRegistered = false; this.error = err.message; return of() })
         )
-        .subscribe();          
+        .subscribe(x => this.justRegistered = true);          
   }
 
 }

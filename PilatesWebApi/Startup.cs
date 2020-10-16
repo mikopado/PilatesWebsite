@@ -55,28 +55,28 @@ namespace PilatesWebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Pilates API", Version = "v1" });
             });
             services.AddCors();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuerSigningKey = true,
-                       ValidateIssuer = true,
-                       ValidateAudience = false,
-                       ValidIssuer = Configuration["Authorization:Issuer"],
-                       ValidateLifetime = true,
-                       // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                       ClockSkew = TimeSpan.Zero,
-                       IssuerSigningKeyResolver = (s, securityToken, identifier, parameters) =>
-                       {
-                           // get JsonWebKeySet from AWS
-                           var json = new WebClient().DownloadString(parameters.ValidIssuer + "/.well-known/jwks.json");
-                           var keys = JsonConvert.DeserializeObject<JsonWebKeySet>(json).Keys;
-                           return keys;
-                       },
-                   };
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //   .AddJwtBearer(options =>
+            //   {
+            //       options.TokenValidationParameters = new TokenValidationParameters
+            //       {
+            //           ValidateIssuerSigningKey = true,
+            //           ValidateIssuer = true,
+            //           ValidateAudience = false,
+            //           ValidIssuer = Configuration["Authorization:Issuer"],
+            //           ValidateLifetime = true,
+            //           // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+            //           ClockSkew = TimeSpan.Zero,
+            //           IssuerSigningKeyResolver = (s, securityToken, identifier, parameters) =>
+            //           {
+            //               // get JsonWebKeySet from AWS
+            //               var json = new WebClient().DownloadString(parameters.ValidIssuer + "/.well-known/jwks.json");
+            //               var keys = JsonConvert.DeserializeObject<JsonWebKeySet>(json).Keys;
+            //               return keys;
+            //           },
+            //       };
 
-               });
+            //   });
 
         }
 
