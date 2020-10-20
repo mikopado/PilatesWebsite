@@ -35,6 +35,7 @@ namespace PilatesWebApi.Application.Mapping
             CreateMap<RegisterUserRequest, User>();          
             CreateMap<Member, MemberResponse>();
             CreateMap<User, UserResponse>();
+            CreateMap<User, UserForAdminResponse>();
             CreateMap<MemberMembership, MembershipResponse>()
                 .ForMember(m => m.ClassType, opt => opt.MapFrom(o => o.Membership.ClassType))
                 .ForMember(m => m.Type, opt => opt.MapFrom(o => o.Membership.Type))
@@ -49,6 +50,16 @@ namespace PilatesWebApi.Application.Mapping
                .ForMember(c => c.Teacher, opt => opt.MapFrom(o => o.Class.Teacher))
                .ForMember(c => c.StartingTime, opt => opt.MapFrom((src, dest) => { return src.Class.ClassCalendars?.Any() ?? false ? src.Class.ClassCalendars.First().StartingTime : default; }))
                .ForMember(c => c.EndingTime, opt => opt.MapFrom((src, dest) => { return src.Class.ClassCalendars?.Any() ?? false ? src.Class.ClassCalendars.First().EndingTime : default; }));
+            CreateMap<ClassBooking, ClassBookedResponse>()
+               .ForMember(c => c.BookedAt, opt => opt.MapFrom(o => o.CreatedAt))
+               .ForMember(c => c.Id, opt => opt.MapFrom(o => o.Id))
+               .ForMember(c => c.Level, opt => opt.MapFrom(o => o.Class.Level))
+               .ForMember(c => c.Type, opt => opt.MapFrom(o => o.Class.Type))
+               .ForMember(c => c.Room, opt => opt.MapFrom(o => o.Class.Room))
+               .ForMember(c => c.Teacher, opt => opt.MapFrom(o => o.Class.Teacher))
+               .ForMember(c => c.UserId, opt => opt.MapFrom(o => o.Member.UserId))
+               .ForMember(c => c.StartingTime, opt => opt.MapFrom((src, dest) => { return src.Class.ClassCalendars?.Any() ?? false ? src.Class.ClassCalendars.First().StartingTime : default; }))
+               .ForMember(c => c.EndingTime, opt => opt.MapFrom((src, dest) => { return src.Class.ClassCalendars?.Any() ?? false ? src.Class.ClassCalendars.First().EndingTime : default; })); ;
 
 
         }

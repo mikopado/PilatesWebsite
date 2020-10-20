@@ -9,5 +9,7 @@ namespace PilatesWebApi.Application.Services
     {
         Task<IEnumerable<MembershipResponse>> GetMembershipsAsync();
         Task AddMembershipsAsync(CreateMembershipsRequest request);
+        Task<IEnumerable<MemberMembershipResponse>> GetMembershipsMemberAsync();
+
     }
 }

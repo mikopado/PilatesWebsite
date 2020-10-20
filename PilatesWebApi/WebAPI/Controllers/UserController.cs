@@ -45,5 +45,12 @@ namespace PilatesWebApi.WebAPI.Controllers
             var bookedClass = await _userService.GetBookedClassAsync(id);
             return Ok(new ApiResponse(HttpStatusCode.OK, bookedClass));
         }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userService.GetUsersAsync();
+            return Ok(new ApiResponse(HttpStatusCode.OK, users));
+        }
     }
 }

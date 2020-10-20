@@ -31,7 +31,6 @@ namespace PilatesWebApi.WebAPI.Controllers
         public async Task<IActionResult> GetAllMembers()
         {
             throw new NotImplementedException();
-
         }
 
         [HttpGet("membership/{id}")]

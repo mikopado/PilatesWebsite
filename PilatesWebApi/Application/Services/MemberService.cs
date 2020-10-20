@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using PilatesWebApi.Application.DTO.Requests;
+using PilatesWebApi.Application.DTO.Responses;
 using PilatesWebApi.Domain.Models;
 using PilatesWebApi.Infrastructure.DAL.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -56,6 +59,6 @@ namespace PilatesWebApi.Application.Services
 
                 throw;
             }
-        }
+        }        
     }
 }

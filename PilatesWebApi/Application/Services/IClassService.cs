@@ -23,5 +23,6 @@ namespace PilatesWebApi.Application.Services
         Task<Guid> BookClassAsync(ClassBookingRequest request);
         Task CancelClassBookingAsync(Guid id);
         Task<ClassBookingResponse> GetBookedClassAsync(Guid bookingId);
+        Task<IEnumerable<ClassBookedResponse>> GetBookedClassesAsync();
     }
 }

@@ -77,5 +77,11 @@ namespace PilatesWebApi.Application.Services
             if (bookedClass is null) throw new NotFoundException($"The resource with id: {bookingId} cannot been found.");
             return _mapper.Map<ClassBookingResponse>(bookedClass);
         }
+
+        public async Task<IEnumerable<UserForAdminResponse>> GetUsersAsync()
+        {
+            var users = await _userRepository.GetEntitiesAsync();
+            return _mapper.Map<IEnumerable<UserForAdminResponse>>(users);
+        }
     }
 }

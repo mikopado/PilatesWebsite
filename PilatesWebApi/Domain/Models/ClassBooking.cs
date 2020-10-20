@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PilatesWebApi.Domain.Models
 {
-    public class ClassBooking : IDeletable
+    public class ClassBooking : DatedEntity, IDeletable
     {
         public Guid Id { get; set; }
         public Guid MemberId { get; set; }

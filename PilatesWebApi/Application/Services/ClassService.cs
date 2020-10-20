@@ -161,8 +161,17 @@ namespace PilatesWebApi.Application.Services
                 .With(c => c.Class, c => c.Class.ClassCalendars, c => c.Class.Teacher)
                 .FirstOrDefaultAsync(c => c.Id == bookingId);
             if (bookedClass is null) throw new NotFoundException($"The resource with id: {bookingId} cannot been found.");
-           var c = _mapper.Map<ClassBookingResponse>(bookedClass);
-            return c;
+            return _mapper.Map<ClassBookingResponse>(bookedClass);
+        }
+
+        public async Task<IEnumerable<ClassBookedResponse>> GetBookedClassesAsync()
+        {
+            var classesBooked = await _uow.Repository<ClassBooking>()
+                .With(c => c.Class, c => c.Class.ClassCalendars, c => c.Class.Teacher, u => u.Member.User)
+                .ToListAsync();
+            if (classesBooked is null) throw new Exception();
+            if (!classesBooked.Any()) return Enumerable.Empty<ClassBookedResponse>();
+            return _mapper.Map<IEnumerable<ClassBookedResponse>>(classesBooked);
         }
     }
 }
