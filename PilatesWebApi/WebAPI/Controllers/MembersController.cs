@@ -28,9 +28,11 @@ namespace PilatesWebApi.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllMembers()
+        public async Task<IActionResult> GetMembers()
         {
-            throw new NotImplementedException();
+            var members = await _memberService.GetMembersAsync();
+            return Ok(new ApiResponse(HttpStatusCode.OK, members));
+
         }
 
         [HttpGet("membership/{id}")]

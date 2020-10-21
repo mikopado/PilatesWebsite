@@ -59,6 +59,28 @@ namespace PilatesWebApi.Application.Services
 
                 throw;
             }
-        }        
+        }
+        
+        public async Task<IEnumerable<MemberUserResponse>> GetMembersAsync()
+        {
+            var members = await _uow.Repository<Member>()
+               .With(m => m.User)
+               .ToListAsync();
+            var users = members.Select(u => u.User);
+            return members.Join(users,
+               mem => mem.UserId, u => u.Id,
+               (mem, u) =>
+               new MemberUserResponse
+               {
+                   Id = mem.UserId,
+                   Email = u.Email,
+                   FirstName = mem.FirstName,
+                   CreatedAt = mem.CreatedAt,
+                   LastName = mem.LastName,
+                   Dob = mem.Dob,
+                   Address = mem.Address,
+                   City = mem.City
+               });
+        }
     }
 }

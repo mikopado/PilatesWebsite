@@ -52,11 +52,8 @@ namespace PilatesWebApi.Application.Services
                     Id = mb.Id,
                     UserId = mem.UserId,
                     ClassType = mb.Membership.ClassType,
-                    CreatedAt = mb.Membership.CreatedAt,
-                    Dob = mem.Dob,
+                    CreatedAt = mb.CreatedAt,
                     ExpirationTime = mb.ExpirationTime,
-                    FirstName = mem.FirstName,
-                    LastName = mem.LastName,
                     MembershipType = mb.Membership.Type,
                     Price = mb.Membership.Price
                 });

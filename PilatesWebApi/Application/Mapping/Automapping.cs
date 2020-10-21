@@ -35,7 +35,7 @@ namespace PilatesWebApi.Application.Mapping
             CreateMap<RegisterUserRequest, User>();          
             CreateMap<Member, MemberResponse>();
             CreateMap<User, UserResponse>();
-            CreateMap<User, UserForAdminResponse>();
+            CreateMap<User, MemberUserResponse>();
             CreateMap<MemberMembership, MembershipResponse>()
                 .ForMember(m => m.ClassType, opt => opt.MapFrom(o => o.Membership.ClassType))
                 .ForMember(m => m.Type, opt => opt.MapFrom(o => o.Membership.Type))

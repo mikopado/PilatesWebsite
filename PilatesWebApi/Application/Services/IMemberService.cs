@@ -8,5 +8,6 @@ namespace PilatesWebApi.Application.Services
     public interface IMemberService
     {
         Task AddMemberAsync(RegisterMemberRequest request);
+        Task<IEnumerable<MemberUserResponse>> GetMembersAsync();
     }
 }
